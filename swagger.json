@@ -1,0 +1,2276 @@
+{
+  "openapi": "3.0.1",
+  "info": {
+    "title": "SpecBox.WebApi",
+    "version": "1.0"
+  },
+  "paths": {
+    "/config": {
+      "get": {
+        "tags": [
+          "Default"
+        ],
+        "summary": "Получение конфигурации приложения",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Default.ConfigurationModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Default.ConfigurationModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Default.ConfigurationModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/export/upload/{project}": {
+      "post": {
+        "tags": [
+          "Export"
+        ],
+        "summary": "Uploads project data. If project with the same code and version exists, it will be updated.\r\nIf project has test runs, it can't be updated.",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project code",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "Optional project version",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "Data to be upladed",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Upload.UploadData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Upload.UploadData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Upload.UploadData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "summary": "Returns the list of projects.",
+        "operationId": "ListProjects",
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectModel"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectModel"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectModel"
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project}/features/{feature}": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "summary": "Returns the feature details.",
+        "operationId": "GetFeature",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "feature",
+            "in": "path",
+            "description": "The feature code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The project version. Default version if not provided.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project}/structures:plain": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "summary": "Returns the list of features for a specific project.",
+        "operationId": "GetStructurePlain",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The project version. Default version if not provided.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project}/structures": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "summary": "Returns the list of structures for a specific project.",
+        "operationId": "ListStructures",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The project version. Default version if not provided.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.TreeModel"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.TreeModel"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.TreeModel"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project}/structures/{treeCode}": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "summary": "Returns the structure details.",
+        "operationId": "GetStructure",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "treeCode",
+            "in": "path",
+            "description": "The tree code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The project version. Default version if not provided.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{project}/features:relations": {
+      "get": {
+        "tags": [
+          "Project"
+        ],
+        "summary": "Returns the graph of feature and attribute rlations.",
+        "operationId": "GetFeatureRelations",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The project version. Default version if not provided.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureRelationsModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureRelationsModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureRelationsModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/stat/upload-autotests": {
+      "post": {
+        "tags": [
+          "Stat"
+        ],
+        "operationId": "AutotestsStatUpload",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Stat.AutotestsStatUploadData"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Stat.AutotestsStatUploadData"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Stat.AutotestsStatUploadData"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          }
+        }
+      }
+    },
+    "/stat": {
+      "get": {
+        "tags": [
+          "Stat"
+        ],
+        "operationId": "GetAutotestsStat",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "from",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "to",
+            "in": "query",
+            "schema": {
+              "type": "string",
+              "format": "date-time"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Stat.StatModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Stat.StatModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Stat.StatModel"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/projects/{project}/testruns": {
+      "post": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Creates a new test run for the specified project.",
+        "operationId": "CreateTestRun",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The project version. Default version if not provided.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The object containing the test run data.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.CreateTestRunModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.CreateTestRunModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.CreateTestRunModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "get": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Retrieves a list of test runs for a specific project from the database.",
+        "operationId": "ListTestRuns",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "path",
+            "description": "The project code for which to retrieve the test runs.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The project version. Default version if not provided.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.ProjectTestRunsModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.ProjectTestRunsModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.ProjectTestRunsModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/testruns/{testRunId}": {
+      "get": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Retrieves a specific test run by ID.",
+        "operationId": "GetTestRun",
+        "parameters": [
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Test run ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestRunDetailsModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestRunDetailsModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestRunDetailsModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "delete": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Deletes a specific test run by ID.",
+        "operationId": "DeleteTestRun",
+        "parameters": [
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Test run ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK"
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/testruns/{testRunId}/complete": {
+      "post": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Completes a specific test run by ID. All test result in NEW status will be marked as SKIPPED.",
+        "operationId": "CompleteTestRun",
+        "parameters": [
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "Test run ID",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestRunDetailsModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestRunDetailsModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestRunDetailsModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/testruns/{testRunId}/testresults": {
+      "get": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Retrieves test results for a specific test run.",
+        "operationId": "ListTestResults",
+        "parameters": [
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "The ID of the test run.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultModel"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultModel"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultModel"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/testruns/{testRunId}/testresults/{testResultId}": {
+      "get": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Retrieves a specific test result for a given project, test run, and test result ID from the database.",
+        "operationId": "GetTestResult",
+        "parameters": [
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "The ID of the test run.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "testResultId",
+            "in": "path",
+            "description": "The ID of the test result.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
+      "put": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Updates test result with provided Status and Report.\r\nSupported Statuses: PASSED, SKIPPED, BLOCKED, INVALID, FAILED, NEW",
+        "operationId": "UpdateTestResult",
+        "parameters": [
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "The ID of the test run.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "testResultId",
+            "in": "path",
+            "description": "The ID of the test result.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "requestBody": {
+          "description": "The data to update the test result with.",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.UpdateTestResultModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.UpdateTestResultModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.UpdateTestResultModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/tests/testruns/{testRunId}/testresults/{testResultId}/history": {
+      "get": {
+        "tags": [
+          "TestRun"
+        ],
+        "summary": "Retrieves test result history.",
+        "operationId": "GetTestResultHistory",
+        "parameters": [
+          {
+            "name": "testRunId",
+            "in": "path",
+            "description": "The ID of the test run.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          },
+          {
+            "name": "testResultId",
+            "in": "path",
+            "description": "The ID of the test result.",
+            "required": true,
+            "schema": {
+              "type": "string",
+              "format": "uuid"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultHistoryModel"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultHistoryModel"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestResultHistoryModel"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+  },
+  "components": {
+    "schemas": {
+      "Microsoft.AspNetCore.Mvc.ProblemDetails": {
+        "type": "object",
+        "properties": {
+          "type": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          },
+          "detail": {
+            "type": "string",
+            "nullable": true
+          },
+          "instance": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": { }
+      },
+      "SpecBox.WebApi.Model.Common.ProjectModel": {
+        "required": [
+          "code",
+          "title",
+          "versions"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "repositoryUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "versions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.VersionModel"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Common.ProjectVersionModel": {
+        "required": [
+          "code",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "repositoryUrl": {
+            "type": "string",
+            "nullable": true
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Common.VersionModel": {
+        "type": "object",
+        "properties": {
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Default.ConfigurationModel": {
+        "type": "object",
+        "properties": {
+          "metrikaCounterId": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.AssertionGroupModel": {
+        "required": [
+          "assertions",
+          "order",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assertions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.AssertionModel"
+            },
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.AssertionModel": {
+        "required": [
+          "isAutomated",
+          "order",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "order": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "isAutomated": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.AttributeModel": {
+        "required": [
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.AttributeValueModel": {
+        "required": [
+          "attribute",
+          "code"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "attribute": {
+            "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.AttributeModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.FeatureModel": {
+        "required": [
+          "assertionGroups",
+          "attributes",
+          "code",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "assertionGroups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.AssertionGroupModel"
+            },
+            "readOnly": true
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.AttributeValueModel"
+            },
+            "readOnly": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.FeatureRelationsModel": {
+        "required": [
+          "edges",
+          "nodes"
+        ],
+        "type": "object",
+        "properties": {
+          "nodes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.GraphNodeModel"
+            }
+          },
+          "edges": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.GraphEdgeModel"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.GraphEdgeModel": {
+        "required": [
+          "source",
+          "target"
+        ],
+        "type": "object",
+        "properties": {
+          "source": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "target": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.GraphNodeModel": {
+        "required": [
+          "id",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.StructureModel": {
+        "required": [
+          "project",
+          "tree"
+        ],
+        "type": "object",
+        "properties": {
+          "project": {
+            "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectVersionModel"
+          },
+          "tree": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.TreeNodeModel"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.TreeModel": {
+        "required": [
+          "code",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.TreeNodeModel": {
+        "required": [
+          "automatedCount",
+          "id",
+          "totalCount"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "parentId": {
+            "type": "string",
+            "format": "uuid",
+            "nullable": true
+          },
+          "featureCode": {
+            "type": "string",
+            "nullable": true
+          },
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "automatedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "sortOrder": {
+            "type": "integer",
+            "format": "int32",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Stat.AssertionsStatModel": {
+        "required": [
+          "automatedCount",
+          "timestamp",
+          "totalCount"
+        ],
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "automatedCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Stat.AutotestsStatModel": {
+        "required": [
+          "assertionsCount",
+          "duration",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assertionsCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Stat.AutotestsStatUploadData": {
+        "required": [
+          "assertionsCount",
+          "duration",
+          "timestamp"
+        ],
+        "type": "object",
+        "properties": {
+          "timestamp": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "duration": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "assertionsCount": {
+            "type": "integer",
+            "format": "int32"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Stat.StatModel": {
+        "required": [
+          "assertions",
+          "autotests",
+          "project"
+        ],
+        "type": "object",
+        "properties": {
+          "project": {
+            "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectVersionModel"
+          },
+          "assertions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Stat.AssertionsStatModel"
+            }
+          },
+          "autotests": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Stat.AutotestsStatModel"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.TestRun.CreateTestRunModel": {
+        "required": [
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "environment": {
+            "type": "string",
+            "nullable": true
+          },
+          "configuration": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.TestRun.ProjectTestRunsModel": {
+        "required": [
+          "configurations",
+          "project",
+          "testRuns"
+        ],
+        "type": "object",
+        "properties": {
+          "project": {
+            "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectVersionModel"
+          },
+          "testRuns": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestRunModel"
+            }
+          },
+          "configurations": {
+            "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestRunConfigurationsModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.TestRun.TestResultHistoryModel": {
+        "required": [
+          "completedAt",
+          "id",
+          "status",
+          "testRunId",
+          "testRunTitle"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "testRunId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "testRunTitle": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "status": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "report": {
+            "type": "string",
+            "nullable": true
+          },
+          "completedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.TestRun.TestResultModel": {
+        "required": [
+          "assertionGroupTitle",
+          "assertionTitle",
+          "featureCode",
+          "featureTitle",
+          "id",
+          "status",
+          "testRunId",
+          "updatedAt"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "testRunId": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "status": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "report": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "completedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "assertionTitle": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "assertionGroupTitle": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "featureCode": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "featureTitle": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.TestRun.TestRunConfigurationsModel": {
+        "required": [
+          "configurations",
+          "environments"
+        ],
+        "type": "object",
+        "properties": {
+          "configurations": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          },
+          "environments": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.TestRun.TestRunDetailsModel": {
+        "required": [
+          "project",
+          "testRun"
+        ],
+        "type": "object",
+        "properties": {
+          "project": {
+            "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectVersionModel"
+          },
+          "testRun": {
+            "$ref": "#/components/schemas/SpecBox.WebApi.Model.TestRun.TestRunModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.TestRun.TestRunModel": {
+        "required": [
+          "blockedCount",
+          "createdAt",
+          "failedCount",
+          "id",
+          "invalidCount",
+          "passedCount",
+          "projectCode",
+          "skippedCount",
+          "title",
+          "totalCount"
+        ],
+        "type": "object",
+        "properties": {
+          "id": {
+            "type": "string",
+            "format": "uuid"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "projectCode": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "version": {
+            "type": "string",
+            "nullable": true
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "startedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "completedAt": {
+            "type": "string",
+            "format": "date-time",
+            "nullable": true
+          },
+          "totalCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "passedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "failedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "blockedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "invalidCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "skippedCount": {
+            "type": "integer",
+            "format": "int32"
+          },
+          "environment": {
+            "type": "string",
+            "nullable": true
+          },
+          "configuration": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.TestRun.UpdateTestResultModel": {
+        "required": [
+          "status"
+        ],
+        "type": "object",
+        "properties": {
+          "status": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "report": {
+            "type": "string",
+            "nullable": true
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Upload.AssertionGroupModel": {
+        "required": [
+          "assertions",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "assertions": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Upload.AssertionModel"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Upload.AssertionModel": {
+        "required": [
+          "isAutomated",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "isAutomated": {
+            "type": "boolean"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Upload.AttributeModel": {
+        "required": [
+          "code",
+          "title",
+          "values"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "values": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Upload.AttributeValueModel"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Upload.AttributeValueModel": {
+        "required": [
+          "code",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Upload.FeatureModel": {
+        "required": [
+          "code",
+          "groups",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "filePath": {
+            "type": "string",
+            "nullable": true
+          },
+          "groups": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Upload.AssertionGroupModel"
+            }
+          },
+          "attributes": {
+            "type": "object",
+            "additionalProperties": {
+              "type": "array",
+              "items": {
+                "type": "string"
+              }
+            },
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Upload.ProjectModel": {
+        "type": "object",
+        "properties": {
+          "title": {
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "type": "string",
+            "nullable": true
+          },
+          "repositoryUrl": {
+            "type": "string",
+            "nullable": true
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Upload.TreeModel": {
+        "required": [
+          "attributes",
+          "code",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "type": "string"
+            }
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Upload.UploadData": {
+        "required": [
+          "attributes",
+          "features",
+          "project",
+          "trees"
+        ],
+        "type": "object",
+        "properties": {
+          "features": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Upload.FeatureModel"
+            }
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Upload.AttributeModel"
+            }
+          },
+          "trees": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Upload.TreeModel"
+            }
+          },
+          "project": {
+            "$ref": "#/components/schemas/SpecBox.WebApi.Model.Upload.ProjectModel"
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  }
+}

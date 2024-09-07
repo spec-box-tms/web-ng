@@ -1,0 +1,85 @@
+<aside [tuiNavigationAside]="expanded()">
+  <tui-aside-group>
+    <button iconStart="@tui.fa.solid.book" tuiAsideItem tuiChevron>
+      Бизнес-требования
+      <ng-template>
+        <button tuiAsideItem>Концепция</button>
+        <button tuiAsideItem>Бизнес-цели</button>
+        <button tuiAsideItem>Заинтересованные лица</button>
+        <button tuiAsideItem>Бизнес-правила</button>
+        <button tuiAsideItem>Соглашения</button>
+        <button tuiAsideItem>Глоссарий</button>
+      </ng-template>
+    </button>
+  </tui-aside-group>
+  <tui-aside-group>
+    <button iconStart="@tui.fa.solid.address-card" tuiAsideItem tuiChevron>
+      Пользовательские
+      <ng-template>
+        <button tuiAsideItem>Варианты использования</button>
+        <button tuiAsideItem>Пользовательские истории</button>
+      </ng-template>
+    </button>
+  </tui-aside-group>
+  <tui-aside-group>
+    <button iconStart="@tui.fa.solid.receipt" tuiAsideItem tuiChevron>
+      Функциональные
+      <ng-template>
+        <button tuiAsideItem>Функциональные</button>
+        <button tuiAsideItem>Нефункциональные</button>
+        <button tuiAsideItem>Критерии приемки</button>
+        <button tuiAsideItem>Ограничения</button>
+        <button tuiAsideItem>Требования к данным</button>
+        <button tuiAsideItem>Тест кейсы</button>
+      </ng-template>
+    </button>
+  </tui-aside-group>
+  <button iconStart="@tui.fa.solid.diagram-project" tuiAsideItem>
+    Трассировка
+  </button>
+  <tui-aside-group>
+    <button iconStart="@tui.fa.solid.vial-circle-check" tuiAsideItem tuiChevron>
+      Тестирование
+      <ng-template>
+        <button tuiAsideItem>Статистика</button>
+        <button tuiAsideItem>Тестовые запуски</button>
+      </ng-template>
+    </button>
+  </tui-aside-group>
+  <tui-aside-group>
+    <button iconStart="@tui.fa.solid.chart-line" tuiAsideItem tuiChevron>
+      Статистика
+      <ng-template>
+        <button tuiAsideItem>Инкремент</button>
+        <button tuiAsideItem>Автотесты</button>
+        <button tuiAsideItem>Тестирование</button>
+        <button tuiAsideItem>Статистика НФТ</button>
+      </ng-template>
+    </button>
+  </tui-aside-group>
+  <button iconStart="@tui.fa.solid.code-compare" tuiAsideItem>
+    Сравнение версий
+  </button>
+  <button iconStart="@tui.fa.solid.chart-gantt" tuiAsideItem>
+    Планирование релизов
+  </button>
+  <footer>
+    <tui-aside-group>
+      <button iconStart="@tui.settings" tuiAsideItem tuiChevron>
+        Настройки
+        <ng-template>
+          <button tuiAsideItem>Учетная запись</button>
+          <button tuiAsideItem>Доступ</button>
+        </ng-template>
+      </button>
+    </tui-aside-group>
+    <button
+      tuiAsideItem
+      [iconStart]="expanded() ? '@tui.chevron-left' : '@tui.chevron-right'"
+      (click)="toggleExpanded()"
+    >
+      {{ expanded() ? "Свернуть" : "Развернуть" }}
+    </button>
+  </footer>
+</aside>
+<ng-content />
