@@ -5,6 +5,216 @@
     "version": "1.0"
   },
   "paths": {
+    "/auth/register": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Регистрация новых пользователей",
+        "operationId": "Register",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.UserRegisterModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.UserRegisterModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.UserRegisterModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.AccessTokenModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.AccessTokenModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.AccessTokenModel"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/login": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Аутентификация пользователя",
+        "operationId": "Login",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.LoginModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.LoginModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.LoginModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.AccessTokenModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.AccessTokenModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.AccessTokenModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/auth/refresh": {
+      "post": {
+        "tags": [
+          "Auth"
+        ],
+        "summary": "Обновление токенов",
+        "operationId": "Refresh tokens",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.RefreshTokenExchangeModel"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.RefreshTokenExchangeModel"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.RefreshTokenExchangeModel"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.AccessTokenModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.AccessTokenModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Auth.AccessTokenModel"
+                }
+              }
+            }
+          },
+          "401": {
+            "description": "Unauthorized",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/config": {
       "get": {
         "tags": [
@@ -1313,6 +1523,91 @@
         },
         "additionalProperties": { }
       },
+      "SpecBox.WebApi.Model.Auth.AccessTokenModel": {
+        "required": [
+          "accessToken",
+          "refreshToken"
+        ],
+        "type": "object",
+        "properties": {
+          "accessToken": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "refreshToken": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Auth.LoginModel": {
+        "required": [
+          "login",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "login": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "password": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Auth.RefreshTokenExchangeModel": {
+        "required": [
+          "refreshToken"
+        ],
+        "type": "object",
+        "properties": {
+          "refreshToken": {
+            "minLength": 1,
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Auth.UserRegisterModel": {
+        "required": [
+          "email",
+          "login",
+          "name",
+          "password"
+        ],
+        "type": "object",
+        "properties": {
+          "login": {
+            "maxLength": 255,
+            "minLength": 1,
+            "pattern": "^[a-zA-Z_]+[a-zA-Z\\d-_]*$",
+            "type": "string"
+          },
+          "email": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string",
+            "format": "email"
+          },
+          "name": {
+            "maxLength": 255,
+            "minLength": 1,
+            "type": "string"
+          },
+          "password": {
+            "maxLength": 40,
+            "minLength": 8,
+            "pattern": "^(?=.*[a-z])(?=.*[A-Z])(?=.*\\d)[A-Za-z\\d@$!%*?&]{8,}$",
+            "type": "string"
+          }
+        },
+        "additionalProperties": false
+      },
       "SpecBox.WebApi.Model.Common.ProjectModel": {
         "required": [
           "code",
@@ -2271,6 +2566,18 @@
         },
         "additionalProperties": false
       }
+    },
+    "securitySchemes": {
+      "bearerAuth": {
+        "type": "http",
+        "scheme": "bearer",
+        "bearerFormat": "JWT"
+      }
     }
-  }
+  },
+  "security": [
+    {
+      "bearerAuth": [ ]
+    }
+  ]
 }

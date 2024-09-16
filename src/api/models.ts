@@ -1,6 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
 export { ProblemDetails as MicrosoftAspNetCoreMvcProblemDetails } from './models/Microsoft/AspNetCore/Mvc/problem-details';
+export { AccessTokenModel as SpecBoxWebApiModelAuthAccessTokenModel } from './models/SpecBox/WebApi/Model/Auth/access-token-model';
+export { LoginModel as SpecBoxWebApiModelAuthLoginModel } from './models/SpecBox/WebApi/Model/Auth/login-model';
+export { RefreshTokenExchangeModel as SpecBoxWebApiModelAuthRefreshTokenExchangeModel } from './models/SpecBox/WebApi/Model/Auth/refresh-token-exchange-model';
+export { UserRegisterModel as SpecBoxWebApiModelAuthUserRegisterModel } from './models/SpecBox/WebApi/Model/Auth/user-register-model';
 export { ProjectModel as SpecBoxWebApiModelCommonProjectModel } from './models/SpecBox/WebApi/Model/Common/project-model';
 export { ProjectVersionModel as SpecBoxWebApiModelCommonProjectVersionModel } from './models/SpecBox/WebApi/Model/Common/project-version-model';
 export { VersionModel as SpecBoxWebApiModelCommonVersionModel } from './models/SpecBox/WebApi/Model/Common/version-model';

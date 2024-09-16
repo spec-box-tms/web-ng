@@ -4,6 +4,7 @@ import { NgModule, ModuleWithProviders, SkipSelf, Optional } from '@angular/core
 import { HttpClient } from '@angular/common/http';
 import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 
+import { AuthService } from './services/auth.service';
 import { DefaultService } from './services/default.service';
 import { ExportService } from './services/export.service';
 import { ProjectService } from './services/project.service';
@@ -18,6 +19,7 @@ import { TestRunService } from './services/test-run.service';
   exports: [],
   declarations: [],
   providers: [
+    AuthService,
     DefaultService,
     ExportService,
     ProjectService,

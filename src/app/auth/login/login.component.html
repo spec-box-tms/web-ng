@@ -1,0 +1,28 @@
+<main tuiNavigationMain>
+  <form class="card" tuiCardLarge tuiSurface="elevated" [formGroup]="form">
+    <span class="tui-text_h3">Spec Box TMS</span>
+    <caption class="tui-text_body-s">
+      Нет учетной записи?
+      <a [routerLink]="['/register']">Пройдите регистрацию</a>
+    </caption>
+    <tui-textfield tuiTextfieldSize="m">
+      <input placeholder="Логин" tuiTextfield formControlName="login" />
+    </tui-textfield>
+    <tui-textfield tuiTextfieldSize="m">
+      <input placeholder="Пароль" tuiInputPassword formControlName="password" />
+    </tui-textfield>
+    @if(error()) {
+      <tui-error [error]="error()" />
+    }
+    <button
+      tuiButton
+      appearance="primary"
+      size="m"
+      [loading]="loading()"
+      (click)="submit()"
+      type="submit"
+    >
+      Войти
+    </button>
+  </form>
+</main>
