@@ -1,4 +1,5 @@
-import { Directive, Self, HostListener, inject } from '@angular/core';
+/* eslint-disable @angular-eslint/directive-selector */
+import { Directive, HostListener, inject } from '@angular/core';
 import { ControlContainer } from '@angular/forms';
 import { tuiMarkControlAsTouchedAndValidate } from '@taiga-ui/cdk/utils/miscellaneous';
 

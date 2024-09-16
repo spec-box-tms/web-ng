@@ -1,5 +1,5 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, map, of, switchMap, tap, throwError } from 'rxjs';
+import { BehaviorSubject, map, of, switchMap, tap } from 'rxjs';
 import { AuthService as AuthHttpService } from '../../api/services';
 import { JWT } from './model/jwt-token.model';
 import { LoginModel } from './model/login.model';
