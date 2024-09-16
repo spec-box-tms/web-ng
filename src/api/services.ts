@@ -1,3 +1,4 @@
+export { AuthService } from './services/auth.service';
 export { DefaultService } from './services/default.service';
 export { ExportService } from './services/export.service';
 export { ProjectService } from './services/project.service';

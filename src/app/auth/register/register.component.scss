@@ -1,0 +1,30 @@
+@import "@taiga-ui/core/styles/taiga-ui-local.scss";
+
+:host {
+  display: flex;
+  height: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+span {
+  text-align: center;
+}
+
+.card {
+  align-items: center;
+  grid-column: 5/9;
+  @media #{$tui-desktop} {
+    grid-column: 4/10;
+  }
+  @media #{$tui-tablet} {
+    grid-column: 4/10;
+  }
+  @media #{$tui-mobile} {
+    grid-column: 1/13;
+  }
+}
+
+button {
+  width: 100%;
+}

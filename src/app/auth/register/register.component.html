@@ -1,0 +1,65 @@
+<main tuiNavigationMain>
+  <form class="card" tuiCardLarge tuiSurface="elevated" [formGroup]="form">
+    <span class="tui-text_h3">Регистрация</span>
+    <caption class="tui-text_body-s">
+      Уже есть учетная запись.
+      <a [routerLink]="['/login']">Авторизация</a>
+    </caption>
+    <label tuiLabel>
+      Введите логин
+      <tui-textfield tuiTextfieldSize="m">
+        <input placeholder="Логин" tuiTextfield formControlName="login" />
+        <tui-icon
+          tuiTooltip="Может начинаться с буквы или знака подчеркивания и содержать только буквы, цифры, дефис или знак подчеркивания"
+        />
+      </tui-textfield>
+      <tui-error formControlName="login" [error]="[] | tuiFieldError | async" />
+    </label>
+
+    <label tuiLabel>
+      Введите email
+      <tui-textfield tuiTextfieldSize="m">
+        <input placeholder="Email" tuiTextfield formControlName="email" />
+      </tui-textfield>
+      <tui-error formControlName="email" [error]="[] | tuiFieldError | async" />
+    </label>
+
+    <label tuiLabel>
+      Введите имя
+      <tui-textfield tuiTextfieldSize="m">
+        <input placeholder="Имя" tuiTextfield formControlName="name" />
+      </tui-textfield>
+      <tui-error formControlName="name" [error]="[] | tuiFieldError | async" />
+    </label>
+
+    <label tuiLabel>
+      Введите пароль
+      <tui-textfield tuiTextfieldSize="m">
+        <input
+          placeholder="Пароль"
+          tuiInputPassword
+          formControlName="password"
+        />
+      </tui-textfield>
+      <tui-error formControlName="password" [error]="[] | tuiFieldError | async" />
+    </label>
+
+    <label tuiLabel>
+      Подтверждение пароля
+      <tui-textfield tuiTextfieldSize="m">
+        <input
+          placeholder="Подтверждение пароля"
+          tuiInputPassword
+          formControlName="confirm"
+        />
+      </tui-textfield>
+      <tui-error formControlName="confirm" [error]="[] | tuiFieldError | async" />
+    </label>
+
+    @if(unknownError()) {
+      <tui-error [error]="unknownError()" />
+    }
+
+    <button appearance="primary" size="m" tuiButton type="submit" [loading]="loading()" (click)="submit()">Зарегистрироваться</button>
+  </form>
+</main>
