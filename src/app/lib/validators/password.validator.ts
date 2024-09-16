@@ -1,4 +1,4 @@
-import { AbstractControl, ValidatorFn } from '@angular/forms';
+import { AbstractControl } from '@angular/forms';
 
 const PASSWORD_PATTERN =
   /^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)[A-Za-z\d@$!%*?&]{8,}$/;
@@ -7,13 +7,13 @@ const HAS_LOWERCASE = /[a-z]/;
 const HAS_UPPERCASE = /[A-Z]/;
 const HAS_DIGIT = /\d/;
 
-type PasswordValidatorResult = {
+interface PasswordValidatorResult {
   lowercase?: true;
   uppercase?: true;
   minlength?: true;
   digit?: true;
   special?: true;
-};
+}
 
 export function passwordValidator({
   value,

@@ -13,7 +13,6 @@ import { TuiCardLarge, TuiHeader, TuiMainComponent } from '@taiga-ui/layout';
 import { MarkFormTouchedDirective } from '../../lib/forms/mark-as-touched.directive';
 import { HttpError } from '../../lib/http-errors/http-error';
 import { processHttp } from '../../lib/process-http';
-import { LogoComponent } from '../../project/navigation/logo/logo.component';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -34,7 +33,6 @@ import { AuthService } from '../auth.service';
     TuiError,
     TuiMainComponent,
     MarkFormTouchedDirective,
-    LogoComponent,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
@@ -64,7 +62,7 @@ export class LoginComponent {
   });
 
   submit() {
-    if (this.form.invalid) {
+    if (!this.form.valid) {
       return;
     }
     const { login, password } = this.form.getRawValue();

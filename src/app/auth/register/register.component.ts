@@ -7,7 +7,6 @@ import {
   inject,
   OnInit,
   signal,
-  untracked,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
@@ -107,7 +106,13 @@ export class RegisterComponent implements OnInit {
       '',
       [Validators.required, Validators.email, Validators.maxLength(255)],
     ],
-    name: ['', [Validators.required, Validators.maxLength(255)]],
+    name: [
+      '',
+      [
+        Validators.required,
+        Validators.maxLength(255),
+      ],
+    ],
     password: [
       '',
       [Validators.required, Validators.maxLength(30), passwordValidator],
@@ -135,15 +140,18 @@ export class RegisterComponent implements OnInit {
           this.form.controls.login.setErrors({
             loginExists: true,
           });
-        } if (hasBadRequestError(error, 'login', 'match')) {
+        }
+        if (hasBadRequestError(error, 'login', 'match')) {
           this.form.controls.login.setErrors({
             pattern: true,
           });
-        } if (hasBadRequestError(error, 'email', 'exists')) {
+        }
+        if (hasBadRequestError(error, 'email', 'exists')) {
           this.form.controls.email.setErrors({
             emailExists: true,
           });
-        } if (hasBadRequestError(error, 'email', 'match')) {
+        }
+        if (hasBadRequestError(error, 'email', 'match')) {
           this.form.controls.email.setErrors({
             pattern: true,
           });
@@ -159,7 +167,7 @@ export class RegisterComponent implements OnInit {
   }
 
   submit() {
-    if (this.form.invalid) {
+    if (!this.form.valid) {
       return;
     }
     const { login, email, name, password } = this.form.getRawValue();
