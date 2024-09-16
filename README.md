@@ -1,27 +1,39 @@
-# SpecBoxTmsWeb
+# SpecBoxTMS.Web-Ng
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 18.2.3.
+Этот репозиторий является частью [SpecBoxTMS](https://github.com/spec-box-tms)
+системы управления функциональными требованиями (УФТы!)
 
-## Development server
+Репозиторий содержит фронтенд на Angular для дальнейшего развития приложения.
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+## Концепция системы
 
-## Code scaffolding
+Цель проекта: объединить проектирование требований к программному обеспечению с задачей на разработку и с планами тестирования.
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+Главная идей проекта заключается в переходе к описанию функциональных требований в виде простых утверждений, 
+которые легко поддаются автоматизации тестирования или ручному тестированию.
 
-## Build
+Такие спецификации должны храниться вместе с исходным кодом приложения в виде yaml файлов, подробнее о которых можно прочитать в 
+документации к репозиторию [SpecBoxTMS.Sync](https://github.com/spec-box-tms/sync).
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+Размещение спецификаций вместе с исходным кодом позволяет:
 
-## Running unit tests
+- Согласовать изменения кода и спецификаций
+- Гарантировать сохранность спецификаций
+- Хранить историю изменений спецификаций за счет системы контроля версий
+- Производить сопоставлений имен утверждений с отчетом об автоматизированных тестах
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+Проект состоит из трех частей:
 
-## Running end-to-end tests
+- Консольная утилита [SpecBoxTMS.Sync](https://github.com/spec-box-tms/sync) - выполняет валидацию содержимого yaml файлов спецификаций, 
+сопоставление с отчетом об автотестах и синхронизацию с сервером требований.
+- Сервер требований [SpecBoxTMS.Api](https://github.com/spec-box-tms/api) - обеспечивает хранение требований и истории тестовых запусков.
+- Документация и Roadmap проекта [SpecBoxTMS.Docs](https://github.com/spec-box-tms/docs)
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
+Данный проект является ответвлением от оригинального [SpecBox](https://github.com/spec-box)
 
-## Further help
+## Как запустить локально
 
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.dev/tools/cli) page.
+1. `npm ci`
+3. `npm start`
+
+Перед запуском нужно поправить [хост в конфиге](./src/app/app.config.ts#L16) — укажите хост, на котором запущен [бэкенд](https://github.com/spec-box-tms/api).
