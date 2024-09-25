@@ -1,0 +1,9 @@
+<div class="side-menu">
+  <app-user-card></app-user-card>
+  <a [routerLink]="['/profile']" iconStart="@tui.fa.regular.clock" tuiLink> Недавние </a>
+  <a [routerLink]="['favorites']" iconStart="@tui.fa.regular.star" tuiLink> Избранное </a>
+  <a [routerLink]="['notifications']" iconStart="@tui.fa.regular.bell" tuiLink> Уведомления </a>
+  <app-teams></app-teams>
+</div>
+
+<ng-content></ng-content>

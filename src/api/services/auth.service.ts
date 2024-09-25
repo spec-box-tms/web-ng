@@ -21,7 +21,7 @@ import { register$Json } from '../fn/auth/register-json';
 import { Register$Json$Params } from '../fn/auth/register-json';
 import { register$Plain } from '../fn/auth/register-plain';
 import { Register$Plain$Params } from '../fn/auth/register-plain';
-import { AccessTokenModel as SpecBoxWebApiModelAuthAccessTokenModel } from '../models/SpecBox/WebApi/Model/Auth/access-token-model';
+import { AccessTokenResponse as SpecBoxWebApiModelAuthAccessTokenResponse } from '../models/SpecBox/WebApi/Model/Auth/access-token-response';
 
 @Injectable({ providedIn: 'root' })
 export class AuthService extends BaseService {
@@ -42,7 +42,7 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  register$Plain$Response(params?: Register$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>> {
+  register$Plain$Response(params?: Register$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>> {
     return register$Plain(this.http, this.rootUrl, params, context);
   }
 
@@ -56,9 +56,9 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  register$Plain(params?: Register$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenModel> {
+  register$Plain(params?: Register$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenResponse> {
     return this.register$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>): SpecBoxWebApiModelAuthAccessTokenModel => r.body)
+      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>): SpecBoxWebApiModelAuthAccessTokenResponse => r.body)
     );
   }
 
@@ -72,7 +72,7 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  register$Json$Response(params?: Register$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>> {
+  register$Json$Response(params?: Register$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>> {
     return register$Json(this.http, this.rootUrl, params, context);
   }
 
@@ -86,9 +86,9 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  register$Json(params?: Register$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenModel> {
+  register$Json(params?: Register$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenResponse> {
     return this.register$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>): SpecBoxWebApiModelAuthAccessTokenModel => r.body)
+      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>): SpecBoxWebApiModelAuthAccessTokenResponse => r.body)
     );
   }
 
@@ -105,7 +105,7 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  login$Plain$Response(params?: Login$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>> {
+  login$Plain$Response(params?: Login$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>> {
     return login$Plain(this.http, this.rootUrl, params, context);
   }
 
@@ -119,9 +119,9 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  login$Plain(params?: Login$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenModel> {
+  login$Plain(params?: Login$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenResponse> {
     return this.login$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>): SpecBoxWebApiModelAuthAccessTokenModel => r.body)
+      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>): SpecBoxWebApiModelAuthAccessTokenResponse => r.body)
     );
   }
 
@@ -135,7 +135,7 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  login$Json$Response(params?: Login$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>> {
+  login$Json$Response(params?: Login$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>> {
     return login$Json(this.http, this.rootUrl, params, context);
   }
 
@@ -149,9 +149,9 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  login$Json(params?: Login$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenModel> {
+  login$Json(params?: Login$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenResponse> {
     return this.login$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>): SpecBoxWebApiModelAuthAccessTokenModel => r.body)
+      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>): SpecBoxWebApiModelAuthAccessTokenResponse => r.body)
     );
   }
 
@@ -168,7 +168,7 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  refreshTokens$Plain$Response(params?: RefreshTokens$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>> {
+  refreshTokens$Plain$Response(params?: RefreshTokens$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>> {
     return refreshTokens$Plain(this.http, this.rootUrl, params, context);
   }
 
@@ -182,9 +182,9 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  refreshTokens$Plain(params?: RefreshTokens$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenModel> {
+  refreshTokens$Plain(params?: RefreshTokens$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenResponse> {
     return this.refreshTokens$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>): SpecBoxWebApiModelAuthAccessTokenModel => r.body)
+      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>): SpecBoxWebApiModelAuthAccessTokenResponse => r.body)
     );
   }
 
@@ -198,7 +198,7 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  refreshTokens$Json$Response(params?: RefreshTokens$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>> {
+  refreshTokens$Json$Response(params?: RefreshTokens$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>> {
     return refreshTokens$Json(this.http, this.rootUrl, params, context);
   }
 
@@ -212,9 +212,9 @@ export class AuthService extends BaseService {
    *
    * This method sends `application/*+json` and handles request body of type `application/*+json`.
    */
-  refreshTokens$Json(params?: RefreshTokens$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenModel> {
+  refreshTokens$Json(params?: RefreshTokens$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelAuthAccessTokenResponse> {
     return this.refreshTokens$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>): SpecBoxWebApiModelAuthAccessTokenModel => r.body)
+      map((r: StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>): SpecBoxWebApiModelAuthAccessTokenResponse => r.body)
     );
   }
 

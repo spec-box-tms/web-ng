@@ -1,0 +1,15 @@
+:host {
+  display: flex;
+  flex-direction: row;
+  flex-grow: 1;
+}
+
+.side-menu {
+  display: flex;
+  flex-direction: column;
+  padding: 1.4em;
+  height: 100%;
+  background-color: #eee;
+  width: 180px;
+  gap: 2em;
+}

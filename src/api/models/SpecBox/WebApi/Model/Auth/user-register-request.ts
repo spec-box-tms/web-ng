@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface UserRegisterModel {
+export interface UserRegisterRequest {
   email: string;
   login: string;
   name: string;

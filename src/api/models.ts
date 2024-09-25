@@ -1,10 +1,10 @@
 /* tslint:disable */
 /* eslint-disable */
 export { ProblemDetails as MicrosoftAspNetCoreMvcProblemDetails } from './models/Microsoft/AspNetCore/Mvc/problem-details';
-export { AccessTokenModel as SpecBoxWebApiModelAuthAccessTokenModel } from './models/SpecBox/WebApi/Model/Auth/access-token-model';
-export { LoginModel as SpecBoxWebApiModelAuthLoginModel } from './models/SpecBox/WebApi/Model/Auth/login-model';
-export { RefreshTokenExchangeModel as SpecBoxWebApiModelAuthRefreshTokenExchangeModel } from './models/SpecBox/WebApi/Model/Auth/refresh-token-exchange-model';
-export { UserRegisterModel as SpecBoxWebApiModelAuthUserRegisterModel } from './models/SpecBox/WebApi/Model/Auth/user-register-model';
+export { AccessTokenResponse as SpecBoxWebApiModelAuthAccessTokenResponse } from './models/SpecBox/WebApi/Model/Auth/access-token-response';
+export { LoginRequest as SpecBoxWebApiModelAuthLoginRequest } from './models/SpecBox/WebApi/Model/Auth/login-request';
+export { RefreshTokenExchangeRequest as SpecBoxWebApiModelAuthRefreshTokenExchangeRequest } from './models/SpecBox/WebApi/Model/Auth/refresh-token-exchange-request';
+export { UserRegisterRequest as SpecBoxWebApiModelAuthUserRegisterRequest } from './models/SpecBox/WebApi/Model/Auth/user-register-request';
 export { ProjectModel as SpecBoxWebApiModelCommonProjectModel } from './models/SpecBox/WebApi/Model/Common/project-model';
 export { ProjectVersionModel as SpecBoxWebApiModelCommonProjectVersionModel } from './models/SpecBox/WebApi/Model/Common/project-version-model';
 export { VersionModel as SpecBoxWebApiModelCommonVersionModel } from './models/SpecBox/WebApi/Model/Common/version-model';
@@ -24,6 +24,12 @@ export { AssertionsStatModel as SpecBoxWebApiModelStatAssertionsStatModel } from
 export { AutotestsStatModel as SpecBoxWebApiModelStatAutotestsStatModel } from './models/SpecBox/WebApi/Model/Stat/autotests-stat-model';
 export { AutotestsStatUploadData as SpecBoxWebApiModelStatAutotestsStatUploadData } from './models/SpecBox/WebApi/Model/Stat/autotests-stat-upload-data';
 export { StatModel as SpecBoxWebApiModelStatStatModel } from './models/SpecBox/WebApi/Model/Stat/stat-model';
+export { CreateTeamRequest as SpecBoxWebApiModelTeamsCreateTeamRequest } from './models/SpecBox/WebApi/Model/Teams/create-team-request';
+export { CreateTeamUserRequest as SpecBoxWebApiModelTeamsCreateTeamUserRequest } from './models/SpecBox/WebApi/Model/Teams/create-team-user-request';
+export { TeamResponse as SpecBoxWebApiModelTeamsTeamResponse } from './models/SpecBox/WebApi/Model/Teams/team-response';
+export { TeamUserResponse as SpecBoxWebApiModelTeamsTeamUserResponse } from './models/SpecBox/WebApi/Model/Teams/team-user-response';
+export { UpdateTeamRequest as SpecBoxWebApiModelTeamsUpdateTeamRequest } from './models/SpecBox/WebApi/Model/Teams/update-team-request';
+export { UpdateTeamUserRequest as SpecBoxWebApiModelTeamsUpdateTeamUserRequest } from './models/SpecBox/WebApi/Model/Teams/update-team-user-request';
 export { CreateTestRunModel as SpecBoxWebApiModelTestRunCreateTestRunModel } from './models/SpecBox/WebApi/Model/TestRun/create-test-run-model';
 export { ProjectTestRunsModel as SpecBoxWebApiModelTestRunProjectTestRunsModel } from './models/SpecBox/WebApi/Model/TestRun/project-test-runs-model';
 export { TestResultHistoryModel as SpecBoxWebApiModelTestRunTestResultHistoryModel } from './models/SpecBox/WebApi/Model/TestRun/test-result-history-model';
@@ -40,3 +46,4 @@ export { FeatureModel as SpecBoxWebApiModelUploadFeatureModel } from './models/S
 export { ProjectModel as SpecBoxWebApiModelUploadProjectModel } from './models/SpecBox/WebApi/Model/Upload/project-model';
 export { TreeModel as SpecBoxWebApiModelUploadTreeModel } from './models/SpecBox/WebApi/Model/Upload/tree-model';
 export { UploadData as SpecBoxWebApiModelUploadUploadData } from './models/SpecBox/WebApi/Model/Upload/upload-data';
+export { UserResponse as SpecBoxWebApiModelUsersUserResponse } from './models/SpecBox/WebApi/Model/Users/user-response';

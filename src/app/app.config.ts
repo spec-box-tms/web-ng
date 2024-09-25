@@ -1,21 +1,25 @@
-import { NG_EVENT_PLUGINS } from '@taiga-ui/event-plugins';
-import { provideAnimations } from '@angular/platform-browser/animations';
 import {
   ApplicationConfig,
   provideZoneChangeDetection,
   signal,
 } from '@angular/core';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { provideRouter } from '@angular/router';
+import { NG_EVENT_PLUGINS } from '@taiga-ui/event-plugins';
 
-import { routes } from './app.routes';
-import { provideApiUrl } from './utils/provide-api-url';
-import { HTTP_INTERCEPTORS, provideHttpClient } from '@angular/common/http';
+import {
+  HTTP_INTERCEPTORS,
+  provideHttpClient,
+  withInterceptorsFromDi,
+} from '@angular/common/http';
 import {
   tuiButtonOptionsProvider,
   tuiTextfieldOptionsProvider,
 } from '@taiga-ui/core';
-import { provideAuthBypass } from './utils/provide-auth-bypass';
+import { routes } from './app.routes';
 import { AuthInterceptor } from './auth/auth.interceptor';
+import { provideApiUrl } from './utils/provide-api-url';
+import { provideAuthBypass } from './utils/provide-auth-bypass';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -31,6 +35,7 @@ export const appConfig: ApplicationConfig = {
     tuiButtonOptionsProvider({
       size: 's',
     }),
+    provideHttpClient(withInterceptorsFromDi()),
     NG_EVENT_PLUGINS,
     {
       provide: HTTP_INTERCEPTORS,

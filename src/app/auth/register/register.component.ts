@@ -36,7 +36,7 @@ import {
   passwordValidator,
   passwordValidatorToText,
 } from '../../lib/validators/password.validator';
-import { LogoComponent } from '../../project/navigation/logo/logo.component';
+import { LogoComponent } from '../../core/logo/logo.component';
 import { AuthService } from '../auth.service';
 
 const LOGIN_PATTERN = /^[a-zA-Z_]+[a-zA-Z\d-_]*$/;

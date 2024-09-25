@@ -1,0 +1,7 @@
+@if (profile$ | async; as profile) {
+<tui-avatar size="xxl" src="@tui.user"></tui-avatar>
+<span class="tui-text_body-s">{{'@' + profile.login}}</span>
+<a [routerLink]="['user']" class="title" tuiLink>{{ profile.name }}</a>
+@if(profile.description) {
+<span>{{ profile.description }}</span>
+} }

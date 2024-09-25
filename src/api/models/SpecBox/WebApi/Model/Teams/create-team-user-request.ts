@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface LoginModel {
+export interface CreateTeamUserRequest {
+  isAdmin: boolean;
   login: string;
-  password: string;
 }

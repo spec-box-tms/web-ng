@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
-export interface AccessTokenModel {
+export interface AccessTokenResponse {
   accessToken: string;
   refreshToken: string;
 }
