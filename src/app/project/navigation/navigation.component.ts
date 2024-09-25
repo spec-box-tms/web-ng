@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { TuiNavigation } from '@taiga-ui/layout';
 import { SideMenuComponent } from './side-menu/side-menu.component';
-import { LogoComponent } from './logo/logo.component';
+import { LogoComponent } from '../../core/logo/logo.component';
 
 @Component({
   standalone: true,

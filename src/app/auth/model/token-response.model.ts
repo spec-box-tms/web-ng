@@ -1,4 +1,4 @@
-import { AccessTokenModel } from '../../../api/models/SpecBox/WebApi/Model/Auth/access-token-model';
+import { AccessTokenResponse } from '../../../api/models/SpecBox/WebApi/Model/Auth/access-token-response';
 
 export interface TokenResponseModel {
   accessToken: string;
@@ -8,7 +8,7 @@ export interface TokenResponseModel {
 export function mapTokenResponse({
   accessToken,
   refreshToken,
-}: AccessTokenModel): TokenResponseModel {
+}: AccessTokenResponse): TokenResponseModel {
   return {
     accessToken,
     refreshToken,

@@ -1,0 +1,13 @@
+@if(teams$ | async; as teams) { @for(team of teams; track team.id) {
+<a
+  [routerLink]="['team', team.id]"
+  iconStart="@tui.fa.solid.user-group"
+  tuiLink
+>
+  {{ team.title }}
+</a>
+} @empty {
+<p>Нет команд</p>
+} } @else {
+<p>еще не загрузилось</p>
+}

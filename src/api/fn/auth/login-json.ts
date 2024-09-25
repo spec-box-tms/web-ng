@@ -6,14 +6,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { AccessTokenModel as SpecBoxWebApiModelAuthAccessTokenModel } from '../../models/SpecBox/WebApi/Model/Auth/access-token-model';
-import { LoginModel as SpecBoxWebApiModelAuthLoginModel } from '../../models/SpecBox/WebApi/Model/Auth/login-model';
+import { AccessTokenResponse as SpecBoxWebApiModelAuthAccessTokenResponse } from '../../models/SpecBox/WebApi/Model/Auth/access-token-response';
+import { LoginRequest as SpecBoxWebApiModelAuthLoginRequest } from '../../models/SpecBox/WebApi/Model/Auth/login-request';
 
 export interface Login$Json$Params {
-      body?: SpecBoxWebApiModelAuthLoginModel
+      body?: SpecBoxWebApiModelAuthLoginRequest
 }
 
-export function login$Json(http: HttpClient, rootUrl: string, params?: Login$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>> {
+export function login$Json(http: HttpClient, rootUrl: string, params?: Login$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>> {
   const rb = new RequestBuilder(rootUrl, login$Json.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/*+json');
@@ -24,7 +24,7 @@ export function login$Json(http: HttpClient, rootUrl: string, params?: Login$Jso
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>;
+      return r as StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>;
     })
   );
 }

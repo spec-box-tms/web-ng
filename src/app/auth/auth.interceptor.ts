@@ -18,6 +18,10 @@ export class AuthInterceptor implements HttpInterceptor {
   private apiConfigurationService = inject(ApiConfiguration);
   private apiUrl = this.apiConfigurationService.rootUrl;
 
+  constructor() {
+    console.log('interceptor created');
+  }
+
   intercept(
     request: HttpRequest<any>,
     next: HttpHandler
@@ -26,6 +30,7 @@ export class AuthInterceptor implements HttpInterceptor {
       return request.url.startsWith(`${this.apiUrl}${endpoint}`);
     });
 
+    console.log('Interceptor', request.url);
     if (bypass) {
       return next.handle(request);
     }

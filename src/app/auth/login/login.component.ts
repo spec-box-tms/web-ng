@@ -72,7 +72,7 @@ export class LoginComponent {
       .pipe(processHttp(this.loading, this.httpError))
       .subscribe((result) => {
         if (result) {
-          this.router.navigate(['/project']);
+          this.router.navigate(['/team']);
         }
       });
   }

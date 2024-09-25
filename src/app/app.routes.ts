@@ -17,6 +17,13 @@ export const routes: Routes = [
       ),
   },
   {
+    path: 'profile',
+    title: 'Spec Box TMS - Профиль пользователя',
+    loadChildren: () =>
+      import('./profile/profile.routes').then((c) => c.routes),
+    canActivate: [guardAuth],
+  },
+  {
     path: 'project',
     title: 'Spec Box TMS - Проект',
     loadComponent: () =>

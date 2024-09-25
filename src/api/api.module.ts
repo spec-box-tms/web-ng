@@ -7,8 +7,11 @@ import { ApiConfiguration, ApiConfigurationParams } from './api-configuration';
 import { AuthService } from './services/auth.service';
 import { DefaultService } from './services/default.service';
 import { ExportService } from './services/export.service';
+import { ProfileService } from './services/profile.service';
 import { ProjectService } from './services/project.service';
 import { StatService } from './services/stat.service';
+import { TeamService } from './services/team.service';
+import { TeamUserService } from './services/team-user.service';
 import { TestRunService } from './services/test-run.service';
 
 /**
@@ -22,8 +25,11 @@ import { TestRunService } from './services/test-run.service';
     AuthService,
     DefaultService,
     ExportService,
+    ProfileService,
     ProjectService,
     StatService,
+    TeamService,
+    TeamUserService,
     TestRunService,
     ApiConfiguration
   ],

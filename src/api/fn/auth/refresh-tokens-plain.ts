@@ -6,14 +6,14 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { AccessTokenModel as SpecBoxWebApiModelAuthAccessTokenModel } from '../../models/SpecBox/WebApi/Model/Auth/access-token-model';
-import { RefreshTokenExchangeModel as SpecBoxWebApiModelAuthRefreshTokenExchangeModel } from '../../models/SpecBox/WebApi/Model/Auth/refresh-token-exchange-model';
+import { AccessTokenResponse as SpecBoxWebApiModelAuthAccessTokenResponse } from '../../models/SpecBox/WebApi/Model/Auth/access-token-response';
+import { RefreshTokenExchangeRequest as SpecBoxWebApiModelAuthRefreshTokenExchangeRequest } from '../../models/SpecBox/WebApi/Model/Auth/refresh-token-exchange-request';
 
 export interface RefreshTokens$Plain$Params {
-      body?: SpecBoxWebApiModelAuthRefreshTokenExchangeModel
+      body?: SpecBoxWebApiModelAuthRefreshTokenExchangeRequest
 }
 
-export function refreshTokens$Plain(http: HttpClient, rootUrl: string, params?: RefreshTokens$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>> {
+export function refreshTokens$Plain(http: HttpClient, rootUrl: string, params?: RefreshTokens$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>> {
   const rb = new RequestBuilder(rootUrl, refreshTokens$Plain.PATH, 'post');
   if (params) {
     rb.body(params.body, 'application/*+json');
@@ -24,7 +24,7 @@ export function refreshTokens$Plain(http: HttpClient, rootUrl: string, params?: 
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenModel>;
+      return r as StrictHttpResponse<SpecBoxWebApiModelAuthAccessTokenResponse>;
     })
   );
 }
