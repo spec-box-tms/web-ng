@@ -1,5 +1,5 @@
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { TuiLink } from '@taiga-ui/core';
+import { TuiLink, TuiTitle } from '@taiga-ui/core';
 import { TuiAvatar, TuiSkeleton } from '@taiga-ui/kit';
 import { ProfileService } from '../../../profile.service';
 import { AsyncPipe } from '@angular/common';
@@ -8,7 +8,7 @@ import { RouterLink } from '@angular/router';
 @Component({
   selector: 'app-user-card',
   standalone: true,
-  imports: [TuiAvatar, TuiLink, TuiSkeleton, AsyncPipe, RouterLink],
+  imports: [TuiAvatar, TuiLink, TuiSkeleton, AsyncPipe, RouterLink, TuiTitle],
   templateUrl: './user-card.component.html',
   styleUrl: './user-card.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

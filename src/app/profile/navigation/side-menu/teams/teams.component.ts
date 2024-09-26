@@ -6,7 +6,7 @@ import {
 import { TeamService } from '../../../team.service';
 import { AsyncPipe } from '@angular/common';
 import { TuiLink } from '@taiga-ui/core';
-import { RouterLink } from '@angular/router';
+import { RouterLink, RouterLinkActive } from '@angular/router';
 
 @Component({
   selector: 'app-teams',
@@ -14,7 +14,7 @@ import { RouterLink } from '@angular/router';
   templateUrl: './teams.component.html',
   styleUrl: './teams.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, TuiLink, RouterLink]
+  imports: [AsyncPipe, TuiLink, RouterLink, RouterLinkActive]
 })
 export class TeamsComponent {
   private readonly teamService = inject(TeamService);
