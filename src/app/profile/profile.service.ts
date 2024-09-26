@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
-import { ProfileService as ProfileHttpService } from '../../api/services';
 import { map, shareReplay } from 'rxjs';
+import { ProfileService as ProfileHttpService } from '../../api/services';
 import { mapUserResponse } from './model/user.model';
 @Injectable()
 export class ProfileService {

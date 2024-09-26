@@ -63,7 +63,6 @@ const LOGIN_PATTERN = /^[a-zA-Z_]+[a-zA-Z\d-_]*$/;
     TuiTile,
     TuiMainComponent,
     MarkFormTouchedDirective,
-    LogoComponent,
   ],
   templateUrl: './register.component.html',
   styleUrl: './register.component.scss',

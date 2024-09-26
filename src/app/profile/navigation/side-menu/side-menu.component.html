@@ -1,9 +1,12 @@
-<div class="side-menu">
+<nav>
   <app-user-card></app-user-card>
   <a [routerLink]="['/profile']" iconStart="@tui.fa.regular.clock" tuiLink> Недавние </a>
   <a [routerLink]="['favorites']" iconStart="@tui.fa.regular.star" tuiLink> Избранное </a>
   <a [routerLink]="['notifications']" iconStart="@tui.fa.regular.bell" tuiLink> Уведомления </a>
+  <app-splitter/>
   <app-teams></app-teams>
-</div>
+  <app-splitter/>
+  <a iconStart="@tui.fa.solid.plus" tuiLink>Создать команду</a>
+</nav>
 
 <ng-content></ng-content>

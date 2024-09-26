@@ -4,12 +4,15 @@
   flex-grow: 1;
 }
 
-.side-menu {
+nav {
   display: flex;
   flex-direction: column;
   padding: 1.4em;
-  height: 100%;
   background-color: #eee;
   width: 180px;
-  gap: 2em;
+  gap: 1.4em;
+  overflow: hidden;
+  app-teams {
+    flex-grow: 1;
+  }
 }

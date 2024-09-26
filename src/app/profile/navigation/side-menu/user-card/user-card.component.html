@@ -1,7 +1,14 @@
 @if (profile$ | async; as profile) {
-<tui-avatar size="xxl" src="@tui.user"></tui-avatar>
-<span class="tui-text_body-s">{{'@' + profile.login}}</span>
-<a [routerLink]="['user']" class="title" tuiLink>{{ profile.name }}</a>
-@if(profile.description) {
-<span>{{ profile.description }}</span>
-} }
+  <tui-avatar size="xxl" src="@tui.user"></tui-avatar>
+  <span class="tui-text_body-s">{{'@' + profile.login}}</span>
+  <a [routerLink]="['user']" tuiLink tuiTitle>{{ profile.name }}</a>
+  @if(profile.description) {
+    <span tuiSubtitle>{{ profile.description }}</span>
+  }
+}
+@else {
+  <tui-avatar size="xxl" src="@tui.user" [tuiSkeleton]="true"></tui-avatar>
+  <span class="tui-text_body-s" [tuiSkeleton]="true">user-login</span>
+  <a [routerLink]="['user']" tuiLink tuiTitle [tuiSkeleton]="true">John Doe</a>
+  <span tuiSubtitle [tuiSkeleton]="true">description</span>
+}
