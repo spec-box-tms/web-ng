@@ -12,7 +12,7 @@ export interface ListTeamUsers$Json$Params {
   teamId: string;
 }
 
-export function listTeamUsers$Json(http: HttpClient, rootUrl: string, params: ListTeamUsers$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelTeamsTeamUserResponse>> {
+export function listTeamUsers$Json(http: HttpClient, rootUrl: string, params: ListTeamUsers$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelTeamsTeamUserResponse>>> {
   const rb = new RequestBuilder(rootUrl, listTeamUsers$Json.PATH, 'get');
   if (params) {
     rb.path('teamId', params.teamId, {});
@@ -23,7 +23,7 @@ export function listTeamUsers$Json(http: HttpClient, rootUrl: string, params: Li
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<SpecBoxWebApiModelTeamsTeamUserResponse>;
+      return r as StrictHttpResponse<Array<SpecBoxWebApiModelTeamsTeamUserResponse>>;
     })
   );
 }

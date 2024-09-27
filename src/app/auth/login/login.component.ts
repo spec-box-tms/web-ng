@@ -71,7 +71,7 @@ export class LoginComponent {
       .pipe(processHttp(this.loading, this.httpError))
       .subscribe((result) => {
         if (result) {
-          this.router.navigate(['/team']);
+          this.router.navigate(['/profile']);
         }
       });
   }

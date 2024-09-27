@@ -17,6 +17,10 @@ import { deleteTeam$Json } from '../fn/team/delete-team-json';
 import { DeleteTeam$Json$Params } from '../fn/team/delete-team-json';
 import { deleteTeam$Plain } from '../fn/team/delete-team-plain';
 import { DeleteTeam$Plain$Params } from '../fn/team/delete-team-plain';
+import { getTeam$Json } from '../fn/team/get-team-json';
+import { GetTeam$Json$Params } from '../fn/team/get-team-json';
+import { getTeam$Plain } from '../fn/team/get-team-plain';
+import { GetTeam$Plain$Params } from '../fn/team/get-team-plain';
 import { listTeams$Json } from '../fn/team/list-teams-json';
 import { ListTeams$Json$Params } from '../fn/team/list-teams-json';
 import { listTeams$Plain } from '../fn/team/list-teams-plain';
@@ -155,6 +159,69 @@ export class TeamService extends BaseService {
    */
   createTeam$Json(params?: CreateTeam$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelTeamsTeamResponse> {
     return this.createTeam$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<SpecBoxWebApiModelTeamsTeamResponse>): SpecBoxWebApiModelTeamsTeamResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `getTeam()` */
+  static readonly GetTeamPath = '/teams/{id}';
+
+  /**
+   * Получить информацию о команде.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getTeam$Plain()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTeam$Plain$Response(params: GetTeam$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelTeamsTeamResponse>> {
+    return getTeam$Plain(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Получить информацию о команде.
+   *
+   *
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getTeam$Plain$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTeam$Plain(params: GetTeam$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelTeamsTeamResponse> {
+    return this.getTeam$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<SpecBoxWebApiModelTeamsTeamResponse>): SpecBoxWebApiModelTeamsTeamResponse => r.body)
+    );
+  }
+
+  /**
+   * Получить информацию о команде.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `getTeam$Json()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTeam$Json$Response(params: GetTeam$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelTeamsTeamResponse>> {
+    return getTeam$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Получить информацию о команде.
+   *
+   *
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `getTeam$Json$Response()` instead.
+   *
+   * This method doesn't expect any request body.
+   */
+  getTeam$Json(params: GetTeam$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelTeamsTeamResponse> {
+    return this.getTeam$Json$Response(params, context).pipe(
       map((r: StrictHttpResponse<SpecBoxWebApiModelTeamsTeamResponse>): SpecBoxWebApiModelTeamsTeamResponse => r.body)
     );
   }

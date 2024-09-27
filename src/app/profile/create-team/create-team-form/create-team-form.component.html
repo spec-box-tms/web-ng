@@ -1,0 +1,38 @@
+<form [formGroup]="form">
+  <label tuiLabel>
+    Введите название команды
+    <tui-textfield tuiTextfieldSize="m">
+      <input placeholder="Название" tuiTextfield formControlName="title" />
+    </tui-textfield>
+    <tui-error formControlName="title" [error]="[] | tuiFieldError | async" />
+  </label>
+  <label tuiLabel>
+    Введите описание команды
+    <tui-textfield tuiTextfieldSize="m">
+      <input
+        placeholder="Описание"
+        tuiTextfield
+        formControlName="description"
+      />
+    </tui-textfield>
+    <tui-error
+      formControlName="description"
+      [error]="[] | tuiFieldError | async"
+    />
+  </label>
+
+  <div class="actions">
+    <button appearance="secondary" type="button" (click)="cancel()" tuiButton>
+      Отмена
+    </button>
+    <button
+      class="tui-space_left-2"
+      type="submit"
+      (click)="submit()"
+      tuiButton
+      [loading]="loading()"
+    >
+      Создать
+    </button>
+  </div>
+</form>

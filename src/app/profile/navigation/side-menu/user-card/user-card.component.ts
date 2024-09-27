@@ -4,6 +4,7 @@ import { TuiAvatar, TuiSkeleton } from '@taiga-ui/kit';
 import { ProfileService } from '../../../profile.service';
 import { AsyncPipe } from '@angular/common';
 import { RouterLink } from '@angular/router';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-user-card',
@@ -14,7 +15,5 @@ import { RouterLink } from '@angular/router';
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
 export class UserCardComponent {
-  private readonly profileService = inject(ProfileService);
-
-  profile$ = this.profileService.profile$;
+  profile = toSignal(inject(ProfileService).profile$);
 }

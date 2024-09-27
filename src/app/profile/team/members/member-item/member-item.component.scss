@@ -1,0 +1,16 @@
+:host {
+  display: contents;
+}
+
+.name-cell {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  gap: .4em;
+}
+.name {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font: var(--tui-font-text-m);
+}

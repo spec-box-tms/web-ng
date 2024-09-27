@@ -36,7 +36,6 @@ import {
   passwordValidator,
   passwordValidatorToText,
 } from '../../lib/validators/password.validator';
-import { LogoComponent } from '../../core/logo/logo.component';
 import { AuthService } from '../auth.service';
 
 const LOGIN_PATTERN = /^[a-zA-Z_]+[a-zA-Z\d-_]*$/;
@@ -105,13 +104,7 @@ export class RegisterComponent implements OnInit {
       '',
       [Validators.required, Validators.email, Validators.maxLength(255)],
     ],
-    name: [
-      '',
-      [
-        Validators.required,
-        Validators.maxLength(255),
-      ],
-    ],
+    name: ['', [Validators.required, Validators.maxLength(255)]],
     password: [
       '',
       [Validators.required, Validators.maxLength(30), passwordValidator],
@@ -176,7 +169,7 @@ export class RegisterComponent implements OnInit {
       .pipe(processHttp(this.loading, this.httpError))
       .subscribe((result) => {
         if (result) {
-          this.router.navigate(['/project']);
+          this.router.navigate(['/profile']);
         }
       });
   }
