@@ -1,12 +1,10 @@
-import {
-  ChangeDetectionStrategy,
-  Component,
-  inject
-} from '@angular/core';
+import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
 import { TeamService } from '../../../team.service';
 import { AsyncPipe } from '@angular/common';
 import { TuiLink } from '@taiga-ui/core';
 import { RouterLink, RouterLinkActive } from '@angular/router';
+import { TuiSkeleton } from '@taiga-ui/kit';
+import { toSignal } from '@angular/core/rxjs-interop';
 
 @Component({
   selector: 'app-teams',
@@ -14,10 +12,8 @@ import { RouterLink, RouterLinkActive } from '@angular/router';
   templateUrl: './teams.component.html',
   styleUrl: './teams.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  imports: [AsyncPipe, TuiLink, RouterLink, RouterLinkActive]
+  imports: [AsyncPipe, TuiLink, RouterLink, RouterLinkActive, TuiSkeleton],
 })
 export class TeamsComponent {
-  private readonly teamService = inject(TeamService);
-
-  readonly teams$ = this.teamService.getTeams$();
+  readonly teams = toSignal(inject(TeamService).getTeams$());
 }

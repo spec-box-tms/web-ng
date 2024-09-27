@@ -1,28 +1,12 @@
-<h1>My Awesome Team</h1>
-<p>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Debitis eum error eius non, illum placeat</p>
+<h1 [tuiSkeleton]="!team() && 3">{{ team()?.title }}</h1>
+<p [tuiSkeleton]="!team() && 20">{{ team()?.description }}</p>
+
 <tui-tabs>
-  <a
-    tuiTab
-    routerLink="projects"
-    routerLinkActive
-  >
-    Проекты
-  </a>
-  <a
-    tuiTab
-    routerLink="members"
-    routerLinkActive
-  >
-    Участники
-  </a>
-  <a
-    tuiTab
-    routerLink="options"
-    routerLinkActive
-  >
-    Настройки
-  </a>
+  <a tuiTab routerLink="projects" routerLinkActive> Проекты </a>
+  <a tuiTab routerLink="members" routerLinkActive> Участники </a>
+  <a tuiTab routerLink="options" routerLinkActive> Настройки </a>
 </tui-tabs>
+
 <section>
-  <router-outlet/>
+  <router-outlet />
 </section>

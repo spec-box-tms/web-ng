@@ -1,1 +1,23 @@
-<p>members works!</p>,
+<div class="actions tui-space_top-4">
+  <button tuiButton>Добавить участника</button>
+</div>
+<section class="members-table tui-space_top-4">
+  <header>
+    <div>Участник</div>
+    <div>Создан</div>
+    <div>Администратор</div>
+  </header>
+  @if(members()) {
+    @for (member of members(); track member.user.id) {
+      <app-member-item [teamUser]="member"></app-member-item>
+    } @empty {
+      <span>В команде нет участников, но так не бывает :)</span>
+    }
+  } @else {
+    @for (item of [0,1,2]; track item) {
+      <div [tuiSkeleton]="5"></div>
+      <div [tuiSkeleton]="3"></div>
+      <div [tuiSkeleton]="2"></div>
+    }
+  }
+</section>

@@ -1,0 +1,19 @@
+:host {
+  display: flex;
+  flex-direction: column;
+}
+
+.members-table {
+  display: grid;
+  grid-template-columns: 2fr 3fr 1fr;
+  gap: 20px;
+  >header {
+    display: contents;
+    font: var(--tui-font-text-l);
+  }
+}
+.actions {
+  display: flex;
+  width: 100%;
+  justify-content: end;
+}

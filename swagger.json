@@ -1024,6 +1024,85 @@
       }
     },
     "/teams/{id}": {
+      "get": {
+        "tags": [
+          "Team"
+        ],
+        "summary": "Получить информацию о команде",
+        "operationId": "GetTeam",
+        "parameters": [
+          {
+            "name": "id",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Teams.TeamResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Teams.TeamResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Teams.TeamResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "403": {
+            "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      },
       "patch": {
         "tags": [
           "Team"
@@ -1285,17 +1364,26 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Teams.TeamUserResponse"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Teams.TeamUserResponse"
+                  }
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Teams.TeamUserResponse"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Teams.TeamUserResponse"
+                  }
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Teams.TeamUserResponse"
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Teams.TeamUserResponse"
+                  }
                 }
               }
             }
@@ -3016,8 +3104,12 @@
       },
       "SpecBox.WebApi.Model.Teams.TeamUserResponse": {
         "required": [
+          "createdAt",
+          "createdBy",
           "isAdmin",
           "teamId",
+          "updatedAt",
+          "updatedBy",
           "user"
         ],
         "type": "object",
@@ -3030,6 +3122,20 @@
             "type": "boolean"
           },
           "user": {
+            "$ref": "#/components/schemas/SpecBox.WebApi.Model.Users.UserResponse"
+          },
+          "createdAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "createdBy": {
+            "$ref": "#/components/schemas/SpecBox.WebApi.Model.Users.UserResponse"
+          },
+          "updatedAt": {
+            "type": "string",
+            "format": "date-time"
+          },
+          "updatedBy": {
             "$ref": "#/components/schemas/SpecBox.WebApi.Model.Users.UserResponse"
           }
         },

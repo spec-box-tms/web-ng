@@ -46,7 +46,7 @@ export class TeamUserService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  listTeamUsers$Plain$Response(params: ListTeamUsers$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelTeamsTeamUserResponse>> {
+  listTeamUsers$Plain$Response(params: ListTeamUsers$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelTeamsTeamUserResponse>>> {
     return listTeamUsers$Plain(this.http, this.rootUrl, params, context);
   }
 
@@ -60,9 +60,9 @@ export class TeamUserService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  listTeamUsers$Plain(params: ListTeamUsers$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelTeamsTeamUserResponse> {
+  listTeamUsers$Plain(params: ListTeamUsers$Plain$Params, context?: HttpContext): Observable<Array<SpecBoxWebApiModelTeamsTeamUserResponse>> {
     return this.listTeamUsers$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelTeamsTeamUserResponse>): SpecBoxWebApiModelTeamsTeamUserResponse => r.body)
+      map((r: StrictHttpResponse<Array<SpecBoxWebApiModelTeamsTeamUserResponse>>): Array<SpecBoxWebApiModelTeamsTeamUserResponse> => r.body)
     );
   }
 
@@ -76,7 +76,7 @@ export class TeamUserService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  listTeamUsers$Json$Response(params: ListTeamUsers$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelTeamsTeamUserResponse>> {
+  listTeamUsers$Json$Response(params: ListTeamUsers$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelTeamsTeamUserResponse>>> {
     return listTeamUsers$Json(this.http, this.rootUrl, params, context);
   }
 
@@ -90,9 +90,9 @@ export class TeamUserService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  listTeamUsers$Json(params: ListTeamUsers$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelTeamsTeamUserResponse> {
+  listTeamUsers$Json(params: ListTeamUsers$Json$Params, context?: HttpContext): Observable<Array<SpecBoxWebApiModelTeamsTeamUserResponse>> {
     return this.listTeamUsers$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelTeamsTeamUserResponse>): SpecBoxWebApiModelTeamsTeamUserResponse => r.body)
+      map((r: StrictHttpResponse<Array<SpecBoxWebApiModelTeamsTeamUserResponse>>): Array<SpecBoxWebApiModelTeamsTeamUserResponse> => r.body)
     );
   }
 
