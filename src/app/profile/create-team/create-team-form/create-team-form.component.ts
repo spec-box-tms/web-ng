@@ -22,6 +22,7 @@ import { MarkFormTouchedDirective } from '../../../lib/forms/mark-as-touched.dir
 import { HttpError } from '../../../lib/http-errors/http-error';
 import { TeamService } from '../../team.service';
 import { processHttp } from '../../../lib/process-http';
+import { NotificationService } from '../../../core/notification.service';
 
 @Component({
   selector: 'app-create-team-form',
@@ -54,6 +55,7 @@ import { processHttp } from '../../../lib/process-http';
 })
 export class CreateTeamFormComponent {
   private readonly teamService = inject(TeamService);
+  private readonly notificationService = inject(NotificationService);
   private readonly context = inject<TuiDialogContext>(POLYMORPHEUS_CONTEXT);
   private readonly fb = inject(FormBuilder).nonNullable;
   private readonly httpError = signal<HttpError | null>(null);
@@ -77,6 +79,12 @@ export class CreateTeamFormComponent {
       .subscribe((result) => {
         if (result) {
           this.context.completeWith();
+          this.notificationService.show('success', 'Команда успешно создана');
+        } else {
+          this.notificationService.show(
+            'error',
+            'При создании команды произошла ошибка'
+          );
         }
       });
   }

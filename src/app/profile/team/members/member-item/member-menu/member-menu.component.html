@@ -1,0 +1,16 @@
+<button
+  iconStart="@tui.fa.solid.ellipsis-vertical"
+  size="xs"
+  appearance="flat"
+  [tuiDropdown]="dropdown"
+  [(tuiDropdownOpen)]="open"
+  tuiIconButton
+  [disabled]="!isAdmin() && !isCurrentUser()"
+>
+  Меню
+</button>
+<ng-template #dropdown>
+  <tui-data-list>
+    <button tuiOption (click)="removeMember()">{{ removeButtonText() }}</button>
+  </tui-data-list>
+</ng-template>

@@ -1,0 +1,28 @@
+<form [formGroup]="form">
+  <label tuiLabel>
+    Введите логин пользователя
+    <tui-textfield tuiTextfieldSize="m">
+      <input placeholder="Логин" tuiTextfield formControlName="login" />
+    </tui-textfield>
+    <tui-error formControlName="login" [error]="[] | tuiFieldError | async" />
+  </label>
+  <label tuiLabel>
+    <input type="checkbox" formControlName="isAdmin" tuiSwitch/>
+    Назначить администратором
+  </label>
+
+  <div class="actions">
+    <button appearance="secondary" type="button" (click)="cancel()" tuiButton>
+      Отмена
+    </button>
+    <button
+      class="tui-space_left-2"
+      type="submit"
+      (click)="submit()"
+      tuiButton
+      [loading]="loading()"
+    >
+      Создать
+    </button>
+  </div>
+</form>

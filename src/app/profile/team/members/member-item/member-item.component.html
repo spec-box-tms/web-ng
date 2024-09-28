@@ -1,11 +1,10 @@
 <app-member-name [teamUser]="teamUser()" />
 <div>
-  {{ teamUser().createdAt | date: 'dd.MM.yyyy'}}
+  {{ teamUser().createdAt | date : "dd.MM.yyyy" }}
   <div>
     По приглашению:
-    {{
-      teamUser().createdBy.name
-    }}
+    {{ teamUser().createdBy.name }}
   </div>
 </div>
 <div>{{ teamUser().isAdmin }}</div>
+<app-member-menu [teamUser]="teamUser()"></app-member-menu>

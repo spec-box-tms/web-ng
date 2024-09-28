@@ -21,6 +21,7 @@ import { listTeamUsers$Json } from '../fn/team-user/list-team-users-json';
 import { ListTeamUsers$Json$Params } from '../fn/team-user/list-team-users-json';
 import { listTeamUsers$Plain } from '../fn/team-user/list-team-users-plain';
 import { ListTeamUsers$Plain$Params } from '../fn/team-user/list-team-users-plain';
+import { OkResult as MicrosoftAspNetCoreMvcOkResult } from '../models/Microsoft/AspNetCore/Mvc/ok-result';
 import { TeamUserResponse as SpecBoxWebApiModelTeamsTeamUserResponse } from '../models/SpecBox/WebApi/Model/Teams/team-user-response';
 import { updateTeamUser$Json } from '../fn/team-user/update-team-user-json';
 import { UpdateTeamUser$Json$Params } from '../fn/team-user/update-team-user-json';
@@ -172,7 +173,7 @@ export class TeamUserService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteTeamUser$Plain$Response(params: DeleteTeamUser$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelTeamsTeamUserResponse>> {
+  deleteTeamUser$Plain$Response(params: DeleteTeamUser$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<MicrosoftAspNetCoreMvcOkResult>> {
     return deleteTeamUser$Plain(this.http, this.rootUrl, params, context);
   }
 
@@ -186,9 +187,9 @@ export class TeamUserService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteTeamUser$Plain(params: DeleteTeamUser$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelTeamsTeamUserResponse> {
+  deleteTeamUser$Plain(params: DeleteTeamUser$Plain$Params, context?: HttpContext): Observable<MicrosoftAspNetCoreMvcOkResult> {
     return this.deleteTeamUser$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelTeamsTeamUserResponse>): SpecBoxWebApiModelTeamsTeamUserResponse => r.body)
+      map((r: StrictHttpResponse<MicrosoftAspNetCoreMvcOkResult>): MicrosoftAspNetCoreMvcOkResult => r.body)
     );
   }
 
@@ -202,7 +203,7 @@ export class TeamUserService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteTeamUser$Json$Response(params: DeleteTeamUser$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelTeamsTeamUserResponse>> {
+  deleteTeamUser$Json$Response(params: DeleteTeamUser$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<MicrosoftAspNetCoreMvcOkResult>> {
     return deleteTeamUser$Json(this.http, this.rootUrl, params, context);
   }
 
@@ -216,9 +217,9 @@ export class TeamUserService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  deleteTeamUser$Json(params: DeleteTeamUser$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelTeamsTeamUserResponse> {
+  deleteTeamUser$Json(params: DeleteTeamUser$Json$Params, context?: HttpContext): Observable<MicrosoftAspNetCoreMvcOkResult> {
     return this.deleteTeamUser$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelTeamsTeamUserResponse>): SpecBoxWebApiModelTeamsTeamUserResponse => r.body)
+      map((r: StrictHttpResponse<MicrosoftAspNetCoreMvcOkResult>): MicrosoftAspNetCoreMvcOkResult => r.body)
     );
   }
 
