@@ -16,6 +16,7 @@ import { NotificationService } from '../../../../../core/notification.service';
 import { TeamUser } from '../../../../model/team-user.model';
 import { TeamService } from '../../../../team.service';
 import { TeamContextService } from '../../../team-context.service';
+import { HttpErrorResponse } from '@angular/common/http';
 
 @Component({
   selector: 'app-member-menu',
@@ -89,6 +90,45 @@ export class MemberMenuComponent {
               'Неизвестная ошибка',
               'Ошибка'
             );
+          }
+        },
+      });
+  }
+
+  makeAdmin() {
+    this.changeRole(true);
+  }
+
+  makeRegular() {
+    this.changeRole(false);
+  }
+
+  private changeRole(isAdmin: boolean) {
+    const teamUser = this.teamUser();
+    this.teamService
+      .updateMember$(teamUser.teamId, teamUser.user.login, isAdmin)
+      .subscribe({
+        next: (result) => {
+          if (result.isAdmin) {
+            this.notificationService.show(
+              'success',
+              `Пользователь ${teamUser.user.name} теперь администратор`
+            );
+          } else {
+            this.notificationService.show(
+              'success',
+              `Пользователь ${teamUser.user.name} теперь участник`
+            ); 
+          }
+        },
+        error: (error: HttpErrorResponse) => {
+          if (error.status === 400) {
+            this.notificationService.show(
+              'warning',
+              'В команде должен быть хотя бы один администратор'
+            );
+          } else {
+            this.notificationService.show('error', 'Произошла ошибка');
           }
         },
       });

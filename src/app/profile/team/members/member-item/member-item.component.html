@@ -6,5 +6,6 @@
     {{ teamUser().createdBy.name }}
   </div>
 </div>
-<div>{{ teamUser().isAdmin }}</div>
+<div>{{ teamUser().isAdmin ? 'Администратор' : 'Участник' }}</div>
 <app-member-menu [teamUser]="teamUser()"></app-member-menu>
+<div class="splitter"></div>

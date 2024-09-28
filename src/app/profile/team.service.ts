@@ -89,4 +89,21 @@ export class TeamService {
         tap(() => this.refreshTeamMembersSubject.next())
       );
   }
+
+  updateMember$(
+    teamId: TeamId,
+    login: string,
+    isAdmin: boolean
+  ): Observable<TeamUser> {
+    return this.teamUserService
+      .updateTeamUser$Json({
+        teamId,
+        userLogin: login,
+        body: { isAdmin },
+      })
+      .pipe(
+        map(mapTeamUserResponse),
+        tap(() => this.refreshTeamMembersSubject.next())
+      );
+  }
 }
