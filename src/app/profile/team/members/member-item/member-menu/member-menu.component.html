@@ -12,5 +12,12 @@
 <ng-template #dropdown>
   <tui-data-list>
     <button tuiOption (click)="removeMember()">{{ removeButtonText() }}</button>
+    @if(isAdmin()) {
+      @if(teamUser().isAdmin) {
+        <button tuiOption (click)="makeRegular()">Сделать участником</button>
+      } @else {
+        <button tuiOption (click)="makeAdmin()">Сделать администратором</button>
+      }
+    }
   </tui-data-list>
 </ng-template>

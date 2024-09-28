@@ -14,3 +14,7 @@
   align-items: center;
   font: var(--tui-font-text-m);
 }
+.splitter {
+  grid-column: 1 / -1;
+  border-bottom: 1px solid var(--tui-text-tertiary);
+}
