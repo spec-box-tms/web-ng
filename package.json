@@ -29,6 +29,7 @@
     "@taiga-ui/icons-fontawesome": "^4.5.0",
     "@taiga-ui/kit": "^4.5.0",
     "@taiga-ui/layout": "^4.5.0",
+    "@taiga-ui/legacy": "^4.8.1",
     "@taiga-ui/styles": "^4.5.0",
     "rxjs": "~7.8.0",
     "tslib": "^2.3.0",

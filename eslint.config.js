@@ -48,6 +48,7 @@ module.exports = tseslint.config(
     },
     rules: {
       "@stylistic/eol-last": ["error"],
+      "@angular-eslint/template/label-has-associated-control": false
     },
   }
 );
