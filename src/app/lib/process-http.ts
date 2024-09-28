@@ -18,6 +18,7 @@ export function processHttp<T>(
         if (httpError instanceof HttpError) {
           error?.set(httpError);
         } else {
+          console.log(httpError);
           throw new Error('Expected HttpError');
         }
         return of(null);

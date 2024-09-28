@@ -1,1 +1,40 @@
-<p>options works!</p>,
+<form class="tui-space_top-4" [formGroup]="form">
+  <label tuiLabel>
+    Название
+    <tui-textfield tuiTextfieldSize="m">
+      <input
+        placeholder="Введите название"
+        tuiTextfield
+        formControlName="title"
+        [readOnly]="!isAdmin()"
+      />
+    </tui-textfield>
+    <tui-error formControlName="title" [error]="[] | tuiFieldError | async" />
+  </label>
+  <label tuiLabel>
+     Описание
+    <tui-textfield tuiTextfieldSize="m">
+      <input
+        placeholder="Введите описание"
+        tuiTextfield
+        formControlName="description"
+        [readOnly]="!isAdmin()"
+      />
+    </tui-textfield>
+    <tui-error
+      formControlName="description"
+      [error]="[] | tuiFieldError | async"
+    />
+  </label>
+
+  <button
+    class="tui-space_top-4"
+    type="submit"
+    (click)="submit()"
+    tuiButton
+    [loading]="loading()"
+    [disabled]="!isAdmin()"
+  >
+    Сохранить
+  </button>
+</form>

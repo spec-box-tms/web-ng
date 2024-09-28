@@ -37,8 +37,10 @@ import {
   passwordValidatorToText,
 } from '../../lib/validators/password.validator';
 import { AuthService } from '../auth.service';
-
-const LOGIN_PATTERN = /^[a-zA-Z_]+[a-zA-Z\d-_]*$/;
+import {
+  loginValidator,
+  loginValidatorText,
+} from '../../lib/validators/login.validator';
 
 @Component({
   selector: 'app-register',
@@ -80,6 +82,7 @@ const LOGIN_PATTERN = /^[a-zA-Z_]+[a-zA-Z\d-_]*$/;
         passwordMatch: 'Пароли не совпадают',
         loginExists: 'Пользователь с таким логином уже существует',
         pattern: 'Неверный формат',
+        login: loginValidatorText,
         emailExists: 'Пользователь с такой почтой уже существует',
       },
     },
@@ -94,11 +97,7 @@ export class RegisterComponent implements OnInit {
   readonly form = this.fb.group({
     login: [
       '',
-      [
-        Validators.required,
-        Validators.maxLength(255),
-        Validators.pattern(LOGIN_PATTERN),
-      ],
+      [Validators.required, Validators.maxLength(255), loginValidator],
     ],
     email: [
       '',

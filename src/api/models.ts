@@ -1,5 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
+export { OkResult as MicrosoftAspNetCoreMvcOkResult } from './models/Microsoft/AspNetCore/Mvc/ok-result';
 export { ProblemDetails as MicrosoftAspNetCoreMvcProblemDetails } from './models/Microsoft/AspNetCore/Mvc/problem-details';
 export { AccessTokenResponse as SpecBoxWebApiModelAuthAccessTokenResponse } from './models/SpecBox/WebApi/Model/Auth/access-token-response';
 export { LoginRequest as SpecBoxWebApiModelAuthLoginRequest } from './models/SpecBox/WebApi/Model/Auth/login-request';

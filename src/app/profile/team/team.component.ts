@@ -10,6 +10,7 @@ import { TuiSkeleton, TuiTabs } from '@taiga-ui/kit';
 import { map, switchMap } from 'rxjs';
 import { TeamId } from '../../lib/model/ids/team.id';
 import { TeamService } from '../team.service';
+import { TeamContextService } from './team-context.service';
 
 @Component({
   selector: 'app-team',
@@ -18,6 +19,7 @@ import { TeamService } from '../team.service';
   templateUrl: './team.component.html',
   styleUrl: './team.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [TeamContextService],
 })
 export class TeamComponent {
   private teamService = inject(TeamService);

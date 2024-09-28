@@ -1,16 +1,20 @@
 <form [formGroup]="form">
   <label tuiLabel>
-    Введите название команды
+    Название
     <tui-textfield tuiTextfieldSize="m">
-      <input placeholder="Название" tuiTextfield formControlName="title" />
+      <input
+        placeholder="Введите название команды"
+        tuiTextfield
+        formControlName="title"
+      />
     </tui-textfield>
     <tui-error formControlName="title" [error]="[] | tuiFieldError | async" />
   </label>
   <label tuiLabel>
-    Введите описание команды
+    Описание
     <tui-textfield tuiTextfieldSize="m">
       <input
-        placeholder="Описание"
+        placeholder="Введите описание команды"
         tuiTextfield
         formControlName="description"
       />
