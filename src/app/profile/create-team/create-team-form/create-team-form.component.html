@@ -12,13 +12,8 @@
   </label>
   <label tuiLabel>
     Описание
-    <tui-textfield tuiTextfieldSize="m">
-      <input
-        placeholder="Введите описание команды"
-        tuiTextfield
-        formControlName="description"
-      />
-    </tui-textfield>
+    <tui-textarea tuiTextfieldSize="m" formControlName="description">
+    </tui-textarea>
     <tui-error
       formControlName="description"
       [error]="[] | tuiFieldError | async"

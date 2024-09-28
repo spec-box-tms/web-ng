@@ -17,12 +17,16 @@ import {
   TuiButtonLoading,
   TuiFieldErrorPipe,
 } from '@taiga-ui/kit';
+import {
+  TuiTextareaModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/legacy';
 import { POLYMORPHEUS_CONTEXT } from '@taiga-ui/polymorpheus';
+import { NotificationService } from '../../../core/notification.service';
 import { MarkFormTouchedDirective } from '../../../lib/forms/mark-as-touched.directive';
 import { HttpError } from '../../../lib/http-errors/http-error';
-import { TeamService } from '../../team.service';
 import { processHttp } from '../../../lib/process-http';
-import { NotificationService } from '../../../core/notification.service';
+import { TeamService } from '../../team.service';
 
 @Component({
   selector: 'app-create-team-form',
@@ -32,6 +36,8 @@ import { NotificationService } from '../../../core/notification.service';
     TuiButton,
     TuiButtonLoading,
     TuiTextfield,
+    TuiTextareaModule,
+    TuiTextfieldControllerModule,
     TuiFieldErrorPipe,
     TuiError,
     AsyncPipe,

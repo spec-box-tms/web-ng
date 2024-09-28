@@ -22,6 +22,8 @@ import { TeamId } from '../../../lib/model/ids/team.id';
 import { processHttp } from '../../../lib/process-http';
 import { TeamService } from '../../team.service';
 import { TeamContextService } from '../team-context.service';
+import { Team } from '../../model/team.model';
+import {TuiTextareaModule, TuiTextfieldControllerModule} from '@taiga-ui/legacy';
 
 @Component({
   selector: 'app-options',
@@ -31,6 +33,8 @@ import { TeamContextService } from '../team-context.service';
     TuiButton,
     TuiButtonLoading,
     TuiTextfield,
+    TuiTextareaModule,
+    TuiTextfieldControllerModule,
     TuiFieldErrorPipe,
     TuiError,
     AsyncPipe,
@@ -77,11 +81,7 @@ export class OptionsComponent implements OnInit {
         filter((team) => !!team),
         take(1)
       )
-      .subscribe((team) => {
-        this.form.patchValue(team);
-        this.teamId = team.id;
-        this.rowVersion = team.rowVersion;
-      });
+      .subscribe((team) => this.updateForm(team));
   }
 
   submit() {
@@ -95,6 +95,7 @@ export class OptionsComponent implements OnInit {
       .pipe(processHttp(this.loading, this.httpError))
       .subscribe((result) => {
         if (result) {
+          this.updateForm(result);
           this.notificationService.show('success', 'Команда успешно создана');
         } else {
           this.notificationService.show(
@@ -103,5 +104,13 @@ export class OptionsComponent implements OnInit {
           );
         }
       });
+  }
+
+  private updateForm(team: Team) {
+    this.form.patchValue(team);
+    // this.form.markAsUntouched();
+    this.form.markAsPristine();
+    this.teamId = team.id;
+    this.rowVersion = team.rowVersion;
   }
 }

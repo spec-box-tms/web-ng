@@ -12,15 +12,13 @@
     <tui-error formControlName="title" [error]="[] | tuiFieldError | async" />
   </label>
   <label tuiLabel>
-     Описание
-    <tui-textfield tuiTextfieldSize="m">
-      <input
-        placeholder="Введите описание"
-        tuiTextfield
-        formControlName="description"
-        [readOnly]="!isAdmin()"
-      />
-    </tui-textfield>
+    Описание
+    <tui-textarea
+      tuiTextfieldSize="m"
+      formControlName="description"
+      [readOnly]="!isAdmin()"
+    >
+    </tui-textarea>
     <tui-error
       formControlName="description"
       [error]="[] | tuiFieldError | async"
@@ -33,7 +31,7 @@
     (click)="submit()"
     tuiButton
     [loading]="loading()"
-    [disabled]="!isAdmin()"
+    [disabled]="!isAdmin() || !form.dirty"
   >
     Сохранить
   </button>
