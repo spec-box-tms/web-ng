@@ -1,6 +1,6 @@
 import { HttpErrorResponse } from '@angular/common/http';
 import { catchError, MonoTypeOperatorFunction, throwError } from 'rxjs';
-import { HttpError } from './http-error';
+import { HttpError } from './http-errors/http-error';
 
 export const catchHttpError = <T>(): MonoTypeOperatorFunction<T> => {
   return catchError((error) => {

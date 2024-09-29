@@ -1,1 +1,41 @@
-<p>edit-user works!</p>,
+<h1 [tuiSkeleton]="!user() && 2">{{ "@" + user()?.login }}</h1>
+<form [formGroup]="form">
+  <label tuiLabel>
+    Введите email
+    <tui-textfield tuiTextfieldSize="m">
+      <input placeholder="Email" tuiTextfield formControlName="email" />
+    </tui-textfield>
+    <tui-error formControlName="email" [error]="[] | tuiFieldError | async" />
+  </label>
+
+  <label tuiLabel>
+    Введите имя
+    <tui-textfield tuiTextfieldSize="m">
+      <input placeholder="Имя" tuiTextfield formControlName="name" />
+    </tui-textfield>
+    <tui-error formControlName="name" [error]="[] | tuiFieldError | async" />
+  </label>
+  <label tuiLabel>
+    Введите описание
+    <tui-textfield tuiTextfieldSize="m">
+      <input
+        placeholder="Описание"
+        tuiTextfield
+        formControlName="description"
+      />
+    </tui-textfield>
+    <tui-error
+      formControlName="description"
+      [error]="[] | tuiFieldError | async"
+    />
+  </label>
+  <button
+    appearance="primary"
+    size="s"
+    tuiButton
+    type="submit"
+    [disabled]="!form.dirty"
+  >
+    Сохранить
+  </button>
+</form>

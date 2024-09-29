@@ -56,9 +56,7 @@
       <tui-error formControlName="confirm" [error]="[] | tuiFieldError | async" />
     </label>
 
-    @if(unknownError()) {
-      <tui-error [error]="unknownError()" />
-    }
+    <tui-error [formGroup]="form" [error]="[] | tuiFieldError | async" />
 
     <button appearance="primary" size="m" tuiButton type="submit" [loading]="loading()" (click)="submit()">Зарегистрироваться</button>
   </form>

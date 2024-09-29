@@ -1,6 +1,6 @@
 import { WritableSignal } from '@angular/core';
 import { catchError, finalize, Observable, of, OperatorFunction } from 'rxjs';
-import { catchHttpError } from './http-errors/catch-http-error';
+import { catchHttpError } from './catch-http-error';
 import { HttpError } from './http-errors/http-error';
 
 export function processHttp<T>(
@@ -18,8 +18,8 @@ export function processHttp<T>(
         if (httpError instanceof HttpError) {
           error?.set(httpError);
         } else {
-          console.log(httpError);
-          throw new Error('Expected HttpError');
+          console.error('Non http error:', httpError);
+          throw httpError;
         }
         return of(null);
       })
