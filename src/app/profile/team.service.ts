@@ -1,21 +1,19 @@
 import { inject, Injectable } from '@angular/core';
-import { BehaviorSubject, delay, map, Observable, tap } from 'rxjs';
+import { map, Observable, Subject, tap } from 'rxjs';
 import {
   TeamService as TeamApiService,
   TeamUserService as TeamUserApiService,
 } from '../../api/services';
+import { mapArray } from '../lib/map-array';
 import { TeamId } from '../lib/model/ids/team.id';
-import { mapArray } from '../lib/model/map-array';
 import { updateWhen } from '../lib/update-when';
 import { mapTeamUserResponse, TeamUser } from './model/team-user.model';
 import { mapTeamResponse, Team } from './model/team.model';
 
 @Injectable()
 export class TeamService {
-  private readonly refreshTeamsSubject = new BehaviorSubject<void>(undefined);
-  private readonly refreshTeamMembersSubject = new BehaviorSubject<void>(
-    undefined
-  );
+  private readonly refreshTeamsSubject = new Subject<void>();
+  private readonly refreshTeamMembersSubject = new Subject<void>();
 
   private readonly teamUserService = inject(TeamUserApiService);
   private readonly teamService = inject(TeamApiService);
@@ -24,8 +22,7 @@ export class TeamService {
     return this.teamService
       .listTeams$Json()
       .pipe(
-        delay(1000),
-        map(mapArray(mapTeamResponse)),
+        mapArray(mapTeamResponse),
         updateWhen(this.refreshTeamsSubject, this.refreshTeamMembersSubject)
       );
   }
@@ -63,7 +60,7 @@ export class TeamService {
     return this.teamUserService
       .listTeamUsers$Json({ teamId })
       .pipe(
-        map(mapArray(mapTeamUserResponse)),
+        mapArray(mapTeamUserResponse),
         updateWhen(this.refreshTeamMembersSubject)
       );
   }

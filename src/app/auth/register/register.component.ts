@@ -2,8 +2,6 @@ import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
-  effect,
   inject,
   OnInit,
   signal,
@@ -27,20 +25,22 @@ import {
   TuiTooltip,
 } from '@taiga-ui/kit';
 import { TuiCardLarge, TuiHeader, TuiMainComponent } from '@taiga-ui/layout';
+import {
+  catchReactiveFormError,
+  serverValidationErrorsToText,
+} from '../../lib/catch-reactive-form-errors';
 import { MarkFormTouchedDirective } from '../../lib/forms/mark-as-touched.directive';
-import { hasBadRequestError } from '../../lib/http-errors/http-bad-request-details';
-import { HttpError } from '../../lib/http-errors/http-error';
-import { processHttp } from '../../lib/process-http';
+import { signalLoading } from '../../lib/signal-loading';
+import {
+  loginValidator,
+  loginValidatorText,
+} from '../../lib/validators/login.validator';
 import { passwordMatchValidator } from '../../lib/validators/password-match.validator';
 import {
   passwordValidator,
   passwordValidatorToText,
 } from '../../lib/validators/password.validator';
 import { AuthService } from '../auth.service';
-import {
-  loginValidator,
-  loginValidatorText,
-} from '../../lib/validators/login.validator';
 
 @Component({
   selector: 'app-register',
@@ -84,6 +84,16 @@ import {
         pattern: 'Неверный формат',
         login: loginValidatorText,
         emailExists: 'Пользователь с такой почтой уже существует',
+        serverValidationErrors: serverValidationErrorsToText({
+          required: 'Обязательное поле',
+          'The field Login must match the regular expression':
+            'Только латинские символы, цифры или знак подчеркивания',
+          'The field Login must be a string or array type with a maximum length':
+            'Превышена максимальная длина поля',
+          'Login already exists': 'Пользователь с таким логином уже существует',
+          'Email already exists': 'Пользователь с такой почтой уже существует',
+        }),
+        serverHttpError: 'Произошла непредвиденная ошибка, попробуйте позже',
       },
     },
   ],
@@ -91,7 +101,6 @@ import {
 export class RegisterComponent implements OnInit {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
-  private readonly httpError = signal<HttpError | null>(null);
 
   private readonly fb = inject(FormBuilder).nonNullable;
   readonly form = this.fb.group({
@@ -111,45 +120,6 @@ export class RegisterComponent implements OnInit {
     confirm: [''],
   });
   readonly loading = signal(false);
-  readonly unknownError = computed(() => {
-    const httpError = this.httpError();
-    if (httpError) {
-      if (httpError.status === 400) {
-        return null;
-      }
-      return 'Произошла непредвиденная ошибка, попробуйте позже';
-    }
-    return null;
-  });
-
-  constructor() {
-    effect(() => {
-      const httpError = this.httpError();
-      if (httpError && httpError.knownError?.status === 400) {
-        const error = httpError.knownError;
-        if (hasBadRequestError(error, 'login', 'exists')) {
-          this.form.controls.login.setErrors({
-            loginExists: true,
-          });
-        }
-        if (hasBadRequestError(error, 'login', 'match')) {
-          this.form.controls.login.setErrors({
-            pattern: true,
-          });
-        }
-        if (hasBadRequestError(error, 'email', 'exists')) {
-          this.form.controls.email.setErrors({
-            emailExists: true,
-          });
-        }
-        if (hasBadRequestError(error, 'email', 'match')) {
-          this.form.controls.email.setErrors({
-            pattern: true,
-          });
-        }
-      }
-    });
-  }
 
   ngOnInit(): void {
     this.form.controls.confirm.setValidators(
@@ -165,11 +135,9 @@ export class RegisterComponent implements OnInit {
 
     this.authService
       .register$({ login, email, name, password })
-      .pipe(processHttp(this.loading, this.httpError))
-      .subscribe((result) => {
-        if (result) {
-          this.router.navigate(['/profile']);
-        }
+      .pipe(signalLoading(this.loading), catchReactiveFormError(this.form))
+      .subscribe(() => {
+        this.router.navigate(['/profile']);
       });
   }
 }

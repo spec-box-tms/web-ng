@@ -27,6 +27,11 @@ import { MarkFormTouchedDirective } from '../../../lib/forms/mark-as-touched.dir
 import { HttpError } from '../../../lib/http-errors/http-error';
 import { processHttp } from '../../../lib/process-http';
 import { TeamService } from '../../team.service';
+import { signalLoading } from '../../../lib/signal-loading';
+import {
+  catchReactiveFormError,
+  serverValidationErrorsToText,
+} from '../../../lib/catch-reactive-form-errors';
 
 @Component({
   selector: 'app-create-team-form',
@@ -55,6 +60,7 @@ import { TeamService } from '../../team.service';
           `Максимальная длина — ${requiredLength}`,
         minlength: ({ requiredLength }: { requiredLength: string }) =>
           `Минимальная длина — ${requiredLength}`,
+        serverValidationErrors: serverValidationErrorsToText({}),
       },
     },
   ],
@@ -64,12 +70,14 @@ export class CreateTeamFormComponent {
   private readonly notificationService = inject(NotificationService);
   private readonly context = inject<TuiDialogContext>(POLYMORPHEUS_CONTEXT);
   private readonly fb = inject(FormBuilder).nonNullable;
-  private readonly httpError = signal<HttpError | null>(null);
 
   readonly loading = signal(false);
 
   readonly form = this.fb.group({
-    title: ['', [Validators.required, Validators.maxLength(255)]],
+    title: [
+      '',
+      [Validators.required, Validators.minLength(2), Validators.maxLength(255)],
+    ],
     description: [''],
   });
 
@@ -81,17 +89,18 @@ export class CreateTeamFormComponent {
 
     this.teamService
       .createTeam$(title, description)
-      .pipe(processHttp(this.loading, this.httpError))
-      .subscribe((result) => {
-        if (result) {
+      .pipe(signalLoading(this.loading), catchReactiveFormError(this.form))
+      .subscribe({
+        next: () => {
           this.context.completeWith();
           this.notificationService.show('success', 'Команда успешно создана');
-        } else {
+        },
+        error: () => {
           this.notificationService.show(
             'error',
             'При создании команды произошла ошибка'
           );
-        }
+        },
       });
   }
 

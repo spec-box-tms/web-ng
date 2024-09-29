@@ -11,9 +11,7 @@
     <tui-textfield tuiTextfieldSize="m">
       <input placeholder="Пароль" tuiInputPassword formControlName="password" />
     </tui-textfield>
-    @if(error()) {
-      <tui-error [error]="error()" />
-    }
+    <tui-error [formGroup]="form" [error]="[] | tuiFieldError | async" />
     <button
       tuiButton
       appearance="primary"

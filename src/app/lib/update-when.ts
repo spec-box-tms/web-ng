@@ -1,8 +1,7 @@
-import { Subject, Observable, merge } from 'rxjs';
-import { switchMap, startWith } from 'rxjs/operators';
+import { Observable, merge } from 'rxjs';
+import { startWith, switchMap } from 'rxjs/operators';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-export function updateWhen<T>(...refreshSubjects: Subject<any>[]) {
+export function updateWhen<T>(...refreshSubjects: Observable<unknown>[]) {
   return (source: Observable<T>): Observable<T | null> => {
     return merge(...refreshSubjects).pipe(
       startWith(null),

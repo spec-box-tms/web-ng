@@ -1,18 +1,27 @@
+import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  computed,
   inject,
   signal,
 } from '@angular/core';
 import { FormBuilder, ReactiveFormsModule, Validators } from '@angular/forms';
 import { Router, RouterLink } from '@angular/router';
 import { TuiButton, TuiError, TuiSurface, TuiTextfield } from '@taiga-ui/core';
-import { TuiButtonLoading, TuiInputPassword, TuiTile } from '@taiga-ui/kit';
+import {
+  TUI_VALIDATION_ERRORS,
+  TuiButtonLoading,
+  TuiFieldErrorPipe,
+  TuiInputPassword,
+  TuiTile,
+} from '@taiga-ui/kit';
 import { TuiCardLarge, TuiHeader, TuiMainComponent } from '@taiga-ui/layout';
+import {
+  catchReactiveFormError,
+  serverHttpErrorToText,
+} from '../../lib/catch-reactive-form-errors';
 import { MarkFormTouchedDirective } from '../../lib/forms/mark-as-touched.directive';
-import { HttpError } from '../../lib/http-errors/http-error';
-import { processHttp } from '../../lib/process-http';
+import { signalLoading } from '../../lib/signal-loading';
 import { AuthService } from '../auth.service';
 
 @Component({
@@ -29,18 +38,32 @@ import { AuthService } from '../auth.service';
     TuiSurface,
     TuiHeader,
     TuiTile,
+    TuiFieldErrorPipe,
     TuiError,
+    AsyncPipe,
     TuiMainComponent,
     MarkFormTouchedDirective,
   ],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [
+    {
+      provide: TUI_VALIDATION_ERRORS,
+      useValue: {
+        serverHttpError: serverHttpErrorToText(
+          {
+            401: 'Неверный логин или пароль',
+          },
+          'Произошла непредвиденная ошибка, попробуйте позже'
+        ),
+      },
+    },
+  ],
 })
 export class LoginComponent {
   private readonly authService = inject(AuthService);
   private readonly router = inject(Router);
-  private readonly httpError = signal<HttpError | null>(null);
   private readonly fb = inject(FormBuilder).nonNullable;
 
   readonly form = this.fb.group({
@@ -48,17 +71,6 @@ export class LoginComponent {
     password: ['', Validators.required],
   });
   readonly loading = signal(false);
-  readonly error = computed(() => {
-    const httpError = this.httpError();
-    if (httpError) {
-      if (httpError.status === 401) {
-        return 'Неверный логин или пароль';
-      } else {
-        return 'Произошла непредвиденная ошибка, попробуйте позже';
-      }
-    }
-    return null;
-  });
 
   submit() {
     if (!this.form.valid) {
@@ -68,11 +80,9 @@ export class LoginComponent {
 
     this.authService
       .login$({ login, password })
-      .pipe(processHttp(this.loading, this.httpError))
-      .subscribe((result) => {
-        if (result) {
-          this.router.navigate(['/profile']);
-        }
+      .pipe(signalLoading(this.loading), catchReactiveFormError(this.form))
+      .subscribe(() => {
+        this.router.navigate(['/profile']);
       });
   }
 }

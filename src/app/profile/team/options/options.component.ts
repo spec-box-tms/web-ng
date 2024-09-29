@@ -23,7 +23,11 @@ import { processHttp } from '../../../lib/process-http';
 import { TeamService } from '../../team.service';
 import { TeamContextService } from '../team-context.service';
 import { Team } from '../../model/team.model';
-import {TuiTextareaModule, TuiTextfieldControllerModule} from '@taiga-ui/legacy';
+import {
+  TuiTextareaModule,
+  TuiTextfieldControllerModule,
+} from '@taiga-ui/legacy';
+import { singleNonNullable } from '../../../lib/single-non-nullable';
 
 @Component({
   selector: 'app-options',
@@ -77,10 +81,7 @@ export class OptionsComponent implements OnInit {
 
   ngOnInit() {
     this.teamContext.team$
-      .pipe(
-        filter((team) => !!team),
-        take(1)
-      )
+      .pipe(singleNonNullable())
       .subscribe((team) => this.updateForm(team));
   }
 
