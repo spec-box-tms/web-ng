@@ -6,12 +6,12 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { ProjectModel as SpecBoxWebApiModelCommonProjectModel } from '../../models/SpecBox/WebApi/Model/Common/project-model';
+import { ProjectResponse as SpecBoxWebApiModelCommonProjectResponse } from '../../models/SpecBox/WebApi/Model/Common/project-response';
 
 export interface ListProjects$Plain$Params {
 }
 
-export function listProjects$Plain(http: HttpClient, rootUrl: string, params?: ListProjects$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectModel>>> {
+export function listProjects$Plain(http: HttpClient, rootUrl: string, params?: ListProjects$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectResponse>>> {
   const rb = new RequestBuilder(rootUrl, listProjects$Plain.PATH, 'get');
   if (params) {
   }
@@ -21,7 +21,7 @@ export function listProjects$Plain(http: HttpClient, rootUrl: string, params?: L
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectModel>>;
+      return r as StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectResponse>>;
     })
   );
 }

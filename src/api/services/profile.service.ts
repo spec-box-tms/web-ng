@@ -92,7 +92,7 @@ export class ProfileService extends BaseService {
   static readonly UpdateProfilePath = '/profile';
 
   /**
-   * Профиль пользователя.
+   * Изменить профиль пользователя.
    *
    *
    *
@@ -106,7 +106,7 @@ export class ProfileService extends BaseService {
   }
 
   /**
-   * Профиль пользователя.
+   * Изменить профиль пользователя.
    *
    *
    *
@@ -122,7 +122,7 @@ export class ProfileService extends BaseService {
   }
 
   /**
-   * Профиль пользователя.
+   * Изменить профиль пользователя.
    *
    *
    *
@@ -136,7 +136,7 @@ export class ProfileService extends BaseService {
   }
 
   /**
-   * Профиль пользователя.
+   * Изменить профиль пользователя.
    *
    *
    *

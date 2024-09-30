@@ -1,1 +1,13 @@
-<p>projects works!</p>,
+@if(projects()) {
+  @for (project of projects(); track project.code) {
+    <p>{{project.title}}</p>
+  } @empty {
+    <span>У команды пока нет проектов</span>
+  }
+} @else {
+  @for (item of [0,1,2]; track item) {
+    <div [tuiSkeleton]="5"></div>
+    <div [tuiSkeleton]="3"></div>
+    <div [tuiSkeleton]="2"></div>
+  }
+}

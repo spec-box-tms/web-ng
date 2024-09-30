@@ -1,5 +1,5 @@
 import { UserResponse } from '../../../api/models/SpecBox/WebApi/Model/Users/user-response';
-import { UserId } from '../../lib/model/ids/user.id';
+import { UserId } from '../../model/ids/user.id';
 import { toUndefined } from '../../lib/model/to-undefined';
 
 export interface User {

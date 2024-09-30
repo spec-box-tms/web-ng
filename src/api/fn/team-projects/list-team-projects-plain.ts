@@ -8,16 +8,18 @@ import { RequestBuilder } from '../../request-builder';
 
 import { ProjectResponse as SpecBoxWebApiModelCommonProjectResponse } from '../../models/SpecBox/WebApi/Model/Common/project-response';
 
-export interface ListProjects$Json$Params {
+export interface ListTeamProjects$Plain$Params {
+  teamId: string;
 }
 
-export function listProjects$Json(http: HttpClient, rootUrl: string, params?: ListProjects$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectResponse>>> {
-  const rb = new RequestBuilder(rootUrl, listProjects$Json.PATH, 'get');
+export function listTeamProjects$Plain(http: HttpClient, rootUrl: string, params: ListTeamProjects$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectResponse>>> {
+  const rb = new RequestBuilder(rootUrl, listTeamProjects$Plain.PATH, 'get');
   if (params) {
+    rb.path('teamId', params.teamId, {});
   }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'text/json', context })
+    rb.build({ responseType: 'text', accept: 'text/plain', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
@@ -26,4 +28,4 @@ export function listProjects$Json(http: HttpClient, rootUrl: string, params?: Li
   );
 }
 
-listProjects$Json.PATH = '/projects';
+listTeamProjects$Plain.PATH = '/teams/{teamId}/projects';

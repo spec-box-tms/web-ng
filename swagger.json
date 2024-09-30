@@ -371,7 +371,7 @@
         "tags": [
           "Profile"
         ],
-        "summary": "Профиль пользователя",
+        "summary": "Изменить профиль пользователя",
         "operationId": "UpdateProfile",
         "requestBody": {
           "content": {
@@ -412,6 +412,46 @@
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad Request",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          },
+          "409": {
+            "description": "Conflict",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
           }
         }
       }
@@ -431,7 +471,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectModel"
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectResponse"
                   }
                 }
               },
@@ -439,7 +479,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectModel"
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectResponse"
                   }
                 }
               },
@@ -447,7 +487,7 @@
                 "schema": {
                   "type": "array",
                   "items": {
-                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectModel"
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectResponse"
                   }
                 }
               }
@@ -1368,6 +1408,76 @@
           },
           "403": {
             "description": "Forbidden",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/teams/{teamId}/projects": {
+      "get": {
+        "tags": [
+          "TeamProjects"
+        ],
+        "summary": "Список проектов команды",
+        "operationId": "ListTeamProjects",
+        "parameters": [
+          {
+            "name": "teamId",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
             "content": {
               "text/plain": {
                 "schema": {
@@ -2579,7 +2689,7 @@
         },
         "additionalProperties": false
       },
-      "SpecBox.WebApi.Model.Common.ProjectModel": {
+      "SpecBox.WebApi.Model.Common.ProjectResponse": {
         "required": [
           "code",
           "title",
@@ -2653,6 +2763,9 @@
         "additionalProperties": false
       },
       "SpecBox.WebApi.Model.Common.VersionModel": {
+        "required": [
+          "updatedAt"
+        ],
         "type": "object",
         "properties": {
           "version": {
@@ -2661,8 +2774,7 @@
           },
           "updatedAt": {
             "type": "string",
-            "format": "date-time",
-            "nullable": true
+            "format": "date-time"
           }
         },
         "additionalProperties": false

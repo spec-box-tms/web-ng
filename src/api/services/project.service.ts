@@ -33,7 +33,7 @@ import { listStructures$Json } from '../fn/project/list-structures-json';
 import { ListStructures$Json$Params } from '../fn/project/list-structures-json';
 import { listStructures$Plain } from '../fn/project/list-structures-plain';
 import { ListStructures$Plain$Params } from '../fn/project/list-structures-plain';
-import { ProjectModel as SpecBoxWebApiModelCommonProjectModel } from '../models/SpecBox/WebApi/Model/Common/project-model';
+import { ProjectResponse as SpecBoxWebApiModelCommonProjectResponse } from '../models/SpecBox/WebApi/Model/Common/project-response';
 import { FeatureModel as SpecBoxWebApiModelProjectFeatureModel } from '../models/SpecBox/WebApi/Model/Project/feature-model';
 import { FeatureRelationsModel as SpecBoxWebApiModelProjectFeatureRelationsModel } from '../models/SpecBox/WebApi/Model/Project/feature-relations-model';
 import { StructureModel as SpecBoxWebApiModelProjectStructureModel } from '../models/SpecBox/WebApi/Model/Project/structure-model';
@@ -58,7 +58,7 @@ export class ProjectService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  listProjects$Plain$Response(params?: ListProjects$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectModel>>> {
+  listProjects$Plain$Response(params?: ListProjects$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectResponse>>> {
     return listProjects$Plain(this.http, this.rootUrl, params, context);
   }
 
@@ -72,9 +72,9 @@ export class ProjectService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  listProjects$Plain(params?: ListProjects$Plain$Params, context?: HttpContext): Observable<Array<SpecBoxWebApiModelCommonProjectModel>> {
+  listProjects$Plain(params?: ListProjects$Plain$Params, context?: HttpContext): Observable<Array<SpecBoxWebApiModelCommonProjectResponse>> {
     return this.listProjects$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectModel>>): Array<SpecBoxWebApiModelCommonProjectModel> => r.body)
+      map((r: StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectResponse>>): Array<SpecBoxWebApiModelCommonProjectResponse> => r.body)
     );
   }
 
@@ -88,7 +88,7 @@ export class ProjectService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  listProjects$Json$Response(params?: ListProjects$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectModel>>> {
+  listProjects$Json$Response(params?: ListProjects$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectResponse>>> {
     return listProjects$Json(this.http, this.rootUrl, params, context);
   }
 
@@ -102,9 +102,9 @@ export class ProjectService extends BaseService {
    *
    * This method doesn't expect any request body.
    */
-  listProjects$Json(params?: ListProjects$Json$Params, context?: HttpContext): Observable<Array<SpecBoxWebApiModelCommonProjectModel>> {
+  listProjects$Json(params?: ListProjects$Json$Params, context?: HttpContext): Observable<Array<SpecBoxWebApiModelCommonProjectResponse>> {
     return this.listProjects$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectModel>>): Array<SpecBoxWebApiModelCommonProjectModel> => r.body)
+      map((r: StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectResponse>>): Array<SpecBoxWebApiModelCommonProjectResponse> => r.body)
     );
   }
 

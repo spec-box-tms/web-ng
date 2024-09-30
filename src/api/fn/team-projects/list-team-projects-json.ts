@@ -8,12 +8,14 @@ import { RequestBuilder } from '../../request-builder';
 
 import { ProjectResponse as SpecBoxWebApiModelCommonProjectResponse } from '../../models/SpecBox/WebApi/Model/Common/project-response';
 
-export interface ListProjects$Json$Params {
+export interface ListTeamProjects$Json$Params {
+  teamId: string;
 }
 
-export function listProjects$Json(http: HttpClient, rootUrl: string, params?: ListProjects$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectResponse>>> {
-  const rb = new RequestBuilder(rootUrl, listProjects$Json.PATH, 'get');
+export function listTeamProjects$Json(http: HttpClient, rootUrl: string, params: ListTeamProjects$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelCommonProjectResponse>>> {
+  const rb = new RequestBuilder(rootUrl, listTeamProjects$Json.PATH, 'get');
   if (params) {
+    rb.path('teamId', params.teamId, {});
   }
 
   return http.request(
@@ -26,4 +28,4 @@ export function listProjects$Json(http: HttpClient, rootUrl: string, params?: Li
   );
 }
 
-listProjects$Json.PATH = '/projects';
+listTeamProjects$Json.PATH = '/teams/{teamId}/projects';

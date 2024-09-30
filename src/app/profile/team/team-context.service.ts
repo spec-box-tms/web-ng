@@ -2,7 +2,7 @@ import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { combineLatest, map, shareReplay, switchMap } from 'rxjs';
 import { AuthService } from '../../auth/auth.service';
-import { TeamId } from '../../lib/model/ids/team.id';
+import { TeamId } from '../../model/ids/team.id';
 import { TeamService } from '../team.service';
 
 @Injectable()
