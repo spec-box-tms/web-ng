@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, shareReplay, Subject, tap } from 'rxjs';
 import { ProfileService as ProfileApiService } from '../../api/services';
-import { UpdateUser } from './model/user-update.model';
+import { UserUpdate } from './model/user-update.model';
 import { mapUserResponse, User } from './model/user.model';
 import { continueWith } from '../lib/continue-with';
 @Injectable()
@@ -17,10 +17,12 @@ export class ProfileService {
       shareReplay(1)
     );
 
-  update$(request: UpdateUser): Observable<User> {
-    return this.profileApiService.updateProfile$Json({ body: request }).pipe(
-      map(mapUserResponse),
-      tap((user) => this.updatedProfileSubject.next(user))
-    );
+  update$(request: UserUpdate, rowVersion: string): Observable<User> {
+    return this.profileApiService
+      .updateProfile$Json({ body: { ...request, rowVersion } })
+      .pipe(
+        map(mapUserResponse),
+        tap((user) => this.updatedProfileSubject.next(user))
+      );
   }
 }
