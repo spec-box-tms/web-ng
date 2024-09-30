@@ -1,6 +1,5 @@
 /* tslint:disable */
 /* eslint-disable */
-export { OkResult as MicrosoftAspNetCoreMvcOkResult } from './models/Microsoft/AspNetCore/Mvc/ok-result';
 export { ProblemDetails as MicrosoftAspNetCoreMvcProblemDetails } from './models/Microsoft/AspNetCore/Mvc/problem-details';
 export { AccessTokenResponse as SpecBoxWebApiModelAuthAccessTokenResponse } from './models/SpecBox/WebApi/Model/Auth/access-token-response';
 export { LoginRequest as SpecBoxWebApiModelAuthLoginRequest } from './models/SpecBox/WebApi/Model/Auth/login-request';
@@ -47,4 +46,5 @@ export { FeatureModel as SpecBoxWebApiModelUploadFeatureModel } from './models/S
 export { ProjectModel as SpecBoxWebApiModelUploadProjectModel } from './models/SpecBox/WebApi/Model/Upload/project-model';
 export { TreeModel as SpecBoxWebApiModelUploadTreeModel } from './models/SpecBox/WebApi/Model/Upload/tree-model';
 export { UploadData as SpecBoxWebApiModelUploadUploadData } from './models/SpecBox/WebApi/Model/Upload/upload-data';
+export { UpdateUserRequest as SpecBoxWebApiModelUsersUpdateUserRequest } from './models/SpecBox/WebApi/Model/Users/update-user-request';
 export { UserResponse as SpecBoxWebApiModelUsersUserResponse } from './models/SpecBox/WebApi/Model/Users/user-response';

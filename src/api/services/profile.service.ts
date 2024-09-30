@@ -14,6 +14,10 @@ import { GetProfile$Json$Params } from '../fn/profile/get-profile-json';
 import { getProfile$Plain } from '../fn/profile/get-profile-plain';
 import { GetProfile$Plain$Params } from '../fn/profile/get-profile-plain';
 import { UserResponse as SpecBoxWebApiModelUsersUserResponse } from '../models/SpecBox/WebApi/Model/Users/user-response';
+import { updateProfile$Json } from '../fn/profile/update-profile-json';
+import { UpdateProfile$Json$Params } from '../fn/profile/update-profile-json';
+import { updateProfile$Plain } from '../fn/profile/update-profile-plain';
+import { UpdateProfile$Plain$Params } from '../fn/profile/update-profile-plain';
 
 @Injectable({ providedIn: 'root' })
 export class ProfileService extends BaseService {
@@ -80,6 +84,69 @@ export class ProfileService extends BaseService {
    */
   getProfile$Json(params?: GetProfile$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelUsersUserResponse> {
     return this.getProfile$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<SpecBoxWebApiModelUsersUserResponse>): SpecBoxWebApiModelUsersUserResponse => r.body)
+    );
+  }
+
+  /** Path part for operation `updateProfile()` */
+  static readonly UpdateProfilePath = '/profile';
+
+  /**
+   * Профиль пользователя.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `updateProfile$Plain()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  updateProfile$Plain$Response(params?: UpdateProfile$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelUsersUserResponse>> {
+    return updateProfile$Plain(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Профиль пользователя.
+   *
+   *
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `updateProfile$Plain$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  updateProfile$Plain(params?: UpdateProfile$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelUsersUserResponse> {
+    return this.updateProfile$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<SpecBoxWebApiModelUsersUserResponse>): SpecBoxWebApiModelUsersUserResponse => r.body)
+    );
+  }
+
+  /**
+   * Профиль пользователя.
+   *
+   *
+   *
+   * This method provides access to the full `HttpResponse`, allowing access to response headers.
+   * To access only the response body, use `updateProfile$Json()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  updateProfile$Json$Response(params?: UpdateProfile$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelUsersUserResponse>> {
+    return updateProfile$Json(this.http, this.rootUrl, params, context);
+  }
+
+  /**
+   * Профиль пользователя.
+   *
+   *
+   *
+   * This method provides access only to the response body.
+   * To access the full response (for headers, for example), `updateProfile$Json$Response()` instead.
+   *
+   * This method sends `application/*+json` and handles request body of type `application/*+json`.
+   */
+  updateProfile$Json(params?: UpdateProfile$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelUsersUserResponse> {
+    return this.updateProfile$Json$Response(params, context).pipe(
       map((r: StrictHttpResponse<SpecBoxWebApiModelUsersUserResponse>): SpecBoxWebApiModelUsersUserResponse => r.body)
     );
   }

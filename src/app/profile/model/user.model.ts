@@ -10,10 +10,20 @@ export interface User {
   description?: string;
   createdAt: Date;
   updatedAt: Date;
+  rowVersion: string;
 }
 
 export function mapUserResponse(input: UserResponse): User {
-  const { id, login, email, name, description, createdAt, updatedAt } = input;
+  const {
+    id,
+    login,
+    email,
+    name,
+    description,
+    createdAt,
+    updatedAt,
+    rowVersion,
+  } = input;
 
   return {
     id: UserId(id),
@@ -23,5 +33,6 @@ export function mapUserResponse(input: UserResponse): User {
     description: toUndefined(description),
     createdAt: new Date(createdAt),
     updatedAt: new Date(updatedAt),
+    rowVersion,
   };
 }
