@@ -1,6 +1,5 @@
-export interface UpdateUser {
+export interface UserUpdate {
   email?: string;
   name?: string;
   description?: string;
-  rowVersion: string;
 }

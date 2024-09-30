@@ -102,10 +102,9 @@ export class EditUserComponent implements OnInit {
     if (!this.form.valid || !this.rowVersion) {
       return;
     }
-    const request = this.form.getRawValue();
 
     this.profileService
-      .update$({ ...request, rowVersion: this.rowVersion })
+      .update$(this.form.getRawValue(), this.rowVersion)
       .pipe(signalLoading(this.loading), catchReactiveFormError(this.form))
       .subscribe({
         next: (userProfile) => {
