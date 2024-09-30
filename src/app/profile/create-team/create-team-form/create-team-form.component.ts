@@ -25,6 +25,7 @@ import { POLYMORPHEUS_CONTEXT } from '@taiga-ui/polymorpheus';
 import { NotificationService } from '../../../core/notification.service';
 import {
   catchReactiveFormError,
+  serverHttpErrorToText,
   serverValidationErrorsToText,
 } from '../../../lib/catch-reactive-form-errors';
 import { MarkFormTouchedDirective } from '../../../lib/forms/mark-as-touched.directive';
@@ -59,6 +60,10 @@ import { TeamService } from '../../team.service';
         minlength: ({ requiredLength }: { requiredLength: string }) =>
           `Минимальная длина — ${requiredLength}`,
         serverValidationErrors: serverValidationErrorsToText({}),
+        serverHttpError: serverHttpErrorToText(
+          {},
+          'Произошла непредвиденная ошибка сервера'
+        ),
       },
     },
   ],

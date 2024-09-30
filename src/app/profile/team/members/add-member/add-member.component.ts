@@ -2,7 +2,6 @@ import { AsyncPipe } from '@angular/common';
 import {
   ChangeDetectionStrategy,
   Component,
-  effect,
   inject,
   signal,
 } from '@angular/core';
@@ -22,15 +21,19 @@ import {
 } from '@taiga-ui/kit';
 import { POLYMORPHEUS_CONTEXT } from '@taiga-ui/polymorpheus';
 import { NotificationService } from '../../../../core/notification.service';
+import {
+  catchReactiveFormError,
+  serverHttpErrorToText,
+  serverValidationErrorsToText,
+} from '../../../../lib/catch-reactive-form-errors';
 import { MarkFormTouchedDirective } from '../../../../lib/forms/mark-as-touched.directive';
-import { hasBadRequestError } from '../../../../lib/http-errors/http-bad-request-details';
-import { HttpError } from '../../../../lib/http-errors/http-error';
-import { processHttp } from '../../../../lib/process-http';
+import { signalLoading } from '../../../../lib/signal-loading';
+import {
+  loginValidator,
+  loginValidatorText,
+} from '../../../../lib/validators/login.validator';
 import { TeamService } from '../../../team.service';
 import { TeamContextService } from '../../team-context.service';
-import { loginValidator, loginValidatorText } from '../../../../lib/validators/login.validator';
-
-
 
 @Component({
   selector: 'app-add-member',
@@ -59,9 +62,20 @@ import { loginValidator, loginValidatorText } from '../../../../lib/validators/l
         minlength: ({ requiredLength }: { requiredLength: string }) =>
           `Минимальная длина — ${requiredLength}`,
         pattern: 'Неверный формат',
-        notFound: 'Пользователь с таким логином не найден',
         exists: 'Пользователь с таким логином уже является участником',
         login: loginValidatorText,
+        serverValidationErrors: serverValidationErrorsToText({
+          'User already exists':
+            'Пользователь с таким логином уже является участником',
+          'User login not found': 'Пользователь с таким логином не найден',
+        }),
+        serverHttpError: serverHttpErrorToText(
+          {
+            404: 'Команда не найдена',
+            403: 'Недостаточно прав для редактирования списка участников',
+          },
+          'Произошла непредвиденная ошибка сервера'
+        ),
       },
     },
   ],
@@ -72,7 +86,6 @@ export class AddMemberComponent {
   private readonly notificationService = inject(NotificationService);
   private readonly context = inject<TuiDialogContext>(POLYMORPHEUS_CONTEXT);
   private readonly fb = inject(FormBuilder).nonNullable;
-  private readonly httpError = signal<HttpError | null>(null);
   private readonly teamId = toSignal(this.teamContext.teamId$);
 
   readonly loading = signal(false);
@@ -80,36 +93,10 @@ export class AddMemberComponent {
   readonly form = this.fb.group({
     login: [
       '',
-      [
-        Validators.required,
-        Validators.maxLength(255),
-        loginValidator
-      ],
+      [Validators.required, Validators.maxLength(255), loginValidator],
     ],
     isAdmin: [false],
   });
-
-  constructor() {
-    effect(() => {
-      const error = this.httpError();
-      if (!error) {
-        return;
-      }
-      if (error.status === 404) {
-        this.form.controls.login.setErrors({
-          notFound: true,
-        });
-      }
-      if (
-        error.knownError.status === 400 &&
-        hasBadRequestError(error.knownError, 'login', 'exists')
-      ) {
-        this.form.controls.login.setErrors({
-          exists: true,
-        });
-      }
-    });
-  }
 
   submit() {
     const teamId = this.teamId();
@@ -123,14 +110,15 @@ export class AddMemberComponent {
 
     this.teamService
       .addMember$(teamId, login, isAdmin)
-      .pipe(processHttp(this.loading, this.httpError))
-      .subscribe((result) => {
-        if (result) {
+      .pipe(signalLoading(this.loading), catchReactiveFormError(this.form))
+      .subscribe({
+        next: () => {
           this.context.completeWith();
           this.notificationService.show('success', 'Участник успешно добавлен');
-        } else {
+        },
+        error: () => {
           this.notificationService.show('error', 'Произошла ошибка');
-        }
+        },
       });
   }
 
