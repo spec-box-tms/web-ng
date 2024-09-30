@@ -1,6 +1,6 @@
 /* tslint:disable */
 /* eslint-disable */
 export interface VersionModel {
-  updatedAt?: string | null;
+  updatedAt: string;
   version?: string | null;
 }

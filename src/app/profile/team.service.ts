@@ -5,7 +5,7 @@ import {
   TeamUserService as TeamUserApiService,
 } from '../../api/services';
 import { mapArray } from '../lib/map-array';
-import { TeamId } from '../lib/model/ids/team.id';
+import { TeamId } from '../model/ids/team.id';
 import { updateWhen } from '../lib/update-when';
 import { mapTeamUserResponse, TeamUser } from './model/team-user.model';
 import { mapTeamResponse, Team } from './model/team.model';

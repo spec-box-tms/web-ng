@@ -3,7 +3,7 @@ import {
   AuditableEntity,
   mapAuditableEntity,
 } from '../../lib/model/auditable-entity';
-import { TeamId } from '../../lib/model/ids/team.id';
+import { TeamId } from '../../model/ids/team.id';
 import { toUndefined } from '../../lib/model/to-undefined';
 
 export interface Team extends AuditableEntity<TeamId> {

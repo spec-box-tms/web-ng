@@ -10,7 +10,7 @@ import { TuiButton, TuiDialogService } from '@taiga-ui/core';
 import { TuiSkeleton } from '@taiga-ui/kit';
 import { PolymorpheusComponent } from '@taiga-ui/polymorpheus';
 import { map, switchMap } from 'rxjs';
-import { TeamId } from '../../../lib/model/ids/team.id';
+import { TeamId } from '../../../model/ids/team.id';
 import { TeamService } from '../../team.service';
 import { TeamContextService } from '../team-context.service';
 import { AddMemberComponent } from './add-member/add-member.component';

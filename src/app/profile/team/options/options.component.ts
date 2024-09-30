@@ -25,7 +25,7 @@ import {
   serverValidationErrorsToText,
 } from '../../../lib/catch-reactive-form-errors';
 import { MarkFormTouchedDirective } from '../../../lib/forms/mark-as-touched.directive';
-import { TeamId } from '../../../lib/model/ids/team.id';
+import { TeamId } from '../../../model/ids/team.id';
 import { signalLoading } from '../../../lib/signal-loading';
 import { singleNonNullable } from '../../../lib/single-non-nullable';
 import { Team } from '../../model/team.model';

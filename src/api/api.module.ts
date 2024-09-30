@@ -11,6 +11,7 @@ import { ProfileService } from './services/profile.service';
 import { ProjectService } from './services/project.service';
 import { StatService } from './services/stat.service';
 import { TeamService } from './services/team.service';
+import { TeamProjectsService } from './services/team-projects.service';
 import { TeamUserService } from './services/team-user.service';
 import { TestRunService } from './services/test-run.service';
 
@@ -29,6 +30,7 @@ import { TestRunService } from './services/test-run.service';
     ProjectService,
     StatService,
     TeamService,
+    TeamProjectsService,
     TeamUserService,
     TestRunService,
     ApiConfiguration

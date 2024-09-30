@@ -1,5 +1,5 @@
 import { TeamUserResponse } from '../../../api/models/SpecBox/WebApi/Model/Teams/team-user-response';
-import { TeamId } from '../../lib/model/ids/team.id';
+import { TeamId } from '../../model/ids/team.id';
 import { mapUserResponse, User } from './user.model';
 
 export interface TeamUser {

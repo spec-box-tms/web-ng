@@ -5,5 +5,6 @@ export { ProfileService } from './services/profile.service';
 export { ProjectService } from './services/project.service';
 export { StatService } from './services/stat.service';
 export { TeamService } from './services/team.service';
+export { TeamProjectsService } from './services/team-projects.service';
 export { TeamUserService } from './services/team-user.service';
 export { TestRunService } from './services/test-run.service';

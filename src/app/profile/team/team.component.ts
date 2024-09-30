@@ -8,9 +8,10 @@ import {
 } from '@angular/router';
 import { TuiSkeleton, TuiTabs } from '@taiga-ui/kit';
 import { map, switchMap } from 'rxjs';
-import { TeamId } from '../../lib/model/ids/team.id';
+import { TeamId } from '../../model/ids/team.id';
 import { TeamService } from '../team.service';
 import { TeamContextService } from './team-context.service';
+import { TeamProjectsService } from '../team-projects.service';
 
 @Component({
   selector: 'app-team',
@@ -19,7 +20,7 @@ import { TeamContextService } from './team-context.service';
   templateUrl: './team.component.html',
   styleUrl: './team.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [TeamContextService],
+  providers: [TeamContextService, TeamProjectsService],
 })
 export class TeamComponent {
   private teamService = inject(TeamService);

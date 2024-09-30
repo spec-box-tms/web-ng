@@ -5,7 +5,7 @@ export { AccessTokenResponse as SpecBoxWebApiModelAuthAccessTokenResponse } from
 export { LoginRequest as SpecBoxWebApiModelAuthLoginRequest } from './models/SpecBox/WebApi/Model/Auth/login-request';
 export { RefreshTokenExchangeRequest as SpecBoxWebApiModelAuthRefreshTokenExchangeRequest } from './models/SpecBox/WebApi/Model/Auth/refresh-token-exchange-request';
 export { UserRegisterRequest as SpecBoxWebApiModelAuthUserRegisterRequest } from './models/SpecBox/WebApi/Model/Auth/user-register-request';
-export { ProjectModel as SpecBoxWebApiModelCommonProjectModel } from './models/SpecBox/WebApi/Model/Common/project-model';
+export { ProjectResponse as SpecBoxWebApiModelCommonProjectResponse } from './models/SpecBox/WebApi/Model/Common/project-response';
 export { ProjectVersionModel as SpecBoxWebApiModelCommonProjectVersionModel } from './models/SpecBox/WebApi/Model/Common/project-version-model';
 export { VersionModel as SpecBoxWebApiModelCommonVersionModel } from './models/SpecBox/WebApi/Model/Common/version-model';
 export { ConfigurationModel as SpecBoxWebApiModelDefaultConfigurationModel } from './models/SpecBox/WebApi/Model/Default/configuration-model';

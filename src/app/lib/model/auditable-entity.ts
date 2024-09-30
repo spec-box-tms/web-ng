@@ -1,5 +1,5 @@
-import { UserId } from './ids/user.id';
-import { UUID } from './ids/uuid';
+import { UserId } from '../../model/ids/user.id';
+import { UUID } from '../../model/ids/uuid';
 
 export interface AuditableEntity<KEY extends UUID> {
   id: KEY;
