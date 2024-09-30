@@ -23,15 +23,13 @@ import {
 } from '@taiga-ui/legacy';
 import { POLYMORPHEUS_CONTEXT } from '@taiga-ui/polymorpheus';
 import { NotificationService } from '../../../core/notification.service';
-import { MarkFormTouchedDirective } from '../../../lib/forms/mark-as-touched.directive';
-import { HttpError } from '../../../lib/http-errors/http-error';
-import { processHttp } from '../../../lib/process-http';
-import { TeamService } from '../../team.service';
-import { signalLoading } from '../../../lib/signal-loading';
 import {
   catchReactiveFormError,
   serverValidationErrorsToText,
 } from '../../../lib/catch-reactive-form-errors';
+import { MarkFormTouchedDirective } from '../../../lib/forms/mark-as-touched.directive';
+import { signalLoading } from '../../../lib/signal-loading';
+import { TeamService } from '../../team.service';
 
 @Component({
   selector: 'app-create-team-form',
@@ -78,7 +76,7 @@ export class CreateTeamFormComponent {
       '',
       [Validators.required, Validators.minLength(2), Validators.maxLength(255)],
     ],
-    description: [''],
+    description: ['', [Validators.maxLength(1000)]],
   });
 
   submit() {

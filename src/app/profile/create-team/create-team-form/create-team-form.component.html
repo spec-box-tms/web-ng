@@ -20,6 +20,8 @@
     />
   </label>
 
+  <tui-error [formGroup]="form" [error]="[] | tuiFieldError | async" />
+
   <div class="actions">
     <button appearance="secondary" type="button" (click)="cancel()" tuiButton>
       Отмена
