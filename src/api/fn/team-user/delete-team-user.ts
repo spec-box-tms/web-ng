@@ -6,28 +6,27 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { OkResult as MicrosoftAspNetCoreMvcOkResult } from '../../models/Microsoft/AspNetCore/Mvc/ok-result';
 
-export interface DeleteTeamUser$Json$Params {
+export interface DeleteTeamUser$Params {
   teamId: string;
   userLogin: string;
 }
 
-export function deleteTeamUser$Json(http: HttpClient, rootUrl: string, params: DeleteTeamUser$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<MicrosoftAspNetCoreMvcOkResult>> {
-  const rb = new RequestBuilder(rootUrl, deleteTeamUser$Json.PATH, 'delete');
+export function deleteTeamUser(http: HttpClient, rootUrl: string, params: DeleteTeamUser$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, deleteTeamUser.PATH, 'delete');
   if (params) {
     rb.path('teamId', params.teamId, {});
     rb.path('userLogin', params.userLogin, {});
   }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'text/json', context })
+    rb.build({ responseType: 'text', accept: '*/*', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<MicrosoftAspNetCoreMvcOkResult>;
+      return (r as HttpResponse<any>).clone({ body: undefined }) as StrictHttpResponse<void>;
     })
   );
 }
 
-deleteTeamUser$Json.PATH = '/teams/{teamId}/users/{userLogin}';
+deleteTeamUser.PATH = '/teams/{teamId}/users/{userLogin}';

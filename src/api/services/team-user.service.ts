@@ -13,15 +13,12 @@ import { createTeamUser$Json } from '../fn/team-user/create-team-user-json';
 import { CreateTeamUser$Json$Params } from '../fn/team-user/create-team-user-json';
 import { createTeamUser$Plain } from '../fn/team-user/create-team-user-plain';
 import { CreateTeamUser$Plain$Params } from '../fn/team-user/create-team-user-plain';
-import { deleteTeamUser$Json } from '../fn/team-user/delete-team-user-json';
-import { DeleteTeamUser$Json$Params } from '../fn/team-user/delete-team-user-json';
-import { deleteTeamUser$Plain } from '../fn/team-user/delete-team-user-plain';
-import { DeleteTeamUser$Plain$Params } from '../fn/team-user/delete-team-user-plain';
+import { deleteTeamUser } from '../fn/team-user/delete-team-user';
+import { DeleteTeamUser$Params } from '../fn/team-user/delete-team-user';
 import { listTeamUsers$Json } from '../fn/team-user/list-team-users-json';
 import { ListTeamUsers$Json$Params } from '../fn/team-user/list-team-users-json';
 import { listTeamUsers$Plain } from '../fn/team-user/list-team-users-plain';
 import { ListTeamUsers$Plain$Params } from '../fn/team-user/list-team-users-plain';
-import { OkResult as MicrosoftAspNetCoreMvcOkResult } from '../models/Microsoft/AspNetCore/Mvc/ok-result';
 import { TeamUserResponse as SpecBoxWebApiModelTeamsTeamUserResponse } from '../models/SpecBox/WebApi/Model/Teams/team-user-response';
 import { updateTeamUser$Json } from '../fn/team-user/update-team-user-json';
 import { UpdateTeamUser$Json$Params } from '../fn/team-user/update-team-user-json';
@@ -169,12 +166,12 @@ export class TeamUserService extends BaseService {
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteTeamUser$Plain()` instead.
+   * To access only the response body, use `deleteTeamUser()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteTeamUser$Plain$Response(params: DeleteTeamUser$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<MicrosoftAspNetCoreMvcOkResult>> {
-    return deleteTeamUser$Plain(this.http, this.rootUrl, params, context);
+  deleteTeamUser$Response(params: DeleteTeamUser$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+    return deleteTeamUser(this.http, this.rootUrl, params, context);
   }
 
   /**
@@ -183,43 +180,13 @@ export class TeamUserService extends BaseService {
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteTeamUser$Plain$Response()` instead.
+   * To access the full response (for headers, for example), `deleteTeamUser$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  deleteTeamUser$Plain(params: DeleteTeamUser$Plain$Params, context?: HttpContext): Observable<MicrosoftAspNetCoreMvcOkResult> {
-    return this.deleteTeamUser$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<MicrosoftAspNetCoreMvcOkResult>): MicrosoftAspNetCoreMvcOkResult => r.body)
-    );
-  }
-
-  /**
-   * Удалить пользователя команды.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `deleteTeamUser$Json()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteTeamUser$Json$Response(params: DeleteTeamUser$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<MicrosoftAspNetCoreMvcOkResult>> {
-    return deleteTeamUser$Json(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * Удалить пользователя команды.
-   *
-   *
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `deleteTeamUser$Json$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  deleteTeamUser$Json(params: DeleteTeamUser$Json$Params, context?: HttpContext): Observable<MicrosoftAspNetCoreMvcOkResult> {
-    return this.deleteTeamUser$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<MicrosoftAspNetCoreMvcOkResult>): MicrosoftAspNetCoreMvcOkResult => r.body)
+  deleteTeamUser(params: DeleteTeamUser$Params, context?: HttpContext): Observable<void> {
+    return this.deleteTeamUser$Response(params, context).pipe(
+      map((r: StrictHttpResponse<void>): void => r.body)
     );
   }
 

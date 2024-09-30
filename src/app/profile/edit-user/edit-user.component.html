@@ -17,24 +17,22 @@
   </label>
   <label tuiLabel>
     Введите описание
-    <tui-textfield tuiTextfieldSize="m">
-      <input
-        placeholder="Описание"
-        tuiTextfield
-        formControlName="description"
-      />
-    </tui-textfield>
+    <tui-textarea tuiTextfieldSize="m" formControlName="description">
+    </tui-textarea>
     <tui-error
       formControlName="description"
       [error]="[] | tuiFieldError | async"
     />
   </label>
+  <tui-error [formGroup]="form" [error]="[] | tuiFieldError | async" />
   <button
     appearance="primary"
     size="s"
     tuiButton
     type="submit"
+    [loading]="loading()"
     [disabled]="!form.dirty"
+    (click)="saveChanges()"
   >
     Сохранить
   </button>

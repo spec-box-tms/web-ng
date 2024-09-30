@@ -80,7 +80,7 @@ export class TeamService {
 
   removeMember$(teamId: TeamId, login: string): Observable<boolean> {
     return this.teamUserService
-      .deleteTeamUser$Json({ teamId, userLogin: login })
+      .deleteTeamUser({ teamId, userLogin: login })
       .pipe(
         map(() => true),
         tap(() => this.refreshTeamMembersSubject.next())

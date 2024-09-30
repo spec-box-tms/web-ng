@@ -67,7 +67,6 @@ export class MemberMenuComponent {
       )
       .subscribe({
         next: (result) => {
-          console.log({ result });
           if (result) {
             if (isCurrentUser) {
               this.notificationService.show('success', 'Вы покинули команду');

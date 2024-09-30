@@ -366,6 +366,54 @@
             }
           }
         }
+      },
+      "patch": {
+        "tags": [
+          "Profile"
+        ],
+        "summary": "Профиль пользователя",
+        "operationId": "UpdateProfile",
+        "requestBody": {
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Users.UpdateUserRequest"
+              }
+            },
+            "text/json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Users.UpdateUserRequest"
+              }
+            },
+            "application/*+json": {
+              "schema": {
+                "$ref": "#/components/schemas/SpecBox.WebApi.Model.Users.UpdateUserRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Users.UserResponse"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Users.UserResponse"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Users.UserResponse"
+                }
+              }
+            }
+          }
+        }
       }
     },
     "/projects": {
@@ -1702,24 +1750,7 @@
         ],
         "responses": {
           "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.OkResult"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.OkResult"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.OkResult"
-                }
-              }
-            }
+            "description": "OK"
           },
           "404": {
             "description": "Not Found",
@@ -2436,16 +2467,6 @@
   },
   "components": {
     "schemas": {
-      "Microsoft.AspNetCore.Mvc.OkResult": {
-        "type": "object",
-        "properties": {
-          "statusCode": {
-            "type": "integer",
-            "format": "int32"
-          }
-        },
-        "additionalProperties": false
-      },
       "Microsoft.AspNetCore.Mvc.ProblemDetails": {
         "type": "object",
         "properties": {
@@ -3680,6 +3701,35 @@
           },
           "project": {
             "$ref": "#/components/schemas/SpecBox.WebApi.Model.Upload.ProjectModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Users.UpdateUserRequest": {
+        "required": [
+          "rowVersion"
+        ],
+        "type": "object",
+        "properties": {
+          "email": {
+            "maxLength": 255,
+            "type": "string",
+            "format": "email",
+            "nullable": true
+          },
+          "name": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "description": {
+            "maxLength": 255,
+            "type": "string",
+            "nullable": true
+          },
+          "rowVersion": {
+            "type": "string",
+            "format": "uuid"
           }
         },
         "additionalProperties": false
