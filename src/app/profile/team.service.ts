@@ -9,6 +9,7 @@ import { TeamId } from '../lib/model/ids/team.id';
 import { updateWhen } from '../lib/update-when';
 import { mapTeamUserResponse, TeamUser } from './model/team-user.model';
 import { mapTeamResponse, Team } from './model/team.model';
+import { TeamUpdate } from './model/team-update.model';
 
 @Injectable()
 export class TeamService {
@@ -23,7 +24,7 @@ export class TeamService {
       .listTeams$Json()
       .pipe(
         mapArray(mapTeamResponse),
-        updateWhen(this.refreshTeamsSubject, this.refreshTeamMembersSubject)
+        updateWhen(this.refreshTeamsSubject)
       );
   }
 
@@ -44,12 +45,11 @@ export class TeamService {
 
   updateTeam$(
     teamId: TeamId,
-    title: string,
-    description: string | undefined,
+    request: TeamUpdate,
     rowVersion: string
   ): Observable<Team> {
     return this.teamService
-      .updateTeam$Json({ id: teamId, body: { title, description, rowVersion } })
+      .updateTeam$Json({ id: teamId, body: { ...request, rowVersion } })
       .pipe(
         map(mapTeamResponse),
         tap(() => this.refreshTeamsSubject.next())
@@ -83,7 +83,10 @@ export class TeamService {
       .deleteTeamUser({ teamId, userLogin: login })
       .pipe(
         map(() => true),
-        tap(() => this.refreshTeamMembersSubject.next())
+        tap(() => {
+          this.refreshTeamMembersSubject.next();
+          this.refreshTeamsSubject.next();
+        })
       );
   }
 
