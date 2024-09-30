@@ -103,10 +103,9 @@ export class OptionsComponent implements OnInit {
     if (!this.form.valid || !this.teamId || !this.rowVersion) {
       return;
     }
-    const { title, description } = this.form.getRawValue();
-
+    
     this.teamService
-      .updateTeam$(this.teamId, title, description, this.rowVersion)
+      .updateTeam$(this.teamId, this.form.getRawValue(), this.rowVersion)
       .pipe(signalLoading(this.loading), catchReactiveFormError(this.form))
       .subscribe({
         next: (result) => {
