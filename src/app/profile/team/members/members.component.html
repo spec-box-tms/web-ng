@@ -3,8 +3,8 @@
     <button tuiButton (click)="showAddMemberDialog()">Добавить участника</button>
   </div>
 }
-<section class="members-table tui-space_top-4">
-  <header>
+<section [appTable]="[2,3,1,'3em']">
+  <header appTableHeader>
     <div>Участник</div>
     <div>Создан</div>
     <div>Роль</div>
@@ -12,9 +12,9 @@
   </header>
   @if(members()) {
     @for (member of members(); track member.user.id) {
-      <app-member-item [teamUser]="member"></app-member-item>
+      <app-member-item [teamUser]="member" appTableRow></app-member-item>
     } @empty {
-      <span>В команде нет участников, но так не бывает :)</span>
+      <span appTableRow>В команде нет участников, но так не бывает :)</span>
     }
   } @else {
     @for (item of [0,1,2]; track item) {

@@ -1,0 +1,13 @@
+<div>
+  <span tuiTitle>{{ project().title }}</span>
+  <span tuiSubTitle>{{ project().code }}</span>
+</div>
+<div>
+  <tui-badge size="m" appearance="primary">
+    {{ latestVersion().version ?? "default" }}
+  </tui-badge>
+  <div>от {{ latestVersion().updatedAt | date : "dd.MM.yyyy HH:mm" }}</div>
+</div>
+<div>
+  {{ project().description }}
+</div>

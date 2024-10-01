@@ -1,13 +1,16 @@
-@if(projects()) {
-  @for (project of projects(); track project.code) {
-    <p>{{project.title}}</p>
+<section [appTable]="[2,1,3,'3em']">
+  <header appTableHeader>
+    <div>Проект</div>
+    <div>Версия</div>
+    <div>Описание</div>
+  </header>
+  @if(projects()) { @for (project of projects(); track project.code) {
+  <app-project-item [project]="project" appTableRow></app-project-item>
   } @empty {
-    <span>У команды пока нет проектов</span>
-  }
-} @else {
-  @for (item of [0,1,2]; track item) {
-    <div [tuiSkeleton]="5"></div>
-    <div [tuiSkeleton]="3"></div>
-    <div [tuiSkeleton]="2"></div>
-  }
-}
+  <span appTableRow>У команды пока нет проектов</span>
+  } } @else { @for (item of [0,1,2]; track item) {
+  <div [tuiSkeleton]="5"></div>
+  <div [tuiSkeleton]="3"></div>
+  <div [tuiSkeleton]="2"></div>
+  } }
+</section>
