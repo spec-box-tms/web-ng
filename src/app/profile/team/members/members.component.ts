@@ -15,11 +15,12 @@ import { TeamService } from '../../team.service';
 import { TeamContextService } from '../team-context.service';
 import { AddMemberComponent } from './add-member/add-member.component';
 import { MemberItemComponent } from './member-item/member-item.component';
+import { TableDirective } from '../../../lib/table/table.directive';
 
 @Component({
   selector: 'app-members',
   standalone: true,
-  imports: [MemberItemComponent, TuiButton, TuiSkeleton],
+  imports: [MemberItemComponent, TuiButton, TuiSkeleton, TableDirective],
   templateUrl: './members.component.html',
   styleUrl: './members.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

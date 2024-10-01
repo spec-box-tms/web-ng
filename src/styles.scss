@@ -2,11 +2,36 @@
   --tui-theme-color: #101f3f;
 }
 
-html, body {
+html,
+body {
   height: 100%;
 }
 
-router-outlet
-{
-   display: none;
+router-outlet {
+  display: none;
+}
+
+[appTableHeader],
+[appTableRow] {
+  display: grid;
+  grid-column: 1/-1;
+  grid-template-columns: inherit;
+  border-bottom: 1px solid var(--tui-border-normal);
+  padding: 1rem;
+  &>* {
+    margin: -1rem 0rem -1rem 0rem;
+    padding: 1rem;
+  }
+  &>*:nth-child(1) {
+    margin: -1rem 0rem -1rem -1rem;
+    padding: 1rem;
+  }
+  &>*:nth-last-child(1) {
+    margin: -1rem -1rem -1rem 0rem;
+    padding: 1rem;
+  }
+}
+
+[appTableHeader] {
+  font: var(--tui-font-text-l);
 }
