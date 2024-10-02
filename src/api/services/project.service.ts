@@ -9,18 +9,14 @@ import { BaseService } from '../base-service';
 import { ApiConfiguration } from '../api-configuration';
 import { StrictHttpResponse } from '../strict-http-response';
 
-import { getFeature$Json } from '../fn/project/get-feature-json';
-import { GetFeature$Json$Params } from '../fn/project/get-feature-json';
-import { getFeature$Plain } from '../fn/project/get-feature-plain';
-import { GetFeature$Plain$Params } from '../fn/project/get-feature-plain';
 import { getFeatureRelations$Json } from '../fn/project/get-feature-relations-json';
 import { GetFeatureRelations$Json$Params } from '../fn/project/get-feature-relations-json';
 import { getFeatureRelations$Plain } from '../fn/project/get-feature-relations-plain';
 import { GetFeatureRelations$Plain$Params } from '../fn/project/get-feature-relations-plain';
-import { getStructure$Json } from '../fn/project/get-structure-json';
-import { GetStructure$Json$Params } from '../fn/project/get-structure-json';
-import { getStructure$Plain } from '../fn/project/get-structure-plain';
-import { GetStructure$Plain$Params } from '../fn/project/get-structure-plain';
+import { getProject$Json } from '../fn/project/get-project-json';
+import { GetProject$Json$Params } from '../fn/project/get-project-json';
+import { getProject$Plain } from '../fn/project/get-project-plain';
+import { GetProject$Plain$Params } from '../fn/project/get-project-plain';
 import { getStructurePlain$Json } from '../fn/project/get-structure-plain-json';
 import { GetStructurePlain$Json$Params } from '../fn/project/get-structure-plain-json';
 import { getStructurePlain$Plain } from '../fn/project/get-structure-plain-plain';
@@ -29,18 +25,12 @@ import { listProjects$Json } from '../fn/project/list-projects-json';
 import { ListProjects$Json$Params } from '../fn/project/list-projects-json';
 import { listProjects$Plain } from '../fn/project/list-projects-plain';
 import { ListProjects$Plain$Params } from '../fn/project/list-projects-plain';
-import { listStructures$Json } from '../fn/project/list-structures-json';
-import { ListStructures$Json$Params } from '../fn/project/list-structures-json';
-import { listStructures$Plain } from '../fn/project/list-structures-plain';
-import { ListStructures$Plain$Params } from '../fn/project/list-structures-plain';
 import { ProjectResponse as SpecBoxWebApiModelCommonProjectResponse } from '../models/SpecBox/WebApi/Model/Common/project-response';
-import { FeatureModel as SpecBoxWebApiModelProjectFeatureModel } from '../models/SpecBox/WebApi/Model/Project/feature-model';
 import { FeatureRelationsModel as SpecBoxWebApiModelProjectFeatureRelationsModel } from '../models/SpecBox/WebApi/Model/Project/feature-relations-model';
 import { StructureModel as SpecBoxWebApiModelProjectStructureModel } from '../models/SpecBox/WebApi/Model/Project/structure-model';
-import { TreeModel as SpecBoxWebApiModelProjectTreeModel } from '../models/SpecBox/WebApi/Model/Project/tree-model';
 
 @Injectable({ providedIn: 'root' })
-export class ProjectService extends BaseService {
+export class ApiProjectService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }
@@ -108,66 +98,66 @@ export class ProjectService extends BaseService {
     );
   }
 
-  /** Path part for operation `getFeature()` */
-  static readonly GetFeaturePath = '/projects/{project}/features/{feature}';
+  /** Path part for operation `getProject()` */
+  static readonly GetProjectPath = '/projects/{code}';
 
   /**
-   * Returns the feature details.
+   * Получить детали проекта и версий.
    *
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getFeature$Plain()` instead.
+   * To access only the response body, use `getProject$Plain()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getFeature$Plain$Response(params: GetFeature$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectFeatureModel>> {
-    return getFeature$Plain(this.http, this.rootUrl, params, context);
+  getProject$Plain$Response(params: GetProject$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelCommonProjectResponse>> {
+    return getProject$Plain(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * Returns the feature details.
+   * Получить детали проекта и версий.
    *
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getFeature$Plain$Response()` instead.
+   * To access the full response (for headers, for example), `getProject$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getFeature$Plain(params: GetFeature$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelProjectFeatureModel> {
-    return this.getFeature$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelProjectFeatureModel>): SpecBoxWebApiModelProjectFeatureModel => r.body)
+  getProject$Plain(params: GetProject$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelCommonProjectResponse> {
+    return this.getProject$Plain$Response(params, context).pipe(
+      map((r: StrictHttpResponse<SpecBoxWebApiModelCommonProjectResponse>): SpecBoxWebApiModelCommonProjectResponse => r.body)
     );
   }
 
   /**
-   * Returns the feature details.
+   * Получить детали проекта и версий.
    *
    *
    *
    * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getFeature$Json()` instead.
+   * To access only the response body, use `getProject$Json()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getFeature$Json$Response(params: GetFeature$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectFeatureModel>> {
-    return getFeature$Json(this.http, this.rootUrl, params, context);
+  getProject$Json$Response(params: GetProject$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelCommonProjectResponse>> {
+    return getProject$Json(this.http, this.rootUrl, params, context);
   }
 
   /**
-   * Returns the feature details.
+   * Получить детали проекта и версий.
    *
    *
    *
    * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getFeature$Json$Response()` instead.
+   * To access the full response (for headers, for example), `getProject$Json$Response()` instead.
    *
    * This method doesn't expect any request body.
    */
-  getFeature$Json(params: GetFeature$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelProjectFeatureModel> {
-    return this.getFeature$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelProjectFeatureModel>): SpecBoxWebApiModelProjectFeatureModel => r.body)
+  getProject$Json(params: GetProject$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelCommonProjectResponse> {
+    return this.getProject$Json$Response(params, context).pipe(
+      map((r: StrictHttpResponse<SpecBoxWebApiModelCommonProjectResponse>): SpecBoxWebApiModelCommonProjectResponse => r.body)
     );
   }
 
@@ -183,6 +173,8 @@ export class ProjectService extends BaseService {
    * To access only the response body, use `getStructurePlain$Plain()` instead.
    *
    * This method doesn't expect any request body.
+   *
+   * @deprecated
    */
   getStructurePlain$Plain$Response(params: GetStructurePlain$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectStructureModel>> {
     return getStructurePlain$Plain(this.http, this.rootUrl, params, context);
@@ -197,6 +189,8 @@ export class ProjectService extends BaseService {
    * To access the full response (for headers, for example), `getStructurePlain$Plain$Response()` instead.
    *
    * This method doesn't expect any request body.
+   *
+   * @deprecated
    */
   getStructurePlain$Plain(params: GetStructurePlain$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelProjectStructureModel> {
     return this.getStructurePlain$Plain$Response(params, context).pipe(
@@ -213,6 +207,8 @@ export class ProjectService extends BaseService {
    * To access only the response body, use `getStructurePlain$Json()` instead.
    *
    * This method doesn't expect any request body.
+   *
+   * @deprecated
    */
   getStructurePlain$Json$Response(params: GetStructurePlain$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectStructureModel>> {
     return getStructurePlain$Json(this.http, this.rootUrl, params, context);
@@ -227,135 +223,11 @@ export class ProjectService extends BaseService {
    * To access the full response (for headers, for example), `getStructurePlain$Json$Response()` instead.
    *
    * This method doesn't expect any request body.
+   *
+   * @deprecated
    */
   getStructurePlain$Json(params: GetStructurePlain$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelProjectStructureModel> {
     return this.getStructurePlain$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelProjectStructureModel>): SpecBoxWebApiModelProjectStructureModel => r.body)
-    );
-  }
-
-  /** Path part for operation `listStructures()` */
-  static readonly ListStructuresPath = '/projects/{project}/structures';
-
-  /**
-   * Returns the list of structures for a specific project.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listStructures$Plain()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  listStructures$Plain$Response(params: ListStructures$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelProjectTreeModel>>> {
-    return listStructures$Plain(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * Returns the list of structures for a specific project.
-   *
-   *
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listStructures$Plain$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  listStructures$Plain(params: ListStructures$Plain$Params, context?: HttpContext): Observable<Array<SpecBoxWebApiModelProjectTreeModel>> {
-    return this.listStructures$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<SpecBoxWebApiModelProjectTreeModel>>): Array<SpecBoxWebApiModelProjectTreeModel> => r.body)
-    );
-  }
-
-  /**
-   * Returns the list of structures for a specific project.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `listStructures$Json()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  listStructures$Json$Response(params: ListStructures$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelProjectTreeModel>>> {
-    return listStructures$Json(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * Returns the list of structures for a specific project.
-   *
-   *
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `listStructures$Json$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  listStructures$Json(params: ListStructures$Json$Params, context?: HttpContext): Observable<Array<SpecBoxWebApiModelProjectTreeModel>> {
-    return this.listStructures$Json$Response(params, context).pipe(
-      map((r: StrictHttpResponse<Array<SpecBoxWebApiModelProjectTreeModel>>): Array<SpecBoxWebApiModelProjectTreeModel> => r.body)
-    );
-  }
-
-  /** Path part for operation `getStructure()` */
-  static readonly GetStructurePath = '/projects/{project}/structures/{treeCode}';
-
-  /**
-   * Returns the structure details.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getStructure$Plain()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getStructure$Plain$Response(params: GetStructure$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectStructureModel>> {
-    return getStructure$Plain(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * Returns the structure details.
-   *
-   *
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getStructure$Plain$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getStructure$Plain(params: GetStructure$Plain$Params, context?: HttpContext): Observable<SpecBoxWebApiModelProjectStructureModel> {
-    return this.getStructure$Plain$Response(params, context).pipe(
-      map((r: StrictHttpResponse<SpecBoxWebApiModelProjectStructureModel>): SpecBoxWebApiModelProjectStructureModel => r.body)
-    );
-  }
-
-  /**
-   * Returns the structure details.
-   *
-   *
-   *
-   * This method provides access to the full `HttpResponse`, allowing access to response headers.
-   * To access only the response body, use `getStructure$Json()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getStructure$Json$Response(params: GetStructure$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectStructureModel>> {
-    return getStructure$Json(this.http, this.rootUrl, params, context);
-  }
-
-  /**
-   * Returns the structure details.
-   *
-   *
-   *
-   * This method provides access only to the response body.
-   * To access the full response (for headers, for example), `getStructure$Json$Response()` instead.
-   *
-   * This method doesn't expect any request body.
-   */
-  getStructure$Json(params: GetStructure$Json$Params, context?: HttpContext): Observable<SpecBoxWebApiModelProjectStructureModel> {
-    return this.getStructure$Json$Response(params, context).pipe(
       map((r: StrictHttpResponse<SpecBoxWebApiModelProjectStructureModel>): SpecBoxWebApiModelProjectStructureModel => r.body)
     );
   }
@@ -364,7 +236,7 @@ export class ProjectService extends BaseService {
   static readonly GetFeatureRelationsPath = '/projects/{project}/features:relations';
 
   /**
-   * Returns the graph of feature and attribute rlations.
+   * Returns the graph of feature and attribute relations.
    *
    *
    *
@@ -378,7 +250,7 @@ export class ProjectService extends BaseService {
   }
 
   /**
-   * Returns the graph of feature and attribute rlations.
+   * Returns the graph of feature and attribute relations.
    *
    *
    *
@@ -394,7 +266,7 @@ export class ProjectService extends BaseService {
   }
 
   /**
-   * Returns the graph of feature and attribute rlations.
+   * Returns the graph of feature and attribute relations.
    *
    *
    *
@@ -408,7 +280,7 @@ export class ProjectService extends BaseService {
   }
 
   /**
-   * Returns the graph of feature and attribute rlations.
+   * Returns the graph of feature and attribute relations.
    *
    *
    *

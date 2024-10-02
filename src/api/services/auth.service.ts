@@ -24,7 +24,7 @@ import { Register$Plain$Params } from '../fn/auth/register-plain';
 import { AccessTokenResponse as SpecBoxWebApiModelAuthAccessTokenResponse } from '../models/SpecBox/WebApi/Model/Auth/access-token-response';
 
 @Injectable({ providedIn: 'root' })
-export class AuthService extends BaseService {
+export class ApiAuthService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }

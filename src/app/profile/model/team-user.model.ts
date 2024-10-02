@@ -1,6 +1,6 @@
 import { TeamUserResponse } from '../../../api/models/SpecBox/WebApi/Model/Teams/team-user-response';
 import { TeamId } from '../../model/ids/team.id';
-import { mapUserResponse, User } from './user.model';
+import { mapUserResponse, User } from '../../model/user.model';
 
 export interface TeamUser {
   isAdmin: boolean;

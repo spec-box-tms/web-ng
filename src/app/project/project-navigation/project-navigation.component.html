@@ -3,9 +3,12 @@
     <app-logo [size]="24" />
     Spec Box TMS
   </span>
+  {{project()?.title}}
+  <div class="separator"></div>
+  <app-current-user class="tui-space_right-1"/>
 </header>
-<app-side-menu>
+<app-project-side-menu>
   <main tuiNavigationMain>
     <ng-content />
   </main>
-</app-side-menu>
+</app-project-side-menu>

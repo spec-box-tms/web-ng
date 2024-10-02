@@ -16,7 +16,7 @@ import { ListTeamProjects$Plain$Params } from '../fn/team-projects/list-team-pro
 import { ProjectResponse as SpecBoxWebApiModelCommonProjectResponse } from '../models/SpecBox/WebApi/Model/Common/project-response';
 
 @Injectable({ providedIn: 'root' })
-export class TeamProjectsService extends BaseService {
+export class ApiTeamProjectsService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }

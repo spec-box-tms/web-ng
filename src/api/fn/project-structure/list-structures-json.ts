@@ -13,7 +13,7 @@ export interface ListStructures$Json$Params {
 /**
  * The project code.
  */
-  project: string;
+  projectCode: string;
 
 /**
  * The project version. Default version if not provided.
@@ -24,7 +24,7 @@ export interface ListStructures$Json$Params {
 export function listStructures$Json(http: HttpClient, rootUrl: string, params: ListStructures$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelProjectTreeModel>>> {
   const rb = new RequestBuilder(rootUrl, listStructures$Json.PATH, 'get');
   if (params) {
-    rb.path('project', params.project, {});
+    rb.path('projectCode', params.projectCode, {});
     rb.query('version', params.version, {});
   }
 
@@ -38,4 +38,4 @@ export function listStructures$Json(http: HttpClient, rootUrl: string, params: L
   );
 }
 
-listStructures$Json.PATH = '/projects/{project}/structures';
+listStructures$Json.PATH = '/projects/{projectCode}/structures';

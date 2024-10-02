@@ -5,11 +5,11 @@ import { TuiNavigation } from '@taiga-ui/layout';
 @Component({
   standalone: true,
   imports: [TuiNavigation, TuiChevron],
-  selector: 'app-side-menu',
-  templateUrl: 'side-menu.component.html',
-  styleUrl: 'side-menu.component.scss',
+  selector: 'app-project-side-menu',
+  templateUrl: 'project-side-menu.component.html',
+  styleUrl: 'project-side-menu.component.scss',
 })
-export class SideMenuComponent {
+export class ProjectSideMenuComponent {
   readonly expanded = signal(false);
 
   toggleExpanded() {

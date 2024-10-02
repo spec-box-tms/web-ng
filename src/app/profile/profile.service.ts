@@ -1,15 +1,15 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, shareReplay, Subject, tap } from 'rxjs';
-import { ProfileService as ProfileApiService } from '../../api/services';
+import { ApiProfileService } from '../../api/services';
 import { UserUpdate } from './model/user-update.model';
-import { mapUserResponse, User } from './model/user.model';
+import { mapUserResponse, User } from '../model/user.model';
 import { continueWith } from '../lib/continue-with';
 @Injectable()
 export class ProfileService {
-  private readonly profileApiService = inject(ProfileApiService);
+  private readonly apiProfileService = inject(ApiProfileService);
   private readonly updatedProfileSubject = new Subject<User>();
 
-  readonly profile$ = this.profileApiService
+  readonly profile$ = this.apiProfileService
     .getProfile$Json()
     .pipe(
       map(mapUserResponse),
@@ -18,7 +18,7 @@ export class ProfileService {
     );
 
   update$(request: UserUpdate, rowVersion: string): Observable<User> {
-    return this.profileApiService
+    return this.apiProfileService
       .updateProfile$Json({ body: { ...request, rowVersion } })
       .pipe(
         map(mapUserResponse),

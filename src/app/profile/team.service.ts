@@ -1,23 +1,20 @@
 import { inject, Injectable } from '@angular/core';
 import { map, Observable, Subject, tap } from 'rxjs';
-import {
-  TeamService as TeamApiService,
-  TeamUserService as TeamUserApiService,
-} from '../../api/services';
 import { mapArray } from '../lib/map-array';
 import { TeamId } from '../model/ids/team.id';
 import { updateWhen } from '../lib/update-when';
 import { mapTeamUserResponse, TeamUser } from './model/team-user.model';
 import { mapTeamResponse, Team } from './model/team.model';
 import { TeamUpdate } from './model/team-update.model';
+import { ApiTeamService, ApiTeamUserService } from '../../api/services';
 
 @Injectable()
 export class TeamService {
   private readonly refreshTeamsSubject = new Subject<void>();
   private readonly refreshTeamMembersSubject = new Subject<void>();
 
-  private readonly teamUserService = inject(TeamUserApiService);
-  private readonly teamService = inject(TeamApiService);
+  private readonly teamUserService = inject(ApiTeamUserService);
+  private readonly teamService = inject(ApiTeamService);
 
   getTeams$(): Observable<Team[] | null> {
     return this.teamService

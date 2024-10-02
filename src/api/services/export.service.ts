@@ -13,7 +13,7 @@ import { exportUploadProjectPost } from '../fn/export/export-upload-project-post
 import { ExportUploadProjectPost$Params } from '../fn/export/export-upload-project-post';
 
 @Injectable({ providedIn: 'root' })
-export class ExportService extends BaseService {
+export class ApiExportService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }

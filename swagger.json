@@ -337,6 +337,82 @@
         }
       }
     },
+    "/projects/{projectCode}/features/{featureCode}": {
+      "get": {
+        "tags": [
+          "Feature"
+        ],
+        "summary": "Детали фичи",
+        "operationId": "GetFeature",
+        "parameters": [
+          {
+            "name": "projectCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "featureCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
     "/profile": {
       "get": {
         "tags": [
@@ -496,36 +572,18 @@
         }
       }
     },
-    "/projects/{project}/features/{feature}": {
+    "/projects/{code}": {
       "get": {
         "tags": [
           "Project"
         ],
-        "summary": "Returns the feature details.",
-        "operationId": "GetFeature",
+        "summary": "Получить детали проекта и версий",
+        "operationId": "GetProject",
         "parameters": [
           {
-            "name": "project",
+            "name": "code",
             "in": "path",
-            "description": "The project code.",
             "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "feature",
-            "in": "path",
-            "description": "The feature code.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "query",
-            "description": "The project version. Default version if not provided.",
             "schema": {
               "type": "string"
             }
@@ -537,17 +595,17 @@
             "content": {
               "text/plain": {
                 "schema": {
-                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureModel"
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectResponse"
                 }
               },
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureModel"
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectResponse"
                 }
               },
               "text/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureModel"
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Common.ProjectResponse"
                 }
               }
             }
@@ -642,165 +700,8 @@
               }
             }
           }
-        }
-      }
-    },
-    "/projects/{project}/structures": {
-      "get": {
-        "tags": [
-          "Project"
-        ],
-        "summary": "Returns the list of structures for a specific project.",
-        "operationId": "ListStructures",
-        "parameters": [
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project code.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "query",
-            "description": "The project version. Default version if not provided.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.TreeModel"
-                  }
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.TreeModel"
-                  }
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "type": "array",
-                  "items": {
-                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.TreeModel"
-                  }
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
-                }
-              }
-            }
-          }
-        }
-      }
-    },
-    "/projects/{project}/structures/{treeCode}": {
-      "get": {
-        "tags": [
-          "Project"
-        ],
-        "summary": "Returns the structure details.",
-        "operationId": "GetStructure",
-        "parameters": [
-          {
-            "name": "project",
-            "in": "path",
-            "description": "The project code.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "treeCode",
-            "in": "path",
-            "description": "The tree code.",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "version",
-            "in": "query",
-            "description": "The project version. Default version if not provided.",
-            "schema": {
-              "type": "string"
-            }
-          }
-        ],
-        "responses": {
-          "200": {
-            "description": "OK",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
-                }
-              }
-            }
-          },
-          "404": {
-            "description": "Not Found",
-            "content": {
-              "text/plain": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
-                }
-              },
-              "application/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
-                }
-              },
-              "text/json": {
-                "schema": {
-                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
-                }
-              }
-            }
-          }
-        }
+        },
+        "deprecated": true
       }
     },
     "/projects/{project}/features:relations": {
@@ -808,7 +709,7 @@
         "tags": [
           "Project"
         ],
-        "summary": "Returns the graph of feature and attribute rlations.",
+        "summary": "Returns the graph of feature and attribute relations.",
         "operationId": "GetFeatureRelations",
         "parameters": [
           {
@@ -846,6 +747,171 @@
               "text/json": {
                 "schema": {
                   "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.FeatureRelationsModel"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{projectCode}/structures": {
+      "get": {
+        "tags": [
+          "ProjectStructure"
+        ],
+        "summary": "Returns the list of structures for a specific project.",
+        "operationId": "ListStructures",
+        "parameters": [
+          {
+            "name": "projectCode",
+            "in": "path",
+            "description": "The project code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The project version. Default version if not provided.",
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.TreeModel"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.TreeModel"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.TreeModel"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{projectCode}/structures/{treeCode}": {
+      "get": {
+        "tags": [
+          "ProjectStructure"
+        ],
+        "summary": "Returns the structure details.",
+        "operationId": "GetStructure",
+        "parameters": [
+          {
+            "name": "project",
+            "in": "query",
+            "description": "The project code.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "treeCode",
+            "in": "path",
+            "description": "The tree code.",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "query",
+            "description": "The project version. Default version if not provided.",
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "projectCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.StructureModel"
                 }
               }
             }

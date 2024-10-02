@@ -22,7 +22,7 @@ import {
   TuiTextfieldControllerModule,
 } from '@taiga-ui/legacy';
 import { MarkFormTouchedDirective } from '../../lib/forms/mark-as-touched.directive';
-import { User } from '../model/user.model';
+import { User } from '../../model/user.model';
 import {
   catchReactiveFormError,
   serverHttpErrorToText,

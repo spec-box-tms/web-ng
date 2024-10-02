@@ -1,19 +1,18 @@
-import { AsyncPipe, CommonModule } from '@angular/common';
-import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { NavigationComponent } from '../navigation/navigation.component';
+import { JsonPipe } from '@angular/common';
+import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { ProjectService } from '../../../api/services';
+import { ProjectContext } from '../project-context.service';
+import { ProjectNavigationComponent } from '../project-navigation/project-navigation.component';
+import { ProjectService } from '../project.service';
+import { UserService } from '../user.service';
 
 @Component({
   selector: 'app-page-project',
   standalone: true,
-  imports: [CommonModule, NavigationComponent, RouterOutlet, AsyncPipe],
+  imports: [ProjectNavigationComponent, RouterOutlet, JsonPipe],
   templateUrl: './page-project.component.html',
   styleUrl: './page-project.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  providers: [ProjectContext, ProjectService, UserService],
 })
-export class PageProjectComponent {
-  private projectService = inject(ProjectService);
-
-  projects$ = this.projectService.listProjects$Json();
-}
+export class PageProjectComponent {}

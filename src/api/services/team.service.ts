@@ -32,7 +32,7 @@ import { updateTeam$Plain } from '../fn/team/update-team-plain';
 import { UpdateTeam$Plain$Params } from '../fn/team/update-team-plain';
 
 @Injectable({ providedIn: 'root' })
-export class TeamService extends BaseService {
+export class ApiTeamService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }

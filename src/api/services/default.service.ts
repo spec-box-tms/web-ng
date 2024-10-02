@@ -16,7 +16,7 @@ import { ConfigGet$Plain$Params } from '../fn/default/config-get-plain';
 import { ConfigurationModel as SpecBoxWebApiModelDefaultConfigurationModel } from '../models/SpecBox/WebApi/Model/Default/configuration-model';
 
 @Injectable({ providedIn: 'root' })
-export class DefaultService extends BaseService {
+export class ApiDefaultService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }

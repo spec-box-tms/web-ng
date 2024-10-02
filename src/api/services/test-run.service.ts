@@ -47,7 +47,7 @@ import { updateTestResult$Plain } from '../fn/test-run/update-test-result-plain'
 import { UpdateTestResult$Plain$Params } from '../fn/test-run/update-test-result-plain';
 
 @Injectable({ providedIn: 'root' })
-export class TestRunService extends BaseService {
+export class ApiTestRunService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }

@@ -26,7 +26,7 @@ import { updateTeamUser$Plain } from '../fn/team-user/update-team-user-plain';
 import { UpdateTeamUser$Plain$Params } from '../fn/team-user/update-team-user-plain';
 
 @Injectable({ providedIn: 'root' })
-export class TeamUserService extends BaseService {
+export class ApiTeamUserService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }

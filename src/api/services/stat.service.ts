@@ -18,7 +18,7 @@ import { GetAutotestsStat$Plain$Params } from '../fn/stat/get-autotests-stat-pla
 import { StatModel as SpecBoxWebApiModelStatStatModel } from '../models/SpecBox/WebApi/Model/Stat/stat-model';
 
 @Injectable({ providedIn: 'root' })
-export class StatService extends BaseService {
+export class ApiStatService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }

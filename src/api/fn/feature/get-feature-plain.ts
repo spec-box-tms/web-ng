@@ -8,34 +8,22 @@ import { RequestBuilder } from '../../request-builder';
 
 import { FeatureModel as SpecBoxWebApiModelProjectFeatureModel } from '../../models/SpecBox/WebApi/Model/Project/feature-model';
 
-export interface GetFeature$Json$Params {
-
-/**
- * The project code.
- */
-  project: string;
-
-/**
- * The feature code.
- */
-  feature: string;
-
-/**
- * The project version. Default version if not provided.
- */
+export interface GetFeature$Plain$Params {
+  projectCode: string;
+  featureCode: string;
   version?: string;
 }
 
-export function getFeature$Json(http: HttpClient, rootUrl: string, params: GetFeature$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectFeatureModel>> {
-  const rb = new RequestBuilder(rootUrl, getFeature$Json.PATH, 'get');
+export function getFeature$Plain(http: HttpClient, rootUrl: string, params: GetFeature$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectFeatureModel>> {
+  const rb = new RequestBuilder(rootUrl, getFeature$Plain.PATH, 'get');
   if (params) {
-    rb.path('project', params.project, {});
-    rb.path('feature', params.feature, {});
+    rb.path('projectCode', params.projectCode, {});
+    rb.path('featureCode', params.featureCode, {});
     rb.query('version', params.version, {});
   }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'text/json', context })
+    rb.build({ responseType: 'text', accept: 'text/plain', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
@@ -44,4 +32,4 @@ export function getFeature$Json(http: HttpClient, rootUrl: string, params: GetFe
   );
 }
 
-getFeature$Json.PATH = '/projects/{project}/features/{feature}';
+getFeature$Plain.PATH = '/projects/{projectCode}/features/{featureCode}';

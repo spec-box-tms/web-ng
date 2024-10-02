@@ -8,12 +8,12 @@ import { RequestBuilder } from '../../request-builder';
 
 import { StructureModel as SpecBoxWebApiModelProjectStructureModel } from '../../models/SpecBox/WebApi/Model/Project/structure-model';
 
-export interface GetStructure$Json$Params {
+export interface GetStructure$Plain$Params {
 
 /**
  * The project code.
  */
-  project: string;
+  project?: string;
 
 /**
  * The tree code.
@@ -24,18 +24,20 @@ export interface GetStructure$Json$Params {
  * The project version. Default version if not provided.
  */
   version?: string;
+  projectCode: string;
 }
 
-export function getStructure$Json(http: HttpClient, rootUrl: string, params: GetStructure$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectStructureModel>> {
-  const rb = new RequestBuilder(rootUrl, getStructure$Json.PATH, 'get');
+export function getStructure$Plain(http: HttpClient, rootUrl: string, params: GetStructure$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectStructureModel>> {
+  const rb = new RequestBuilder(rootUrl, getStructure$Plain.PATH, 'get');
   if (params) {
-    rb.path('project', params.project, {});
+    rb.query('project', params.project, {});
     rb.path('treeCode', params.treeCode, {});
     rb.query('version', params.version, {});
+    rb.path('projectCode', params.projectCode, {});
   }
 
   return http.request(
-    rb.build({ responseType: 'json', accept: 'text/json', context })
+    rb.build({ responseType: 'text', accept: 'text/plain', context })
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
@@ -44,4 +46,4 @@ export function getStructure$Json(http: HttpClient, rootUrl: string, params: Get
   );
 }
 
-getStructure$Json.PATH = '/projects/{project}/structures/{treeCode}';
+getStructure$Plain.PATH = '/projects/{projectCode}/structures/{treeCode}';

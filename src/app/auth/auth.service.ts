@@ -1,6 +1,6 @@
 import { inject, Injectable } from '@angular/core';
 import { BehaviorSubject, map, of, switchMap, tap } from 'rxjs';
-import { AuthService as AuthHttpService } from '../../api/services';
+import { ApiAuthService } from '../../api/services';
 import { JWT } from './model/jwt-token.model';
 import { LoginModel } from './model/login.model';
 import {
@@ -12,7 +12,7 @@ import { UserRegisterModel } from './model/user-register.model';
 @Injectable({ providedIn: 'root' })
 export class AuthService {
   private readonly refreshTokenKey = 'refresh-token';
-  private readonly authHttp = inject(AuthHttpService);
+  private readonly authHttp = inject(ApiAuthService);
   private readonly accessTokenExpireLag = 60 * 60 * 1000;
   private accessToken?: JWT;
   private readonly accessTokenSubject = new BehaviorSubject<string | null>(

@@ -20,7 +20,7 @@ import { updateProfile$Plain } from '../fn/profile/update-profile-plain';
 import { UpdateProfile$Plain$Params } from '../fn/profile/update-profile-plain';
 
 @Injectable({ providedIn: 'root' })
-export class ProfileService extends BaseService {
+export class ApiProfileService extends BaseService {
   constructor(config: ApiConfiguration, http: HttpClient) {
     super(config, http);
   }

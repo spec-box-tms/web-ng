@@ -1,5 +1,5 @@
 <div>
-  <span tuiTitle>{{ project().title }}</span>
+  <a [routerLink]="['/project', project().code]" tuiLink tuiTitle>{{ project().title }}</a>
   <span tuiSubTitle>{{ project().code }}</span>
 </div>
 <div>
