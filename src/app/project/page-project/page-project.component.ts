@@ -5,6 +5,7 @@ import { ProjectContext } from '../project-context.service';
 import { ProjectNavigationComponent } from '../project-navigation/project-navigation.component';
 import { ProjectService } from '../project.service';
 import { UserService } from '../user.service';
+import { FeatureService } from '../services/feature.service';
 
 @Component({
   selector: 'app-page-project',
@@ -13,6 +14,6 @@ import { UserService } from '../user.service';
   templateUrl: './page-project.component.html',
   styleUrl: './page-project.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
-  providers: [ProjectContext, ProjectService, UserService],
+  providers: [ProjectContext, ProjectService, UserService, FeatureService],
 })
 export class PageProjectComponent {}

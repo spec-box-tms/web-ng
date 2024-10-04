@@ -265,7 +265,7 @@
         }
       }
     },
-    "/export/upload/{project}": {
+    "/export/upload/{project}/versions/{version}": {
       "post": {
         "tags": [
           "Export"
@@ -283,15 +283,16 @@
           },
           {
             "name": "version",
-            "in": "query",
+            "in": "path",
             "description": "Optional project version",
+            "required": true,
             "schema": {
               "type": "string"
             }
           }
         ],
         "requestBody": {
-          "description": "Data to be upladed",
+          "description": "Data to be updated",
           "content": {
             "application/json": {
               "schema": {
@@ -337,7 +338,85 @@
         }
       }
     },
-    "/projects/{projectCode}/features/{featureCode}": {
+    "/projects/{projectCode}/{version}/features": {
+      "get": {
+        "tags": [
+          "Feature"
+        ],
+        "summary": "Детали фичи",
+        "operationId": "ListFeatures",
+        "parameters": [
+          {
+            "name": "projectCode",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          },
+          {
+            "name": "version",
+            "in": "path",
+            "required": true,
+            "schema": {
+              "type": "string"
+            }
+          }
+        ],
+        "responses": {
+          "200": {
+            "description": "OK",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.Feature.FeatureResponse"
+                  }
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.Feature.FeatureResponse"
+                  }
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "type": "array",
+                  "items": {
+                    "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.Feature.FeatureResponse"
+                  }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "Not Found",
+            "content": {
+              "text/plain": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              },
+              "text/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/Microsoft.AspNetCore.Mvc.ProblemDetails"
+                }
+              }
+            }
+          }
+        }
+      }
+    },
+    "/projects/{projectCode}/{version}/features/{featureCode}": {
       "get": {
         "tags": [
           "Feature"
@@ -354,7 +433,7 @@
             }
           },
           {
-            "name": "featureCode",
+            "name": "version",
             "in": "path",
             "required": true,
             "schema": {
@@ -362,8 +441,9 @@
             }
           },
           {
-            "name": "version",
-            "in": "query",
+            "name": "featureCode",
+            "in": "path",
+            "required": true,
             "schema": {
               "type": "string"
             }
@@ -633,7 +713,7 @@
         }
       }
     },
-    "/projects/{project}/structures:plain": {
+    "/projects/{project}/versions/{version}/structures:plain": {
       "get": {
         "tags": [
           "Project"
@@ -652,8 +732,9 @@
           },
           {
             "name": "version",
-            "in": "query",
+            "in": "path",
             "description": "The project version. Default version if not provided.",
+            "required": true,
             "schema": {
               "type": "string"
             }
@@ -704,7 +785,7 @@
         "deprecated": true
       }
     },
-    "/projects/{project}/features:relations": {
+    "/projects/{project}/versions/{version}/features:relations": {
       "get": {
         "tags": [
           "Project"
@@ -723,8 +804,9 @@
           },
           {
             "name": "version",
-            "in": "query",
+            "in": "path",
             "description": "The project version. Default version if not provided.",
+            "required": true,
             "schema": {
               "type": "string"
             }
@@ -2791,7 +2873,8 @@
       "SpecBox.WebApi.Model.Common.ProjectVersionModel": {
         "required": [
           "code",
-          "title"
+          "title",
+          "version"
         ],
         "type": "object",
         "properties": {
@@ -2812,8 +2895,8 @@
             "nullable": true
           },
           "version": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "createdAt": {
             "type": "string",
@@ -2830,13 +2913,14 @@
       },
       "SpecBox.WebApi.Model.Common.VersionModel": {
         "required": [
-          "updatedAt"
+          "updatedAt",
+          "version"
         ],
         "type": "object",
         "properties": {
           "version": {
-            "type": "string",
-            "nullable": true
+            "minLength": 1,
+            "type": "string"
           },
           "updatedAt": {
             "type": "string",
@@ -2941,6 +3025,32 @@
           },
           "attribute": {
             "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.AttributeModel"
+          }
+        },
+        "additionalProperties": false
+      },
+      "SpecBox.WebApi.Model.Project.Feature.FeatureResponse": {
+        "required": [
+          "attributes",
+          "code",
+          "title"
+        ],
+        "type": "object",
+        "properties": {
+          "code": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "title": {
+            "minLength": 1,
+            "type": "string"
+          },
+          "attributes": {
+            "type": "array",
+            "items": {
+              "$ref": "#/components/schemas/SpecBox.WebApi.Model.Project.AttributeValueModel"
+            },
+            "readOnly": true
           }
         },
         "additionalProperties": false

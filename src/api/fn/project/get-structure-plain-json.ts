@@ -18,14 +18,14 @@ export interface GetStructurePlain$Json$Params {
 /**
  * The project version. Default version if not provided.
  */
-  version?: string;
+  version: string;
 }
 
 export function getStructurePlain$Json(http: HttpClient, rootUrl: string, params: GetStructurePlain$Json$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectStructureModel>> {
   const rb = new RequestBuilder(rootUrl, getStructurePlain$Json.PATH, 'get');
   if (params) {
     rb.path('project', params.project, {});
-    rb.query('version', params.version, {});
+    rb.path('version', params.version, {});
   }
 
   return http.request(
@@ -38,4 +38,4 @@ export function getStructurePlain$Json(http: HttpClient, rootUrl: string, params
   );
 }
 
-getStructurePlain$Json.PATH = '/projects/{project}/structures:plain';
+getStructurePlain$Json.PATH = '/projects/{project}/versions/{version}/structures:plain';

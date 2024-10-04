@@ -11,3 +11,8 @@ app-side-menu {
 .separator {
   flex-grow: 1;
 }
+
+tui-scrollbar {
+  heigh: 100%;
+  flex-grow: 0;
+}

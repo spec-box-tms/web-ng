@@ -162,7 +162,7 @@ export class ApiProjectService extends BaseService {
   }
 
   /** Path part for operation `getStructurePlain()` */
-  static readonly GetStructurePlainPath = '/projects/{project}/structures:plain';
+  static readonly GetStructurePlainPath = '/projects/{project}/versions/{version}/structures:plain';
 
   /**
    * Returns the list of features for a specific project.
@@ -233,7 +233,7 @@ export class ApiProjectService extends BaseService {
   }
 
   /** Path part for operation `getFeatureRelations()` */
-  static readonly GetFeatureRelationsPath = '/projects/{project}/features:relations';
+  static readonly GetFeatureRelationsPath = '/projects/{project}/versions/{version}/features:relations';
 
   /**
    * Returns the graph of feature and attribute relations.

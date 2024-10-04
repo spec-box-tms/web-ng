@@ -1,14 +1,48 @@
 <header tuiNavigationHeader>
   <span tuiNavigationLogo>
     <app-logo [size]="24" />
-    Spec Box TMS
   </span>
-  {{project()?.title}}
+  <button
+    class="tui-space_right-2"
+    tuiButton
+    tuiChevron
+    tuiDropdownOpen
+    [appearance]="'outline'"
+    [size]="'xs'"
+    type="button"
+    [tuiDropdown]="content"
+  >
+    {{ projectIdentity()?.version }}
+  </button>
+  <a [routerLink]="['./']" tuiLink [tuiSkeleton]="!project() && 3">
+    {{ project()?.title }}
+  </a>
   <div class="separator"></div>
-  <app-current-user class="tui-space_right-1"/>
+  <app-current-user class="tui-space_right-1" />
 </header>
 <app-project-side-menu>
-  <main tuiNavigationMain>
-    <ng-content />
-  </main>
+  <tui-scrollbar>
+    <main tuiNavigationMain>
+      <ng-content />
+    </main>
+  </tui-scrollbar>
 </app-project-side-menu>
+
+<ng-template #content>
+  <tui-data-list role="menu" size="s">
+    @for(item of versions(); track item) {
+      <a tuiOption [routerLink]="['../', item.version]">
+        {{ item.version }}
+        @if(isActiveVersion(item)) { <tui-icon icon="@tui.check" [style.height.px]="16"/> }
+      </a>
+    }
+    <a 
+      tuiOption 
+      [routerLink]="['/', 'projects', 
+      projectIdentity()?.code, 
+      projectIdentity()?.version]"
+    >
+      Больше...
+    </a>
+  </tui-data-list>
+</ng-template>

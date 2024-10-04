@@ -8,7 +8,7 @@ import { RequestBuilder } from '../../request-builder';
 
 import { UploadData as SpecBoxWebApiModelUploadUploadData } from '../../models/SpecBox/WebApi/Model/Upload/upload-data';
 
-export interface ExportUploadProjectPost$Params {
+export interface ExportUploadProjectVersionsVersionPost$Params {
 
 /**
  * The project code
@@ -18,19 +18,19 @@ export interface ExportUploadProjectPost$Params {
 /**
  * Optional project version
  */
-  version?: string;
+  version: string;
   
     /**
-     * Data to be upladed
+     * Data to be updated
      */
     body?: SpecBoxWebApiModelUploadUploadData
 }
 
-export function exportUploadProjectPost(http: HttpClient, rootUrl: string, params: ExportUploadProjectPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
-  const rb = new RequestBuilder(rootUrl, exportUploadProjectPost.PATH, 'post');
+export function exportUploadProjectVersionsVersionPost(http: HttpClient, rootUrl: string, params: ExportUploadProjectVersionsVersionPost$Params, context?: HttpContext): Observable<StrictHttpResponse<void>> {
+  const rb = new RequestBuilder(rootUrl, exportUploadProjectVersionsVersionPost.PATH, 'post');
   if (params) {
     rb.path('project', params.project, {});
-    rb.query('version', params.version, {});
+    rb.path('version', params.version, {});
     rb.body(params.body, 'application/*+json');
   }
 
@@ -44,4 +44,4 @@ export function exportUploadProjectPost(http: HttpClient, rootUrl: string, param
   );
 }
 
-exportUploadProjectPost.PATH = '/export/upload/{project}';
+exportUploadProjectVersionsVersionPost.PATH = '/export/upload/{project}/versions/{version}';

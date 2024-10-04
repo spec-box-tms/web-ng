@@ -1,6 +1,6 @@
 import { ProjectResponse } from '../../api/models/SpecBox/WebApi/Model/Common/project-response';
 import { toUndefined } from '../lib/model/to-undefined';
-import { ProjectCode } from './ids/project-code';
+import { ProjectCode } from './ids/project.code';
 import { mapVersionModel, ProjectVersion } from './project-version.model';
 
 export interface Project {

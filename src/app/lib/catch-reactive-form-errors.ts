@@ -12,8 +12,6 @@ function isValidationErrors(value: unknown): value is ValidationErrors {
   return Object.keys(value).every((key) => {
     const item = (value as Record<string, unknown>)[key];
     return (
-      typeof item === 'object' &&
-      item !== null &&
       Array.isArray(item) &&
       item.every((error: unknown) => typeof error === 'string')
     );
@@ -68,7 +66,9 @@ export function catchReactiveFormError<T>(
   });
 }
 
-export function serverValidationErrorsToText(errorMapping: Record<string, string>) {
+export function serverValidationErrorsToText(
+  errorMapping: Record<string, string>
+) {
   return (serverErrors: string[]): string[] => {
     const result = new Array<string>();
     for (const serverError of serverErrors) {
@@ -85,8 +85,13 @@ export function serverValidationErrorsToText(errorMapping: Record<string, string
   };
 }
 
-export function serverHttpErrorToText(errorMapping: Record<number, string>, fallbackMessage?: string) {
+export function serverHttpErrorToText(
+  errorMapping: Record<number, string>,
+  fallbackMessage?: string
+) {
   return (httpError: HttpErrorResponse): string => {
-    return errorMapping[httpError.status] ?? fallbackMessage ?? httpError.message;
-  }; 
+    return (
+      errorMapping[httpError.status] ?? fallbackMessage ?? httpError.message
+    );
+  };
 }

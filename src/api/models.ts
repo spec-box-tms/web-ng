@@ -13,6 +13,7 @@ export { AssertionGroupModel as SpecBoxWebApiModelProjectAssertionGroupModel } f
 export { AssertionModel as SpecBoxWebApiModelProjectAssertionModel } from './models/SpecBox/WebApi/Model/Project/assertion-model';
 export { AttributeModel as SpecBoxWebApiModelProjectAttributeModel } from './models/SpecBox/WebApi/Model/Project/attribute-model';
 export { AttributeValueModel as SpecBoxWebApiModelProjectAttributeValueModel } from './models/SpecBox/WebApi/Model/Project/attribute-value-model';
+export { FeatureResponse as SpecBoxWebApiModelProjectFeatureFeatureResponse } from './models/SpecBox/WebApi/Model/Project/Feature/feature-response';
 export { FeatureModel as SpecBoxWebApiModelProjectFeatureModel } from './models/SpecBox/WebApi/Model/Project/feature-model';
 export { FeatureRelationsModel as SpecBoxWebApiModelProjectFeatureRelationsModel } from './models/SpecBox/WebApi/Model/Project/feature-relations-model';
 export { GraphEdgeModel as SpecBoxWebApiModelProjectGraphEdgeModel } from './models/SpecBox/WebApi/Model/Project/graph-edge-model';

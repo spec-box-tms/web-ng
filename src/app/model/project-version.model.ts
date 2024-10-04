@@ -1,8 +1,8 @@
 import { VersionModel } from '../../api/models/SpecBox/WebApi/Model/Common/version-model';
-import { toUndefined } from '../lib/model/to-undefined';
+import { ProjectVersionIdent } from './ids/project-version-ident';
 
 export interface ProjectVersion {
-  version?: string;
+  version: ProjectVersionIdent;
   updatedAt: Date;
 }
 
@@ -11,7 +11,7 @@ export function mapVersionModel({
   updatedAt,
 }: VersionModel): ProjectVersion {
   return {
-    version: toUndefined(version),
+    version: ProjectVersionIdent(version),
     updatedAt: new Date(updatedAt),
   };
 }

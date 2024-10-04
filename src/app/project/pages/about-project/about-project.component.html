@@ -1,0 +1,16 @@
+<h1 [tuiSkeleton]="!project() && 4">{{ project()?.title }}</h1>
+<p [tuiSkeleton]="!project() && 10">{{ project()?.description }}</p>
+
+@if (versions()) { @for(version of versions(); track version.version ) {
+<div>
+  {{ version.version || "default" }} от
+  {{ version.updatedAt | date : "dd.MM.yyyy HH:mm" }}
+</div>
+} @empty {
+<div>Нет версий проекта</div>
+} } @else {
+<div [tuiSkeleton]="3"></div>
+<div [tuiSkeleton]="3"></div>
+<div [tuiSkeleton]="3"></div>
+<div [tuiSkeleton]="3"></div>
+}

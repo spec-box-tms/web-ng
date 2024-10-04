@@ -18,14 +18,14 @@ export interface GetFeatureRelations$Plain$Params {
 /**
  * The project version. Default version if not provided.
  */
-  version?: string;
+  version: string;
 }
 
 export function getFeatureRelations$Plain(http: HttpClient, rootUrl: string, params: GetFeatureRelations$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectFeatureRelationsModel>> {
   const rb = new RequestBuilder(rootUrl, getFeatureRelations$Plain.PATH, 'get');
   if (params) {
     rb.path('project', params.project, {});
-    rb.query('version', params.version, {});
+    rb.path('version', params.version, {});
   }
 
   return http.request(
@@ -38,4 +38,4 @@ export function getFeatureRelations$Plain(http: HttpClient, rootUrl: string, par
   );
 }
 
-getFeatureRelations$Plain.PATH = '/projects/{project}/features:relations';
+getFeatureRelations$Plain.PATH = '/projects/{project}/versions/{version}/features:relations';

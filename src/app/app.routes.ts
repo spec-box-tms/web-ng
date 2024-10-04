@@ -24,7 +24,7 @@ export const routes: Routes = [
     canActivate: [guardAuth],
   },
   {
-    path: 'project',
+    path: 'projects',
     title: 'Spec Box TMS - Проект',
     loadChildren: () =>
       import('./project/project.routes').then(

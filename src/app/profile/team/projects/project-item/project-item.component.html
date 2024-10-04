@@ -1,10 +1,15 @@
 <div>
-  <a [routerLink]="['/project', project().code]" tuiLink tuiTitle>{{ project().title }}</a>
+  <a
+    [routerLink]="['/projects', project().code, latestVersion().version]"
+    tuiLink
+    tuiTitle
+    >{{ project().title }}</a
+  >
   <span tuiSubTitle>{{ project().code }}</span>
 </div>
 <div>
   <tui-badge size="m" appearance="primary">
-    {{ latestVersion().version ?? "default" }}
+    {{ latestVersion().version }}
   </tui-badge>
   <div>от {{ latestVersion().updatedAt | date : "dd.MM.yyyy HH:mm" }}</div>
 </div>

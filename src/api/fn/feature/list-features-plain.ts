@@ -6,20 +6,18 @@ import { filter, map } from 'rxjs/operators';
 import { StrictHttpResponse } from '../../strict-http-response';
 import { RequestBuilder } from '../../request-builder';
 
-import { FeatureModel as SpecBoxWebApiModelProjectFeatureModel } from '../../models/SpecBox/WebApi/Model/Project/feature-model';
+import { FeatureResponse as SpecBoxWebApiModelProjectFeatureFeatureResponse } from '../../models/SpecBox/WebApi/Model/Project/Feature/feature-response';
 
-export interface GetFeature$Plain$Params {
+export interface ListFeatures$Plain$Params {
   projectCode: string;
   version: string;
-  featureCode: string;
 }
 
-export function getFeature$Plain(http: HttpClient, rootUrl: string, params: GetFeature$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<SpecBoxWebApiModelProjectFeatureModel>> {
-  const rb = new RequestBuilder(rootUrl, getFeature$Plain.PATH, 'get');
+export function listFeatures$Plain(http: HttpClient, rootUrl: string, params: ListFeatures$Plain$Params, context?: HttpContext): Observable<StrictHttpResponse<Array<SpecBoxWebApiModelProjectFeatureFeatureResponse>>> {
+  const rb = new RequestBuilder(rootUrl, listFeatures$Plain.PATH, 'get');
   if (params) {
     rb.path('projectCode', params.projectCode, {});
     rb.path('version', params.version, {});
-    rb.path('featureCode', params.featureCode, {});
   }
 
   return http.request(
@@ -27,9 +25,9 @@ export function getFeature$Plain(http: HttpClient, rootUrl: string, params: GetF
   ).pipe(
     filter((r: any): r is HttpResponse<any> => r instanceof HttpResponse),
     map((r: HttpResponse<any>) => {
-      return r as StrictHttpResponse<SpecBoxWebApiModelProjectFeatureModel>;
+      return r as StrictHttpResponse<Array<SpecBoxWebApiModelProjectFeatureFeatureResponse>>;
     })
   );
 }
 
-getFeature$Plain.PATH = '/projects/{projectCode}/{version}/features/{featureCode}';
+listFeatures$Plain.PATH = '/projects/{projectCode}/{version}/features';

@@ -7,5 +7,5 @@ export interface ProjectVersionModel {
   repositoryUrl?: string | null;
   title: string;
   updatedAt?: string | null;
-  version?: string | null;
+  version: string;
 }

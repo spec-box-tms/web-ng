@@ -1,11 +1,13 @@
-import { inject } from '@angular/core';
+import { inject, Injectable } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { map, shareReplay, switchMap } from 'rxjs';
 import { AuthService } from '../auth/auth.service';
 import { ProjectService } from './project.service';
-import { ProjectCode } from '../model/ids/project-code';
+import { ProjectCode } from '../model/ids/project.code';
 import { UserService } from './user.service';
+import { ProjectVersionIdent } from '../model/ids/project-version-ident';
 
+@Injectable()
 export class ProjectContext {
   private authService = inject(AuthService);
   private activeRoute = inject(ActivatedRoute);
@@ -17,13 +19,16 @@ export class ProjectContext {
     shareReplay(1)
   );
 
-  projectCode$ = this.activeRoute.params.pipe(
-    map(({ projectCode }) => ProjectCode(projectCode)),
+  projectIdentity$ = this.activeRoute.params.pipe(
+    map(({ projectCode, version }) => ({
+      code: ProjectCode(projectCode),
+      version: ProjectVersionIdent(version),
+    })),
     shareReplay(1)
   );
 
-  project$ = this.projectCode$.pipe(
-    switchMap((code) => this.projectService.get$(code)),
+  project$ = this.projectIdentity$.pipe(
+    switchMap(({ code }) => this.projectService.get$(code)),
     shareReplay(1)
   );
 }
