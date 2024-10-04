@@ -1,3 +1,14 @@
-@for(feature of features(); track feature.code) {
-<p>{{ feature.title }}</p>
-}
+<tui-scrollbar class="list">
+  <app-functional-requirement-list></app-functional-requirement-list>
+</tui-scrollbar>
+<tui-scrollbar class="details">
+  <div>
+    <router-outlet
+      (activate)="showFallback.set(true)"
+      (deactivate)="showFallback.set(false)"
+    ></router-outlet>
+    @if(!showFallback()) {
+    <h3>Выберите функциональное требование</h3>
+    }
+  </div>
+</tui-scrollbar>

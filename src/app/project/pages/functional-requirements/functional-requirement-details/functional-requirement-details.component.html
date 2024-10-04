@@ -1,0 +1,21 @@
+<header tuiHeader>
+  <h2 tuiTitle [tuiSkeleton]="!feature() && 5">{{feature()?.title}}
+    <div tuiSubtitle [tuiSkeleton]="!feature() && 2">${{feature()?.code}}</div>
+  </h2>
+</header>
+
+
+<section [tuiSkeleton]="!feature() && 30">
+{{feature()?.description}}
+</section>
+
+<footer>
+  <button
+      appearance="secondary"
+      size="m"
+      tuiButton
+      type="button"
+  >
+      Label
+  </button>
+</footer>

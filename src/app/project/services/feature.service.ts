@@ -6,6 +6,8 @@ import { ProjectVersionIdent } from '../../model/ids/project-version-ident';
 import { ProjectCode } from '../../model/ids/project.code';
 import { Feature, mapFeatureResponse } from '../model/feature.model';
 import { ProjectContext } from '../project-context.service';
+import { FeatureCode } from '../model/feature.code';
+import { FeatureModel } from '../../../api/models/SpecBox/WebApi/Model/Project/feature-model';
 
 @Injectable()
 export class FeatureService {
@@ -24,5 +26,17 @@ export class FeatureService {
     return this.apiFeatureService
       .listFeatures$Json({ projectCode, version })
       .pipe(mapArray(mapFeatureResponse));
+  }
+
+  get$(
+    projectCode: ProjectCode,
+    version: ProjectVersionIdent,
+    featureCode: FeatureCode
+  ): Observable<FeatureModel> {
+    return this.apiFeatureService.getFeature$Json({
+      projectCode,
+      version,
+      featureCode,
+    });
   }
 }
