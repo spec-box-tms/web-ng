@@ -1,9 +1,12 @@
 import {
   ChangeDetectionStrategy,
   Component,
+  computed,
+  effect,
   inject,
   Injector,
   INJECTOR,
+  untracked,
 } from '@angular/core';
 import { ActivatedRoute } from '@angular/router';
 import { TuiTitle } from '@taiga-ui/core';
@@ -12,12 +15,26 @@ import { ProjectContext } from '../../../project-context.service';
 import { FeatureService } from '../../../services/feature.service';
 import { toSignal } from '@angular/core/rxjs-interop';
 import { TuiSkeleton } from '@taiga-ui/kit';
-import { TUI_EDITOR_EXTENSIONS } from '@taiga-ui/editor';
+import {
+  TUI_EDITOR_EXTENSIONS,
+  TUI_EDITOR_VALUE_TRANSFORMER,
+  TuiEditor,
+  TuiEditorSocket,
+  TuiEditorTool,
+} from '@taiga-ui/editor';
+import { FormControl, ReactiveFormsModule } from '@angular/forms';
+import { TuiValueTransformer } from '@taiga-ui/cdk';
 
 @Component({
   selector: 'app-functional-requirement-details',
   standalone: true,
-  imports: [TuiTitle, TuiSkeleton],
+  imports: [
+    TuiTitle,
+    TuiSkeleton,
+    ReactiveFormsModule,
+    TuiEditor,
+    TuiEditorSocket,
+  ],
   templateUrl: './functional-requirement-details.component.html',
   styleUrl: './functional-requirement-details.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
@@ -52,6 +69,10 @@ export class FunctionalRequirementDetailsComponent {
   );
   private readonly projectIdentity$ = inject(ProjectContext).projectIdentity$;
   private readonly featureService = inject(FeatureService);
+  
+  private readonly contentProcessor = inject<
+    TuiValueTransformer<string | null, string | null>
+  >(TUI_EDITOR_VALUE_TRANSFORMER, { optional: true });
 
   readonly feature = toSignal(
     combineLatest([this.featureCode$, this.projectIdentity$]).pipe(
@@ -62,4 +83,27 @@ export class FunctionalRequirementDetailsComponent {
       )
     )
   );
+
+  readonly content = computed(() => {
+    if(!this.contentProcessor) {
+      return 'foo';
+    }
+    if(!this.feature()) {
+      return 'boo';
+    }
+
+    return this.contentProcessor.fromControlValue(this.feature()?.description ?? null);
+  });
+
+  control = new FormControl();
+  protected readonly builtInTools = [TuiEditorTool.Undo];
+
+  constructor() {
+    effect(() => {
+      const feature = this.feature();
+      untracked(() => {
+        this.control.setValue(feature?.description || '');
+      });
+    });
+  }
 }

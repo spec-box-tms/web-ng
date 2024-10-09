@@ -5,14 +5,12 @@
 }
 
 .list {
-  flex-basis: 1;
   border-right: 1px solid var(--tui-border-normal);
   margin-bottom: 2em;
   flex-shrink: 0;
 }
 
 .details {
-  flex-basis: 3;
   flex-grow: 1;
   margin: 1em;
 }

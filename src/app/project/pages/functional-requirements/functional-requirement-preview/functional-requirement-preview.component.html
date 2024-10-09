@@ -1,0 +1,16 @@
+<header tuiHeader>
+  <h2 [tuiSkeleton]="!feature() && 5">
+    {{ feature()?.title }}
+    <div tuiSubtitle [tuiSkeleton]="!feature() && 2">
+      ${{ feature()?.code }}
+    </div>
+  </h2>
+</header>
+
+<div class="wrapper">
+  <app-markdown class="preview" [value]="description()"></app-markdown>
+  <ngx-monaco-editor class="editor"
+    [(ngModel)]="description"
+    [options]="editorOptions"
+  ></ngx-monaco-editor>
+</div>

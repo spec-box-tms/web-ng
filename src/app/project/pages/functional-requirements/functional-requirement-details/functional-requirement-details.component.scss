@@ -1,0 +1,17 @@
+:host {
+  ::ng-deep {
+      .tui-editor-socket pre:has(code[class='language-ts']) {
+          background: var(--tui-background-accent-opposite-hover);
+          min-inline-size: 0;
+          overflow-x: auto;
+          padding: 2ch;
+      }
+
+      code[class='language-ts'] {
+          font-family: 'Monaspace', monospace;
+          font-palette: --kung-fury;
+          color: var(--tui-background-base);
+          text-shadow: none;
+      }
+  }
+}

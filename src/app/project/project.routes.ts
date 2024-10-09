@@ -3,6 +3,7 @@ import { PageProjectComponent } from './page-project/page-project.component';
 import { AboutProjectComponent } from './pages/about-project/about-project.component';
 import { FunctionalRequirementsComponent } from './pages/functional-requirements/functional-requirements.component';
 import { FunctionalRequirementDetailsComponent } from './pages/functional-requirements/functional-requirement-details/functional-requirement-details.component';
+import { FunctionalRequirementPreviewComponent } from './pages/functional-requirements/functional-requirement-preview/functional-requirement-preview.component';
 
 export const routes: Routes = [
   {
@@ -21,7 +22,7 @@ export const routes: Routes = [
         children: [
           {
             path: ':code',
-            component: FunctionalRequirementDetailsComponent,
+            component: FunctionalRequirementPreviewComponent,
           },
         ],
       },

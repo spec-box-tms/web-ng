@@ -1,0 +1,5 @@
+@if(highlighted()) {
+<pre [innerHTML]="highlighted()"></pre>
+} @else {
+<pre>{{ token().text }}</pre>
+}

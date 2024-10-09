@@ -1,21 +1,20 @@
 <header tuiHeader>
-  <h2 tuiTitle [tuiSkeleton]="!feature() && 5">{{feature()?.title}}
-    <div tuiSubtitle [tuiSkeleton]="!feature() && 2">${{feature()?.code}}</div>
+  <h2 [tuiSkeleton]="!feature() && 5">
+    {{ feature()?.title }}
+    <div tuiSubtitle [tuiSkeleton]="!feature() && 2">
+      ${{ feature()?.code }}
+    </div>
   </h2>
 </header>
 
-
 <section [tuiSkeleton]="!feature() && 30">
-{{feature()?.description}}
+  <tui-editor [formControl]="control" >
+  </tui-editor>
+
+    <tui-editor-socket [content]="control.value || ''">
+  </tui-editor-socket>
 </section>
 
 <footer>
-  <button
-      appearance="secondary"
-      size="m"
-      tuiButton
-      type="button"
-  >
-      Label
-  </button>
+  <button appearance="secondary" size="m" tuiButton type="button">Label</button>
 </footer>

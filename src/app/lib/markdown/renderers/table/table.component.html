@@ -1,0 +1,28 @@
+<table [columns]="columns()" tuiTable>
+  <thead tuiThead>
+    <tr tuiThGroup>
+      @for(column of columnTokens(); track $index) {
+      <th tuiTh [resizable]="true" [sticky]="true">
+        <app-markdown-token-renderer
+          [tokens]="column.tokens"
+        ></app-markdown-token-renderer>
+      </th>
+      }
+    </tr>
+  </thead>
+  <tbody tuiTbody
+    [data]="rows()"
+  >
+    @for(row of rows(); track row) {
+    <tr tuiTr>
+      @for(cell of row; track $index) {
+      <td *tuiCell="columns()[$index]" tuiTd>
+        <app-markdown-token-renderer
+          [tokens]="cell.tokens"
+        ></app-markdown-token-renderer>
+      </td>
+      }
+    </tr>
+    }
+  </tbody>
+</table>

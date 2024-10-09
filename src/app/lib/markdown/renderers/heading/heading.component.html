@@ -1,0 +1,8 @@
+@switch (token().depth) {
+  @case (1) { <h1><app-markdown-token-renderer [tokens]="token().tokens"/></h1> }
+  @case (2) { <h2><app-markdown-token-renderer [tokens]="token().tokens"/></h2> }
+  @case (3) { <h3><app-markdown-token-renderer [tokens]="token().tokens"/></h3> }
+  @case (4) { <h4><app-markdown-token-renderer [tokens]="token().tokens"/></h4> }
+  @case (5) { <h5><app-markdown-token-renderer [tokens]="token().tokens"/></h5> }
+  @case (6) { <h6><app-markdown-token-renderer [tokens]="token().tokens"/></h6> }
+}

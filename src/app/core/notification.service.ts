@@ -1,7 +1,7 @@
 import { inject, Injectable } from '@angular/core';
 import { TuiAlertService } from '@taiga-ui/core';
 
-type NotificationType = 'success' | 'warning' | 'error';
+type NotificationType = 'success' | 'warning' | 'error' | 'info';
 
 @Injectable()
 export class NotificationService {

@@ -20,6 +20,8 @@ import { routes } from './app.routes';
 import { AuthInterceptor } from './auth/auth.interceptor';
 import { provideApiUrl } from './utils/provide-api-url';
 import { provideAuthBypass } from './utils/provide-auth-bypass';
+import { provideMarkdown } from 'ngx-markdown';
+import { provideMonaco } from './utils/provide-monaco';
 
 export const appConfig: ApplicationConfig = {
   providers: [
@@ -42,5 +44,7 @@ export const appConfig: ApplicationConfig = {
       useClass: AuthInterceptor,
       multi: true,
     },
+    // provideMarkdown(),
+    provideMonaco(),
   ],
 };
