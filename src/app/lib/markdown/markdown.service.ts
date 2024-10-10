@@ -1,17 +1,17 @@
 import { Injectable, Type } from '@angular/core';
-import { marked, Renderer, Token, TokensList } from 'marked';
+import { marked, Token, TokensList } from 'marked';
 import { internalLinkTokenizer } from './extensions/internal-link';
+import { li } from './formatters/li.formatter';
+import { ol } from './formatters/ol.formatter';
+import { ul } from './formatters/ul.formatter';
+import { CodeComponent } from './renderers/code/code.component';
 import { HeadingComponent } from './renderers/heading/heading.component';
+import { InlineCodeComponent } from './renderers/inline-code/inline-code.component';
 import { InternalLinkComponent } from './renderers/internal-link/internal-link.component';
 import { ParagraphComponent } from './renderers/paragraph/paragraph.component';
 import { AnyTokenRenderer, RendererBase } from './renderers/renderer-base';
 import { TableComponent } from './renderers/table/table.component';
 import { TextComponent } from './renderers/text/text.component';
-import { InlineCodeComponent } from './renderers/inline-code/inline-code.component';
-import { ol } from './formatters/ol.formatter';
-import { ul } from './formatters/ul.formatter';
-import { li } from './formatters/li.formatter';
-import { PrismRendererComponent } from './renderers/prism-renderer/prism-renderer.component';
 
 @Injectable({
   providedIn: 'root',
@@ -38,7 +38,7 @@ export class MarkdownService {
     this.tokenMap.set('table', TableComponent);
     this.tokenMap.set('internalLink', InternalLinkComponent);
     this.tokenMap.set('codespan', InlineCodeComponent);
-    this.tokenMap.set('code', PrismRendererComponent);
+    this.tokenMap.set('code', CodeComponent);
 
     const renderer = new marked.Renderer();
     renderer.list = (body, ordered, start) => {

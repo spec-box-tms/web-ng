@@ -38,11 +38,15 @@
               {
                 "glob": "**/*",
                 "input": "node_modules/@taiga-ui/icons-fontawesome/src",
-                "output": "assets/taiga-ui/icons/"
+                "output": "assets/taiga-ui/icons"
               },
               { "glob": "**/*", 
                 "input": "node_modules/monaco-editor", 
-                "output": "/assets/monaco/" 
+                "output": "/assets/monaco" 
+              },
+              { "glob": "**/*", 
+                "input": "node_modules/prismjs/components", 
+                "output": "/assets/prismjs/components" 
               }
             ],
             "styles": [
@@ -55,11 +59,7 @@
             ],
             "scripts": [
               "node_modules/prismjs/prism.js",
-              "node_modules/prismjs/components/prism-csharp.min.js",
-              "node_modules/prismjs/components/prism-css.min.js",
-              "node_modules/prismjs/components/prism-js-extras.min.js",
-              "node_modules/prismjs/components/prism-typescript.min.js",
-              "node_modules/prismjs/components/prism-json.min.js",
+              "node_modules/prismjs/plugins/autoloader/prism-autoloader.js",
               "node_modules/prismjs/plugins/line-numbers/prism-line-numbers.js",
               "node_modules/mermaid/dist/mermaid.min.js"
             ]

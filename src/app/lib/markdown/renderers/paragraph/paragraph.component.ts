@@ -1,10 +1,11 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { RendererBase } from '../renderer-base';
 import { Tokens } from 'marked';
 import { MarkdownTokenRendererComponent } from "../../markdown-token-renderer/markdown-token-renderer.component";
 
 @Component({
-  selector: 'app-paragraph',
+  selector: 'p[appParagraph]',
   standalone: true,
   templateUrl: './paragraph.component.html',
   styleUrl: './paragraph.component.scss',
