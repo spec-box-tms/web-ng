@@ -11,7 +11,7 @@ import {
 import { PrismService } from './prism.service';
 
 @Component({
-  selector: 'app-prism',
+  selector: 'pre[mdPrism]',
   standalone: true,
   templateUrl: './prism.component.html',
   styleUrl: './prism.component.scss',
@@ -22,10 +22,8 @@ export class PrismComponent implements AfterViewInit {
   private elementRef = inject(ElementRef<HTMLElement>);
   code = input.required<string>();
   language = input.required<string | undefined>();
-  
-  languageClass = computed(
-    () => this.language() && `language-${this.language()}`
-  );
+
+  languageClass = computed(() => `language-${this.language() ?? 'none'}`);
 
   ngAfterViewInit() {
     this.prismService.highlightElement(this.elementRef.nativeElement);

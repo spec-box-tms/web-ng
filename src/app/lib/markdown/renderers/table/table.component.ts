@@ -1,14 +1,27 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectionStrategy, Component, computed } from '@angular/core';
-import { TuiTable, TuiTableSortable, TuiTableSortPipe, TuiTableSortBy } from '@taiga-ui/addon-table';
-import { RendererBase } from '../renderer-base';
-import { Tokens } from 'marked';
-import { MarkdownTokenRendererComponent } from "../../markdown-token-renderer/markdown-token-renderer.component";
+import {
+  TuiTable,
+  TuiTableSortable,
+  TuiTableSortBy,
+  TuiTableSortPipe,
+} from '@taiga-ui/addon-table';
 import { TuiLet } from '@taiga-ui/cdk';
+import { Tokens } from 'marked';
+import { ForTokenDirective } from '../forToken.directive';
+import { RendererBase } from '../renderer-base';
 
 @Component({
-  selector: 'app-table',
+  selector: 'md-table',
   standalone: true,
-  imports: [TuiTable, MarkdownTokenRendererComponent, TuiLet, TuiTableSortPipe, TuiTableSortable, TuiTableSortBy],
+  imports: [
+    ForTokenDirective,
+    TuiTable,
+    TuiLet,
+    TuiTableSortPipe,
+    TuiTableSortable,
+    TuiTableSortBy,
+  ],
   templateUrl: './table.component.html',
   styleUrl: './table.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

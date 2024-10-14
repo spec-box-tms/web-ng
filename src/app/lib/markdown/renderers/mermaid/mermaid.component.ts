@@ -1,46 +1,33 @@
+/* eslint-disable @angular-eslint/component-selector */
 import {
+  AfterViewInit,
   ChangeDetectionStrategy,
   Component,
-  effect,
+  ElementRef,
   inject,
   input,
-  signal,
 } from '@angular/core';
 import { MermaidService } from './mermaid.service';
-import { DomSanitizer, SafeHtml } from '@angular/platform-browser';
 
 @Component({
-  selector: 'app-mermaid',
+  selector: 'md-mermaid',
   standalone: true,
   templateUrl: './mermaid.component.html',
   styleUrl: './mermaid.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
 })
-export class MermaidComponent {
+export class MermaidComponent implements AfterViewInit {
   private mermaidService = inject(MermaidService);
-  private sanitizer = inject(DomSanitizer);
 
   code = input.required<string>();
-  html = signal<SafeHtml>('');
 
-  constructor() {
-    effect(() => {
-      const code = this.code();
+  constructor(private elementRef: ElementRef) {}
 
-      this.mermaidService.renderMermaid('foo', code).subscribe({
-        next: ({ svg }) => {
-          console.log(svg);
-          
-          this.html.set(this.sanitizer.bypassSecurityTrustHtml(svg));
-        },
-        error: () => {
-          this.html.set(
-            this.sanitizer.bypassSecurityTrustHtml(
-              'Ошибка визуализации диаграммы'
-            )
-          );
-        },
-      });
-    });
+  ngAfterViewInit(): void {
+    const nodes = this.elementRef.nativeElement.querySelectorAll('code');
+
+    if (nodes) {
+      this.mermaidService.runMermaid([this.elementRef.nativeElement]);
+    }
   }
 }

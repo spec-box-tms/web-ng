@@ -5,11 +5,11 @@ import { ForTokenDirective } from '../forToken.directive';
 import { RendererBase } from '../renderer-base';
 
 @Component({
-  selector: 'p[mdParagraph]',
+  selector: 'blockquote[mdBlockquote]',
   standalone: true,
-  templateUrl: './paragraph.component.html',
-  styleUrl: './paragraph.component.scss',
+  templateUrl: './blockquote.component.html',
+  styleUrl: './blockquote.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ForTokenDirective],
 })
-export class ParagraphComponent extends RendererBase<Tokens.Paragraph> {}
+export class BlockquoteComponent extends RendererBase<Tokens.Blockquote> {}

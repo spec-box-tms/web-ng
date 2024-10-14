@@ -5,11 +5,18 @@ import { ForTokenDirective } from '../forToken.directive';
 import { RendererBase } from '../renderer-base';
 
 @Component({
-  selector: 'p[mdParagraph]',
+  selector: 'ol[mdList]',
   standalone: true,
-  templateUrl: './paragraph.component.html',
-  styleUrl: './paragraph.component.scss',
-  changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ForTokenDirective],
+  templateUrl: './list.component.html',
+  styleUrl: './list.component.scss',
+  changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '[attr.start]': 'start',
+  },
 })
-export class ParagraphComponent extends RendererBase<Tokens.Paragraph> {}
+export class ListComponent extends RendererBase<Tokens.List> {
+  get start() {
+    return this.token().start;
+  }
+}

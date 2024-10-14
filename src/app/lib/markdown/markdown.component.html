@@ -1,7 +1,1 @@
-<!-- <markdown class="preview" lineNumbers mermaid [data]="value()"></markdown> -->
-
-<app-markdown-custom [value]="value()"></app-markdown-custom>
-
-<pre>
-  {{ tokens() | json }}
-</pre>
+<ng-container *forToken="tokens()"></ng-container>

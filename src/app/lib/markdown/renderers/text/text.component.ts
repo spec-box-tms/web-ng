@@ -1,13 +1,14 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Tokens } from 'marked';
-import { RendererBase } from '../renderer-base';
+import { ForTokenDirective } from '../forToken.directive';
+import { BaseText } from './base-text';
 
 @Component({
-  selector: 'span[appText]',
+  selector: 'span[mdText]',
   standalone: true,
   templateUrl: './text.component.html',
-  styleUrl: './text.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  imports: [ForTokenDirective],
 })
-export class TextComponent extends RendererBase<Tokens.Text> {}
+export class TextComponent extends BaseText<Tokens.Text | Tokens.Escape> {}

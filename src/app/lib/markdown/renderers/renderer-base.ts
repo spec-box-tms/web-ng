@@ -2,10 +2,10 @@ import { Directive, input, InputSignal } from '@angular/core';
 import { Token } from 'marked';
 
 export interface AnyTokenRenderer {
-  token: InputSignal<any>;
+  token: InputSignal<unknown>;
 }
 
 @Directive()
-export class RendererBase<T extends Token> {
+export abstract class RendererBase<T extends Token> {
   token = input.required<T>();
 }

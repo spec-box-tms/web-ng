@@ -8,11 +8,7 @@
 </header>
 
 <section [tuiSkeleton]="!feature() && 30">
-  <tui-editor [formControl]="control" >
-  </tui-editor>
-
-    <tui-editor-socket [content]="control.value || ''">
-  </tui-editor-socket>
+  <app-markdown [value]="feature()?.description ?? ''"></app-markdown>
 </section>
 
 <footer>

@@ -1,21 +1,25 @@
-import { CommonModule } from '@angular/common';
+/* eslint-disable @angular-eslint/component-selector */
+import { Clipboard } from '@angular/cdk/clipboard';
 import { ChangeDetectionStrategy, Component, inject } from '@angular/core';
-import { RendererBase } from '../renderer-base';
 import { Tokens } from 'marked';
 import { NotificationService } from '../../../../core/notification.service';
-import { Clipboard } from '@angular/cdk/clipboard';
+import { RendererBase } from '../renderer-base';
 @Component({
-  selector: 'app-inline-code',
+  selector: 'code[mdInlineCode]',
   standalone: true,
-  imports: [CommonModule],
   templateUrl: './inline-code.component.html',
   styleUrl: './inline-code.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,
+  host: {
+    '(click)': 'copyToClipboard()',
+  },
 })
 export class InlineCodeComponent extends RendererBase<Tokens.Codespan> {
-  private readonly notificationService = inject(NotificationService, { optional: true });
+  private readonly notificationService = inject(NotificationService, {
+    optional: true,
+  });
   private readonly clipboard = inject(Clipboard);
-  
+
   copyToClipboard() {
     this.notificationService?.show(
       'info',

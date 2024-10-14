@@ -1,1 +1,5 @@
-{{token().text}}
+@if (tokens()) {
+<ng-container *forToken="tokens()" />
+} @else {
+{{ token().text }}
+}

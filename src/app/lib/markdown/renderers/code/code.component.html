@@ -1,5 +1,5 @@
 @if(token().lang === 'mermaid') {
-  <app-mermaid [code]="token().text"></app-mermaid>
+  <md-mermaid [code]="token().text"></md-mermaid>
 } @else {
-  <app-prism [code]="token().text" [language]="token().lang"></app-prism>
+  <pre mdPrism [code]="token().text" [language]="token().lang"></pre>
 }

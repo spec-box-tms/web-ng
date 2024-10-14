@@ -1,12 +1,13 @@
+/* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Tokens } from 'marked';
+import { ForTokenDirective } from '../forToken.directive';
 import { RendererBase } from '../renderer-base';
-import { MarkdownTokenRendererComponent } from '../../markdown-token-renderer/markdown-token-renderer.component';
 
 @Component({
-  selector: 'app-heading',
+  selector: 'md-heading',
   standalone: true,
-  imports: [MarkdownTokenRendererComponent],
+  imports: [ForTokenDirective],
   templateUrl: './heading.component.html',
   styleUrl: './heading.component.scss',
   changeDetection: ChangeDetectionStrategy.OnPush,

@@ -3,23 +3,17 @@
     <tr tuiThGroup>
       @for(column of columnTokens(); track $index) {
       <th tuiTh [resizable]="true" [sticky]="true">
-        <app-markdown-token-renderer
-          [tokens]="column.tokens"
-        ></app-markdown-token-renderer>
+        <span><ng-container *forToken="column.tokens" /></span>
       </th>
       }
     </tr>
   </thead>
-  <tbody tuiTbody
-    [data]="rows()"
-  >
+  <tbody tuiTbody [data]="rows()">
     @for(row of rows(); track row) {
     <tr tuiTr>
       @for(cell of row; track $index) {
       <td *tuiCell="columns()[$index]" tuiTd>
-        <app-markdown-token-renderer
-          [tokens]="cell.tokens"
-        ></app-markdown-token-renderer>
+        <ng-container *forToken="cell.tokens" />
       </td>
       }
     </tr>

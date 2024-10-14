@@ -1,15 +1,14 @@
 /* eslint-disable @angular-eslint/component-selector */
 import { ChangeDetectionStrategy, Component } from '@angular/core';
 import { Tokens } from 'marked';
+import { BaseText } from './base-text';
 import { ForTokenDirective } from '../forToken.directive';
-import { RendererBase } from '../renderer-base';
 
 @Component({
-  selector: 'p[mdParagraph]',
+  selector: 'strong[mdStrong]',
   standalone: true,
-  templateUrl: './paragraph.component.html',
-  styleUrl: './paragraph.component.scss',
+  templateUrl: './text.component.html',
   changeDetection: ChangeDetectionStrategy.OnPush,
   imports: [ForTokenDirective],
 })
-export class ParagraphComponent extends RendererBase<Tokens.Paragraph> {}
+export class StrongComponent extends BaseText<Tokens.Strong> {}
